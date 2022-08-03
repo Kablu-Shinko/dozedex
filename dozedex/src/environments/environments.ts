@@ -2,7 +2,7 @@ const API_URL: string = "https://dozedex-api.herokuapp.com";
 const LOCAL_URL: string = "localhost:3333";
 
 //altere aqui para dinamicamente pegar url local ou hospedada
-const isLocal = false;
+const isLocal = true;
 
 function useLocal(use: Boolean): string{
     if(!use){
