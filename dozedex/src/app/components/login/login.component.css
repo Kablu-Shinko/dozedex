@@ -1,0 +1,14 @@
+.LoginBody{
+    background: #383a3d;
+    padding-top: 30vh;
+    height: 100vh;	
+  }
+
+  form{
+    background: rgb(255, 255, 255);
+  }
+
+  .form-container{
+    border-radius: 10px;
+    padding: 30px;
+  }
