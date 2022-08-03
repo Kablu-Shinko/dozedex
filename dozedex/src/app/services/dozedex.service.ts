@@ -12,7 +12,7 @@ import { Auth } from '../interfaces/auth.interface';
 
 export class DozedexService{
 
-    DozedexApiURL = environment.API_URL;
+    private DozedexApiURL = environment.API_URL;
 
     constructor(private http: HttpClient) {}
 
