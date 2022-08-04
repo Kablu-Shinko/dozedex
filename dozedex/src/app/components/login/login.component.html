@@ -1,20 +1,25 @@
 <div class="LoginBody">
 <section class="container-fluid">
-    <section class="row justify-content-center">
-      <section class="col-12 col-sm-6 col-md-4">
-        <form #loginForm class="form-container">
-          <div class="form-group">
-            <h4 class="text-center font-weight-bold"> Login Dozedex </h4>
-            <label for="InputEmail1">Seu usuário</label>
-            <input #email type="email" class="form-control" id="InputEmail1" placeholder="Usuário">
-          </div>
-          <div class="form-group">
-            <label for="InputPassword1">Sua senha</label>
-            <input #password type="password" class="form-control" id="InputPassword1" placeholder="Senha">
-          </div>
-          <button type="button" class="btn btn-primary btn-block" (click)='onSubmit({"Email": email.value, "Password":password.value, "Name": "", "UserName":"", ImageUrl:""})'>Entrar</button>
-        </form>
-      </section>
+  <section class="row justify-content-center">
+    <section class="col-12">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
+        <div class="form-group">
+          <h4 class="text-center font-weight-bold"> {{title}} </h4>
+          <label for="Email">Seu Email</label>
+          <input formControlName="Email" type="email" class="form-control" id="InputEmail1" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="Password">Sua senha</label>
+          <input formControlName="Password" type="password" class="form-control" id="InputPassword1" placeholder="Senha">
+          <br>
+          <mat-slide-toggle color="primary" formControlName="KeepLogin">Manter login</mat-slide-toggle>
+        </div>
+        <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary btn-block">
+          <img *ngIf="loading" src="../../../assets/animations/spinner.gif">
+          Entrar
+        </button>
+      </form>
     </section>
+  </section>
 </section>
 </div>

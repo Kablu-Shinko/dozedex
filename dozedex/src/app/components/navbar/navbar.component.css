@@ -1,0 +1,33 @@
+.navbar-spacer {
+    flex: 1 1 auto;
+}
+
+.navbar-icon{
+    background-color: transparent;
+    color: white;
+    border: 0;
+}
+
+.navbar-profile-icon{
+    width: 4vh;
+    height: 4vh;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 0;
+}
+
+.example-container {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    height: 100vh;
+  }
+  
+  .example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .example-sidenav {
+    padding: 20px;
+  }

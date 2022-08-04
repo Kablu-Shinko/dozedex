@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+    <button mat-button [matMenuTriggerFor]="menu" class="navbar-icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <div *ngFor="let option of options">
+            <button mat-menu-item (click)="option.Function()">{{option.Title}}</button>
+        </div>
+    </mat-menu>
+
+    <button mat-icon-button class="navbar-icon" aria-label="Example icon-button with menu icon">
+    </button>
+    <span class="navbar-spacer"></span>
+    <button mat-button [matMenuTriggerFor]="profile" class="navbar-icon">
+        <img src="{{path}}" alt="{{altText}}" class="navbar-profile-icon">
+    </button>
+    <mat-menu #profile="matMenu">
+      <button mat-menu-item>Meu perfil</button>
+      <button mat-menu-item (click)="logOut()">Sair</button>
+    </mat-menu>
+
+    <button class="navbar-icon">
+    </button>
+</mat-toolbar>
