@@ -65,7 +65,7 @@ export class NavbarComponent implements OnInit {
     this.dozedexService.logOut();
   };
 
-  async ReloadPage(): Promise<void>{
+  async RefreshPage(): Promise<void>{
     this.loading = true;
     await this.dozedexService.RefreshPage(this.router.url);
     this.loading = false;
