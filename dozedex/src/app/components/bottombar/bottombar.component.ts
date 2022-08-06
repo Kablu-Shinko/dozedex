@@ -17,6 +17,7 @@ export class BottombarComponent implements OnInit {
 
   user: User = this.userService.GetActualUser();
   friend: User = {Email:"", KeepLogin:false, Password: ""}
+  i:number = 0;
 
   async ngOnInit(): Promise<void> {
     this.getFriend();
@@ -32,30 +33,36 @@ export class BottombarComponent implements OnInit {
   }
 
   mensagem(){
+    this.i++;
     var aleatorio:number = Number((Math.random() * (Math.random() * 100)).toFixed(0));
 
-    if(aleatorio > 0 && aleatorio <= 10){
-      alert("nah")
-    }
+    if(this.i !== 10){
+      if(aleatorio > 0 && aleatorio <= 10){
+        alert("nah");
+      }
 
-    if(aleatorio > 10 && aleatorio <= 20){
-      alert("nop")
-    }
+      if(aleatorio > 10 && aleatorio <= 20){
+        alert("nop");
+      }
 
-    if(aleatorio > 20 && aleatorio <= 30){
-      alert("naaaa noup")
-    }
+      if(aleatorio > 20 && aleatorio <= 30){
+        alert("naaaa noup");
+      }
 
-    if(aleatorio > 30 && aleatorio <= 40){
-      alert("*bocejos*")
-    }
+      if(aleatorio > 30 && aleatorio <= 40){
+        alert("*bocejos*");
+      }
 
-    if(aleatorio> 40 && aleatorio <= 50){
-      alert("alixia: eu não faria isso se fosse voce")
-    }
+      if(aleatorio> 40 && aleatorio <= 50){
+        alert("alixia: eu não faria isso se fosse voce");
+      }
 
-    if(aleatorio > 50){
-      alert("'----'")
+      if(aleatorio > 50){
+        alert("'----'");
+      }
+    }
+    else{
+      window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
     }
   }
 }
