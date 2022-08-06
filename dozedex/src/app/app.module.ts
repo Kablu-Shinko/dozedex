@@ -31,6 +31,7 @@ import { CharacterDetailsComponent } from './components/characters/character-det
 import { CharacterEditComponent } from './components/characters/character-edit/character-edit.component';
 import { UserProfileComponent } from './components/User/user-profile/user-profile.component';
 import { PulsingButtonComponent } from './components/assets/buttons/pulsing-button/pulsing-button.component';
+import { BottombarComponent } from './components/bottombar/bottombar.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PulsingButtonComponent } from './components/assets/buttons/pulsing-butt
     CharacterDetailsComponent,
     CharacterEditComponent,
     UserProfileComponent,
-    PulsingButtonComponent
+    PulsingButtonComponent,
+    BottombarComponent
   ],
   imports: [
     MatSliderModule,
