@@ -10,11 +10,11 @@
 
     <span class="navbar-spacer"></span>
 
-    <button mat-button *ngIf="loading" class="navbar-icon simple-icon" disabled id="navbar-refresh-button" (click)="ReloadPage()">
+    <button mat-button *ngIf="loading" class="navbar-icon simple-icon" disabled id="navbar-refresh-button" (click)="RefreshPage()">
         <mat-icon class="pulsing-button">refresh</mat-icon>
     </button>
 
-    <button mat-button *ngIf="!loading" class="navbar-icon simple-icon" id="navbar-refresh-button" (click)="ReloadPage()">
+    <button mat-button *ngIf="!loading" class="navbar-icon simple-icon" id="navbar-refresh-button" (click)="RefreshPage()">
         <mat-icon>refresh</mat-icon>
     </button>
     
