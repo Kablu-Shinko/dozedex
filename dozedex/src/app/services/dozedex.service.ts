@@ -1,6 +1,6 @@
 import { environment } from '../../environments/environments';
 import { User } from '../interfaces/user.interface'
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { interval, firstValueFrom } from 'rxjs';
@@ -12,16 +12,27 @@ import { Router } from '@angular/router';
     providedIn: 'root'
 })
 
-export class DozedexService{
+export class DozedexService implements OnInit{
 
     private DozedexApiURL = environment.API_URL;
     private AuthApiURL = `${this.DozedexApiURL}/auth`
+    private pathsNavigated: string[] = [];
 
     constructor(
         private http: HttpClient,
         private userService: UserService,
         private router: Router
     ) {}
+
+    ngOnInit(): void {
+        this.pathsNavigated.push(this.getLastPath());
+    }
+
+    async RefreshPage(path: string): Promise<void>{
+        await this.userService.RefreshData();
+        await this.router.navigateByUrl('/home', {skipLocationChange: true});
+        await this.router.navigate([path]);
+    }
 
     async VerifyUser(user: User): Promise<Auth>{
         var response: any = await firstValueFrom(this.http.post(`${this.AuthApiURL}`, user));
@@ -32,17 +43,15 @@ export class DozedexService{
 
         if(result.auth){
             user.Token = result.token;
-            this.userService.ConfigDefault(user);
+            await this.userService.ConfigDefault(user);
         }
-        else{
-            alert("Algo deu errado, tente novamente.");
-        }
-
+        
         return result;
     }
 
     logOut(): void {
         this.userService.Reset();
+        this.systemCacheReset();
         this.router.navigate(['/login']);
     }
 
@@ -53,4 +62,26 @@ export class DozedexService{
     notImplemented(): void{
         alert("não implementado ainda");
     };
+
+    //#region system features
+
+    addCurrentPath(path: string): void{
+        this.pathsNavigated.push(path);
+        var lastPath = this.pathsNavigated[this.pathsNavigated.length - 1]
+        this.setLastPath(lastPath);
+    }
+
+    getLastPath(): string {
+        return localStorage.getItem("dozedex_system_lastPath") ?? "";
+    }
+
+    setLastPath(path: string | null | undefined): void {
+        localStorage.setItem("dozedex_system_lastPath", path ?? "");
+    }
+
+    systemCacheReset(){
+        this.setLastPath("");
+    }
+
+    //#endregion system features
 }

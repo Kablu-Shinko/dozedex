@@ -34,13 +34,24 @@ export class LoginComponent implements OnInit {
 
   async onSubmit(){
     if(this.loginForm.valid){
+      this.loading = true;
       var loggedUser: User = {
         Email: this.loginForm.controls.Email.value ?? '',
         Password: this.loginForm.controls.Password.value ?? '',
         KeepLogin: this.loginForm.controls.KeepLogin.value ?? false
       }
 
-      var response: Auth =  await this.dozedexService.VerifyUser(loggedUser);
+      var response: Auth;
+
+      try{
+         response = await this.dozedexService.VerifyUser(loggedUser);
+      }
+      catch{
+        response = {     
+          auth: false,
+          token: "" 
+        }
+      }
       
       if(response.auth){
         this.router.navigate(['/home']);
@@ -52,5 +63,6 @@ export class LoginComponent implements OnInit {
     else{
       alert("Verifique os dados e tente novamente")
     }
+    this.loading = false;
   }
 }

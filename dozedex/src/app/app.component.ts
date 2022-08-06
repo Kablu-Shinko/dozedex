@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from './interfaces/user.interface';
+import { DozedexService } from './services/dozedex.service';
 
 import { UserService } from './services/user.service';
 
@@ -13,18 +15,23 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private dozedexService: DozedexService
   )
   {}
 
-  ngOnInit(): void{
-    var loginKeeped: Boolean = this.userService.getKeepLogin();
+  user: User = this.userService.GetActualUser();
 
-    if(loginKeeped){
-      this.router.navigate(['/home']);
+  ngOnInit(): void{
+
+    if(!this.user.KeepLogin){
+      this.router.navigate(['/login']);
+    }
+    else if(this.dozedexService.getLastPath().length > 0){
+      this.router.navigate([this.dozedexService.getLastPath()]);
     }
     else{
-      this.router.navigate(['/login']);
+      this.router.navigate(['/home']);
     }
   }
 }

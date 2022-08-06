@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuOption } from 'src/app/interfaces/small-interfaces/small-interfaces';
 import { DozedexService } from 'src/app/services/dozedex.service';
 import { UserService } from 'src/app/services/user.service';
+import { User } from '../../interfaces/user.interface'
 
 @Component({
   selector: 'app-navbar',
@@ -15,11 +16,12 @@ export class NavbarComponent implements OnInit {
     private userService: UserService,
     private dozedexService: DozedexService,
     private router: Router
-    ) { }
+  ) { }
 
+  user: User = this.userService.GetActualUser();
   altText: string = "imagem de perfil";
   showFiller: Boolean =  false;
-  path: string = this.userService.getImageURL();
+  loading: Boolean = false;
 
   menuOptions: MenuOption[] = [
     {
@@ -56,23 +58,21 @@ export class NavbarComponent implements OnInit {
   ];
     
   ngOnInit(): void {
+    this.dozedexService.addCurrentPath(this.router.url);
   };
 
   logOut(): void{
     this.dozedexService.logOut();
   };
 
-  ReloadPage(): void{
-    let currentUrl = this.router.url;
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-        this.router.navigate([currentUrl]);
-        alert("Atualizado");
-    });
+  async ReloadPage(): Promise<void>{
+    this.loading = true;
+    await this.dozedexService.RefreshPage(this.router.url);
+    this.loading = false;
+    alert("Atualizado");
   };
 
   goToCharacters(): void{
     this.router.navigate(['/characters/list']);
   };
-
-
 }

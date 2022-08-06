@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user.interface';
+import { DozedexService } from 'src/app/services/dozedex.service';
 import { ImageService } from 'src/app/services/image.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,9 +16,12 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private imageService: ImageService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dozedexService: DozedexService,
+    private router: Router
   ) { }
 
+  loading: Boolean = false;
   user: User = this.userService.GetActualUser();
 
   profileForm = this.formBuilder.group({
@@ -39,6 +44,7 @@ export class UserProfileComponent implements OnInit {
 
   async onSubmit(): Promise<void> {
     if(this.profileForm.valid){
+      this.loading = true;
       var editedUser: User = {
         Email: this.profileForm.controls.Email.value ?? this.user.Email,
         KeepLogin: this.profileForm.controls.KeepLogin.value ?? this.user.KeepLogin,
@@ -49,11 +55,14 @@ export class UserProfileComponent implements OnInit {
         UserName: this.profileForm.controls.UserName.value ?? this.user.UserName 
       }
 
-      await this.userService.UpdateUser(editedUser);
-      alert("Dados atualizados!")
+      var result = await this.userService.UpdateUser(editedUser);
+      await this.dozedexService.RefreshPage(this.router.url);
+
+      alert(result);
     }
     else{
       alert("Verifique os campos obrigatórios e tente novamente")
     }
+    this.loading = false;
   }
 }

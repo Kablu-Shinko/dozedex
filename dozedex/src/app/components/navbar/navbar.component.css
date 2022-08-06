@@ -33,3 +33,16 @@
   .example-sidenav {
     padding: 20px;
   }
+
+  @keyframes pulsing-button-animation {
+    0%   {color: white}
+    50%  {color: rgb(0, 206, 58);}
+    100%  {color: white}
+  }
+
+  .pulsing-button{
+    color: white;
+    animation-name: pulsing-button-animation;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+  }

@@ -9,11 +9,17 @@
     </mat-menu>
 
     <span class="navbar-spacer"></span>
-    <button mat-button class="navbar-icon simple-icon" (click)="ReloadPage()">
+
+    <button mat-button *ngIf="loading" class="navbar-icon simple-icon" disabled id="navbar-refresh-button" (click)="ReloadPage()">
+        <mat-icon class="pulsing-button">refresh</mat-icon>
+    </button>
+
+    <button mat-button *ngIf="!loading" class="navbar-icon simple-icon" id="navbar-refresh-button" (click)="ReloadPage()">
         <mat-icon>refresh</mat-icon>
     </button>
+    
     <button mat-button [matMenuTriggerFor]="profile" class="navbar-icon">
-        <img src="{{path}}" alt="{{altText}}" width="25vh;" height="25vh;" style="border-radius: 50%;">
+        <img src="{{user.ImagePath}}" alt="{{altText}}" width="25vh;" height="25vh;" style="border-radius: 50%;">
     </button>
     <mat-menu #profile="matMenu">
         <div *ngFor="let option of profileOptions">

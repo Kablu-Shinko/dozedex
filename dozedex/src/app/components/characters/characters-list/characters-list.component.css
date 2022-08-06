@@ -1,0 +1,32 @@
+.character-list-container{
+    margin: 5vh 5vh 5vh 5vh;
+}
+
+.character-list-button{
+    max-width: 20vh;
+    max-height: 10vh;
+    border-radius: 10px;
+}
+
+.characters-list-table > table{
+    margin-top: 2vh;
+    overflow-x: auto;
+    max-width: 200vh;
+    zoom: 1;
+}
+
+.characters-list-table > table > thead > tr > th{
+    font-size: 18px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 3vh;
+    padding-right: 3vh;
+}
+
+.characters-list-table > table > tbody > tr > td{
+    font-size: 14px !important;
+    word-wrap: break-word;
+}
+
+

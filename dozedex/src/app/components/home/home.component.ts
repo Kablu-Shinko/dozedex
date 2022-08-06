@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CardOption } from 'src/app/interfaces/small-interfaces/small-interfaces';
 import { DozedexService } from 'src/app/services/dozedex.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
       private router: Router,
-      private dozedexService: DozedexService
+      private dozedexService: DozedexService,
+      private userService: UserService
     ) { }
   
   CardOptions: CardOption[] = [
@@ -39,6 +41,6 @@ export class HomeComponent implements OnInit {
   ]
 
   ngOnInit(): void {
-  }
 
+  }
 }

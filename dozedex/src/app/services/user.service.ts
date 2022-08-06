@@ -15,13 +15,13 @@ import { ImageService } from './image.service';
 export class UserService{
     private DozedexApiURL = environment.API_URL;
     private API_UserRoute = `${this.DozedexApiURL}/user`;
-    private DefaultProfileFormError: string = "Verifique os campos e tente novamente";
 
     constructor(
         private http: HttpClient,
         private imageService: ImageService    
     ) {}
-
+    
+    //ok
     async GetUserByEmail(email: string): Promise<User>{
         var objeto: {Email: string} = {Email: email};
         var response: any = await firstValueFrom(this.http.post(`${this.API_UserRoute}/getUserByEmail`, objeto));
@@ -39,64 +39,75 @@ export class UserService{
         return result;
     }
 
-    ConfigDefault(user: User): void {
-        if(user.Email.length > 0){
-            let token = user.Token;
-            let keepLogin = user.KeepLogin;
-            this.GetUserByEmail(user.Email).then((_user) => {
-                user = _user
-                user.Token = token;  
-                user.KeepLogin = keepLogin;          
-                
-                this.setEmail(user.Email ?? '');
-                this.setImageUrl(user.ImageUrl ?? '');
-                this.setKeepLogin(user.KeepLogin);
-                this.setName(user.Name ?? '');
-                this.setToken(user.Token ?? '');
-                this.setUserName(user.UserName ?? '');
-            }); 
-        }
+    //ok
+    async ConfigDefault(user: User): Promise<void> {
+        let token = user.Token;
+        let keepLogin = user.KeepLogin;
+        let _user = await this.GetUserByEmail(user.Email);
+
+        user = _user;
+        user.Token = token;  
+        user.KeepLogin = keepLogin;  
+        user.ImagePath = this.imageService.GetFullImageURL(user.ImageUrl ?? "");
+        
+        this.setEmail(user.Email);
+        this.setImageUrl(user.ImageUrl);
+        this.setKeepLogin(user.KeepLogin);
+        this.setName(user.Name);
+        this.setToken(user.Token);
+        this.setUserName(user.UserName);
+        this.setImagePath(user.ImagePath);
     }
 
+    //ok
     GetActualUser(): User{
-        let user: User = {
+        return {
             Email: this.getEmail(),
             KeepLogin: this.getKeepLogin(),
             Password: "",
             ImageUrl: this.getImageURL(),
-            ImagePath: this.imageService.GetFullImageURL(this.getImageURL()),
+            ImagePath: this.getImagePath(),
             Name: this.getName(),
-            Token: "",
+            Token: this.getToken(),
             UserName: this.getUserName()
         };
-        return user;
     }
 
+    //ok
     Reset(){
-        this.setToken('');
+        this.setImagePath('');
         this.setEmail('');
+        this.setToken('');
         this.setImageUrl('');
+        this.setKeepLogin(false);
         this.setName('');
         this.setUserName('');
-        this.setKeepLogin(false);
     }
 
+    //ok
+    async RefreshData(): Promise<void>{
+        var user: User = this.GetActualUser();
+        this.Reset();
+        await this.ConfigDefault(user);
+    }
+
+    //ok
     //#region get
 
-    getToken(): string {
+    private getToken(): string {
         return localStorage.getItem("dozedex_user_token") ?? "";
     }
 
-    getEmail(): string {
+    private getEmail(): string {
         return localStorage.getItem("dozedex_user_email") ?? "";
     }
 
-    getKeepLogin(): Boolean {
+    private getKeepLogin(): Boolean {
         var keepLogin: string = localStorage.getItem("dozedex_user_keepLogin") ?? '';
         return keepLogin.length > 0 ? keepLogin === 'true' : false;
     }
 
-    getImageURL(): string {
+    private getImageURL(): string {
         var url = localStorage.getItem("dozedex_user_userImageUrl") ?? '';
         
         if(url?.length === 0){
@@ -106,49 +117,57 @@ export class UserService{
         return url;
     }
 
-    getName(): string {
+    private getName(): string {
         return localStorage.getItem("dozedex_user_name") ?? "";
     }
 
-    getUserName(): string {
+    private getUserName(): string {
         return localStorage.getItem("dozedex_user_username") ?? "";
+    }
+
+    private getImagePath(): string {
+        return localStorage.getItem("dozedex_user_userImagePath") ?? "";
     }
 
     //#endregion get
 
+    //ok
     //#region set
 
-    setToken(token: string): void {
-        localStorage.setItem("dozedex_user_token", token);
+    private setToken(token: string | null | undefined): void {
+        localStorage.setItem("dozedex_user_token", token ?? "");
     }
 
-    setEmail(email: string) : void {
-        localStorage.setItem("dozedex_user_email", email);
+    private setEmail(email: string | null | undefined) : void {
+        localStorage.setItem("dozedex_user_email", email ?? "");
     }
 
-    setKeepLogin(keepLogin: Boolean): void {
+    private setKeepLogin(keepLogin: Boolean | null | undefined): void {
         localStorage.setItem("dozedex_user_keepLogin", keepLogin ? 'true' : 'false');
     }
 
-    setImageUrl(imageUrl: string): void {
-        localStorage.setItem("dozedex_user_userImageUrl", imageUrl);
+    private setImageUrl(imageUrl: string | null | undefined): void {
+        localStorage.setItem("dozedex_user_userImageUrl", imageUrl ?? "");
     }
 
-    setUserName(username: string): void{
-        localStorage.setItem("dozedex_user_username", username);
+    private setUserName(username: string | null | undefined): void{
+        localStorage.setItem("dozedex_user_username", username ?? "");
     }
 
-    setName(name: string): void{
-        localStorage.setItem("dozedex_user_name", name);
+    private setName(name: string | null | undefined): void{
+        localStorage.setItem("dozedex_user_name", name ?? "");
+    }
+
+    private setImagePath(path: string | null | undefined): void{
+        localStorage.setItem("dozedex_user_userImagePath", path ?? "");
     }
 
     //#endregion set
 
-    async UpdateUser(user: User): Promise<void>{
+    async UpdateUser(user: User): Promise<string>{
 
         if(user === undefined || user.OldPassword === undefined || user.OldPassword.length === 0){
-            alert(this.DefaultProfileFormError);   
-            return;
+            return "Verifique os campos e tente novamente";
         }
 
         var OldPassword: string = user.OldPassword;
@@ -156,12 +175,11 @@ export class UserService{
         var passwordValid: Boolean = await this.VerifyPassword(user.Email, OldPassword);
 
         if(!passwordValid){
-            alert("Senha atual incorreta");
-            return;
+            return "Senha atual incorreta";
         }
 
         try{
-            var response: any = await firstValueFrom(this.http.post(`${this.API_UserRoute}/update`, {
+            await firstValueFrom(this.http.post(`${this.API_UserRoute}/update`, {
                 Email: user.Email,
                 UserName: user.UserName,
                 oldPassword: OldPassword,
@@ -171,8 +189,10 @@ export class UserService{
             }));
         }
         catch(ex: any){
-            alert(ex['error']['Status']);
+            return ex['error']['Status'];
         }
+
+        return "Dados Atualizados!";
     }
 
     async VerifyPassword(email: string, password: string): Promise<Boolean>{

@@ -4,7 +4,7 @@
         <section class="row justify-content-center">
             <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form-container">
                 <div class="form-group" style="display: flex; justify-content: center;">
-                    <img src="{{user.ImagePath}}" height="250vh" style="border-radius: 20px;">
+                    <img src="{{user.ImagePath}}" width="200vh" style="border-radius: 20px;">
                 </div>
 
                 <div class="form-group">
@@ -37,12 +37,18 @@
                     <input formControlName="OldPassword" type="password" class="form-control" id="InputOldPassword" placeholder="Senha anterior"> 
                 </div>
 
+                <br>
+                
                 <div class="form-group">
                     <mat-slide-toggle color="primary" formControlName="KeepLogin">Manter login</mat-slide-toggle>
                 </div>
 
-                <button class="btn btn-primary btn-block" type="submit">Salvar alterações</button>
+                <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [text]='"Salvar alterações"' [loading]="loading"></app-pulsing-button>
               </form>
         </section>
     </section>
+</div>
+<div id="profile-spacer">
+    <br/>
+    <br/>
 </div>
