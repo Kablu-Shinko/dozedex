@@ -1,0 +1,13 @@
+.profile-container{
+    margin-left: 7vh;
+    margin-right: 7vh;
+    margin-top: 5vh;
+    background-color: rgba(170, 170, 170, 0.366);
+    border-radius: 20px;
+}
+
+.form-container{
+    border-radius: 10px;
+    padding: 30px;
+    margin: auto;
+  }

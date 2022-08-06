@@ -3,11 +3,11 @@
 
 <div class="main-home-container">
     <div class="flex-gap">
-        <div style="min-width:200px" *ngFor="let option of options">
+        <div style="min-width:200px" *ngFor="let option of CardOptions">
             <div class="card">
                 <div class="card-header">{{option.Title}}</div>
                 <div class="card-body">
-                    <a class="home-card-link" routerLink="{{option.Path}}"><strong>{{option.Description}}</strong></a>
+                    <a class="home-card-link" (click)="option.Function()"><strong>{{option.Description}}</strong></a>
                 </div>
             </div>
         </div>

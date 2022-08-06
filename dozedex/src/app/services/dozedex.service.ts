@@ -23,26 +23,6 @@ export class DozedexService{
         private router: Router
     ) {}
 
-    InitService(): Boolean{
-        try{
-            var token: string = this.userService.getUserToken() ?? '';
-            if(token.length === 0){
-                return false;
-            }
-            var auth: any;
-
-            firstValueFrom(this.http.post(`${this.AuthApiURL}/byToken/`, token)).then((item: any) => {
-                console.log(item)
-            });
-            
-            return true;
-        }
-        catch{
-            return false;
-        }
-    }
-
-    //#region authentication
     async VerifyUser(user: User): Promise<Auth>{
         var response: any = await firstValueFrom(this.http.post(`${this.AuthApiURL}`, user));
         var result: Auth = {
@@ -54,13 +34,23 @@ export class DozedexService{
             user.Token = result.token;
             this.userService.ConfigDefault(user);
         }
+        else{
+            alert("Algo deu errado, tente novamente.");
+        }
 
         return result;
     }
 
-    //#region User comands
     logOut(): void {
         this.userService.Reset();
         this.router.navigate(['/login']);
-      }
+    }
+
+    getBaseGoogleDriveURL(): string {
+        return environment.GOOGLEDRIVE_URL;
+    }
+
+    notImplemented(): void{
+        alert("não implementado ainda");
+    };
 }

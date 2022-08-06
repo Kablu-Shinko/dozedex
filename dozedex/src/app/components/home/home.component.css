@@ -1,7 +1,7 @@
 .flex-gap {
     display: inline-flex;
-    margin-left: 10vh;
-    margin-right: 10vh;
+    margin-left: 7vh;
+    margin-right: 7vh;
     flex-wrap: wrap;
     gap: 2vh;
 }

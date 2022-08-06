@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 //imports angular material
 import { MatSliderModule } from '@angular/material/slider';
@@ -28,6 +29,7 @@ import { CharactersListComponent } from './components/characters/characters-list
 import { CharacterCreateComponent } from './components/characters/character-create/character-create.component';
 import { CharacterDetailsComponent } from './components/characters/character-details/character-details.component';
 import { CharacterEditComponent } from './components/characters/character-edit/character-edit.component';
+import { UserProfileComponent } from './components/User/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { CharacterEditComponent } from './components/characters/character-edit/c
     CharactersListComponent,
     CharacterCreateComponent,
     CharacterDetailsComponent,
-    CharacterEditComponent
+    CharacterEditComponent,
+    UserProfileComponent
   ],
   imports: [
     MatSliderModule,
@@ -62,7 +65,8 @@ import { CharacterEditComponent } from './components/characters/character-edit/c
     }),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

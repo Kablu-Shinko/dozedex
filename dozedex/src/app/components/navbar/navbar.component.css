@@ -8,9 +8,11 @@
     border: 0;
 }
 
+.simple-icon{
+  margin-top: 1.5vh;
+}
+
 .navbar-profile-icon{
-    width: 4vh;
-    height: 4vh;
     background-color: transparent;
     border-radius: 50%;
     border: 0;

@@ -6,6 +6,7 @@ import { CharacterEditComponent } from './components/characters/character-edit/c
 import { CharactersListComponent } from './components/characters/characters-list/characters-list.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { UserProfileComponent } from './components/User/user-profile/user-profile.component';
 
 
 const routes: Routes = [
@@ -14,11 +15,13 @@ const routes: Routes = [
   {path: 'characters/list', component: CharactersListComponent},
   {path: 'characters/edit/:id', component: CharacterEditComponent},
   {path: 'characters/details/:id', component: CharacterDetailsComponent},
-  {path: 'characters/create', component: CharacterCreateComponent}
+  {path: 'characters/create', component: CharacterCreateComponent},
+  {path: 'user/profile', component: UserProfileComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  // imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

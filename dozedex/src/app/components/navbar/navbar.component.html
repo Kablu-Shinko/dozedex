@@ -1,22 +1,24 @@
 <mat-toolbar color="primary">
-    <button mat-button [matMenuTriggerFor]="menu" class="navbar-icon">
+    <button mat-button [matMenuTriggerFor]="menu" class="navbar-icon simple-icon">
         <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <div *ngFor="let option of options">
+        <div *ngFor="let option of menuOptions">
             <button mat-menu-item (click)="option.Function()">{{option.Title}}</button>
         </div>
     </mat-menu>
 
-    <button mat-icon-button class="navbar-icon" aria-label="Example icon-button with menu icon">
-    </button>
     <span class="navbar-spacer"></span>
+    <button mat-button class="navbar-icon simple-icon" (click)="ReloadPage()">
+        <mat-icon>refresh</mat-icon>
+    </button>
     <button mat-button [matMenuTriggerFor]="profile" class="navbar-icon">
-        <img src="{{path}}" alt="{{altText}}" class="navbar-profile-icon">
+        <img src="{{path}}" alt="{{altText}}" width="25vh;" height="25vh;" style="border-radius: 50%;">
     </button>
     <mat-menu #profile="matMenu">
-      <button mat-menu-item>Meu perfil</button>
-      <button mat-menu-item (click)="logOut()">Sair</button>
+        <div *ngFor="let option of profileOptions">
+            <button mat-menu-item (click)="option.Function()">{{option.Title}}</button>
+        </div>
     </mat-menu>
 
     <button class="navbar-icon">

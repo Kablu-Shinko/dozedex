@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuOption } from 'src/app/interfaces/small-interfaces/small-interfaces';
 import { DozedexService } from 'src/app/services/dozedex.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -16,14 +17,11 @@ export class NavbarComponent implements OnInit {
     private router: Router
     ) { }
 
-  altText: string = "imagem do luan"
+  altText: string = "imagem de perfil";
   showFiller: Boolean =  false;
-  path: string = this.userService.getUserImageURL();
+  path: string = this.userService.getImageURL();
 
-  options: {
-    Title: string,
-    Function: Function
-  }[] = [
+  menuOptions: MenuOption[] = [
     {
       Title: "Início",
       Function: () => this.router.navigate(['home'])  
@@ -31,17 +29,50 @@ export class NavbarComponent implements OnInit {
     {
       Title: "Personagens",
       Function: () => this.router.navigate(['/characters/list'])
+    },
+    {
+      Title: "Raças",
+      Function: () => this.dozedexService.notImplemented()
+    },
+    {
+      Title: "Mundos",
+      Function: () => this.dozedexService.notImplemented()
+    },
+    {
+      Title: "Itens",
+      Function: () => this.dozedexService.notImplemented()
     }
-  ] 
+  ];
+
+  profileOptions: MenuOption[] = [
+    {
+      Title: "Meu Perfil",
+      Function: () => this.router.navigate(['/user/profile'])
+    },
+    {
+      Title: "Sair",
+      Function: () => this.logOut()
+    }
+  ];
     
   ngOnInit(): void {
-  }
+  };
 
   logOut(): void{
     this.dozedexService.logOut();
-  }
+  };
+
+  ReloadPage(): void{
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+        alert("Atualizado");
+    });
+  };
 
   goToCharacters(): void{
     this.router.navigate(['/characters/list']);
-  }
+  };
+
+
 }

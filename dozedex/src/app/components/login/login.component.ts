@@ -30,8 +30,6 @@ export class LoginComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    var keepLogin: Boolean = this.userService.getKeepLogin();
-    console.log('keepLogin: ', keepLogin);
   }
 
   async onSubmit(){
@@ -48,7 +46,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
       }
       else{
-        alert("não deveria logar");
+        alert("Verifique os dados e tente novamente");
       }
     }
     else{
