@@ -16,25 +16,3 @@
     margin: auto;
   }
 
-  @keyframes login-pulsing-button-animation {
-    0%   {
-      background-color: rgb(31, 108, 232);
-      border-color: rgb(31, 108, 232);
-    } 
-    50%  {
-      background-color: rgb(152, 205, 251);
-      border-color: rgb(152, 205, 251);
-    }
-    100%  {
-      background-color: rgb(31, 108, 232);
-      border-color: rgb(31, 108, 232);
-    }
-  }
-
-  .login-pulsing-button{
-    background-color: rgb(31, 108, 232);
-    color: white;
-    animation-name: login-pulsing-button-animation;
-    animation-duration: 1.5s;
-    animation-iteration-count: infinite;
-  }

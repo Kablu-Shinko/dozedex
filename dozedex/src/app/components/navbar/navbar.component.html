@@ -19,7 +19,7 @@
     </button>
     
     <button mat-button [matMenuTriggerFor]="profile" class="navbar-icon">
-        <img src="{{user.ImagePath}}" alt="{{altText}}" width="25vh;" height="25vh;" style="border-radius: 50%;">
+        <img src="{{user.ImagePath}}" alt="{{altText}}" height="25vh" width="25vh" class="navbar-profile-icon">
     </button>
     <mat-menu #profile="matMenu">
         <div *ngFor="let option of profileOptions">

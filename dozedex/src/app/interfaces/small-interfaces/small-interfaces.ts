@@ -9,7 +9,23 @@ interface CardOption{
     Function: Function
 }
 
+interface DialogData {
+    Title: string;
+    Description: string;
+    Inputs: DialogFormInput[];
+    FunctionDescription: string;
+    Function: Function;
+}
+
+interface DialogFormInput{
+    Label: string,
+    Input: string,
+    Type: string
+}
+
 export {
     MenuOption,
-    CardOption
+    CardOption,
+    DialogData,
+    DialogFormInput
 }

@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user.interface';
 import { DozedexService } from 'src/app/services/dozedex.service';
 import { ImageService } from 'src/app/services/image.service';
 import { UserService } from 'src/app/services/user.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
+import { DialogData } from 'src/app/interfaces/small-interfaces/small-interfaces';
 
 @Component({
   selector: 'app-user-profile',
@@ -18,11 +21,14 @@ export class UserProfileComponent implements OnInit {
     private imageService: ImageService,
     private formBuilder: FormBuilder,
     private dozedexService: DozedexService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) { }
 
   loading: Boolean = false;
   user: User = this.userService.GetActualUser();
+  profilePictureURL: string = "";
+  actualPassword: string = "";
 
   profileForm = this.formBuilder.group({
     Email: [''],
@@ -51,7 +57,7 @@ export class UserProfileComponent implements OnInit {
         Password: this.profileForm.controls.Password.value ?? "",
         OldPassword: this.profileForm.controls.OldPassword.value ?? "",
         Name: this.profileForm.controls.Name.value ?? this.user.Name,
-        ImageUrl: this.profileForm.controls.ImageUrl.value ?? this.user.ImageUrl,
+        ImageUrl: this.user.ImageUrl,
         UserName: this.profileForm.controls.UserName.value ?? this.user.UserName 
       }
 
@@ -64,5 +70,51 @@ export class UserProfileComponent implements OnInit {
       alert("Verifique os campos obrigatórios e tente novamente")
     }
     this.loading = false;
+  }
+
+  async SaveUrl(newUrl: string, actualPassword: string): Promise<string>{
+    var editedUser: User = {
+      Email: this.user.Email,
+      KeepLogin: this.user.KeepLogin,
+      Password: "",
+      OldPassword: actualPassword,
+      Name: this.user.Name,
+      ImageUrl: newUrl,
+      UserName: this.user.UserName 
+    }
+
+    var result = await this.userService.UpdateUser(editedUser);
+    await this.dozedexService.RefreshPage(this.router.url);
+
+    return result;
+  }
+
+  openDialog(): void {
+    const data: DialogData = {
+      Title: "Trocar url da imagem",
+      Description: "insira abaixo a url da nova imagem",
+      FunctionDescription: "Atualizar",
+      Inputs: [
+        {
+          Label: "Nova URL",
+          Input: this.profilePictureURL,
+          Type: "text"
+        },
+        {
+          Label: "Senha atual",
+          Input: this.actualPassword,
+          Type: "password"
+        }
+      ],
+      Function: async (inputs: string[]) => { 
+        await this.SaveUrl(inputs[0], inputs[1]); 
+        this.dialog.closeAll(); 
+      }
+    }
+    
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: data
+    });
   }
 }

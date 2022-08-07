@@ -13,15 +13,17 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 //environments
 import { environment } from '../environments/environment';
 
 //components
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -32,6 +34,7 @@ import { CharacterEditComponent } from './components/characters/character-edit/c
 import { UserProfileComponent } from './components/User/user-profile/user-profile.component';
 import { PulsingButtonComponent } from './components/assets/buttons/pulsing-button/pulsing-button.component';
 import { BottombarComponent } from './components/bottombar/bottombar.component';
+import { DialogComponent } from './components/User/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import { BottombarComponent } from './components/bottombar/bottombar.component';
     CharacterEditComponent,
     UserProfileComponent,
     PulsingButtonComponent,
-    BottombarComponent
+    BottombarComponent,
+    DialogComponent
   ],
   imports: [
     MatSliderModule,
@@ -55,6 +59,8 @@ import { BottombarComponent } from './components/bottombar/bottombar.component';
     MatMenuModule,
     MatSidenavModule,
     MatListModule,
+    MatDialogModule,
+    MatFormFieldModule,
 
     FormsModule,
     ReactiveFormsModule,
@@ -73,4 +79,5 @@ import { BottombarComponent } from './components/bottombar/bottombar.component';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

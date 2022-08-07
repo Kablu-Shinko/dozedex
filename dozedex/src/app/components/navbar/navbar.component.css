@@ -13,9 +13,10 @@
 }
 
 .navbar-profile-icon{
-    background-color: transparent;
-    border-radius: 50%;
-    border: 0;
+  object-fit: cover;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 0;
 }
 
 .example-container {
