@@ -1,6 +1,6 @@
 .profile-outofbox-container{
     background-color: #abf2ff;
-    height: 100%;
+    height: auto;
 }
 
 .profile-container{
@@ -15,7 +15,7 @@
     border-radius: 10px;
     padding: 30px;
     margin: auto;
-    max-width: 1000px;
+    max-width: 800px;
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 20px;
