@@ -1,63 +1,52 @@
 <div class="profile-outofbox-container">
-<app-navbar></app-navbar>
+    <app-navbar></app-navbar>
 
-<div class="profile-container">
-    <section class="container-fluid">
-        <section class="row justify-content-center">
-            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form-container">
-                <div class="profile-picture-container">
-                    <img src="{{user.ImagePath}}" class="profile-picture" (click)="openDialog()">
-                </div>
-                
-                <div class="form-group">
-                  <label for="Email">Seu Email</label>
-                  <input formControlName="Email" type="email" class="form-control" id="InputEmail" placeholder="Seu Email">
-                </div>
+    <div class="profile-container">
+        <section class="container-fluid">
+            <section class="row justify-content-center">
+                <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form-container">
+                    <div class="profile-picture-container">
+                        <img src="{{user.ImagePath}}" class="profile-picture" (click)="openDialog()">
+                    </div>
+                    
+                    <div class="form-group">
+                    <label for="Email">Seu Email</label>
+                    <input formControlName="Email" type="email" class="form-control" id="InputEmail" placeholder="Seu Email">
+                    </div>
 
-                <div class="form-group">
-                    <label for="Name">Seu Nome</label>
-                    <input formControlName="Name" type="text" class="form-control" id="InputName" placeholder="Seu Nome">
-                </div>
+                    <div class="form-group">
+                        <label for="Name">Seu Nome</label>
+                        <input formControlName="Name" type="text" class="form-control" id="InputName" placeholder="Seu Nome">
+                    </div>
 
-                <div class="form-group">
-                    <label for="UserName">Seu Nome de usuário</label>
-                    <input formControlName="UserName" type="text" class="form-control" id="InputUserName" placeholder="Nome de usuário">
-                </div>
+                    <div class="form-group">
+                        <label for="UserName">Seu Nome de usuário</label>
+                        <input formControlName="UserName" type="text" class="form-control" id="InputUserName" placeholder="Nome de usuário">
+                    </div>
 
-                <div class="form-group">
-                    <label for="Password">Sua senha</label>
-                    <input formControlName="Password" type="password" class="form-control" id="InputPassword" placeholder="Senha">
-                </div>
+                    <div class="form-group">
+                        <label for="Password">Sua senha</label>
+                        <input formControlName="Password" type="password" class="form-control" id="InputPassword" placeholder="Senha">
+                    </div>
 
-                <div>
-                    <label for="OldPassword">Senha antiga (obrigatória)</label>
-                    <input formControlName="OldPassword" type="password" class="form-control" id="InputOldPassword" placeholder="Senha anterior"> 
-                </div>
+                    <div>
+                        <label for="OldPassword">Senha antiga (obrigatória)</label>
+                        <input formControlName="OldPassword" type="password" class="form-control" id="InputOldPassword" placeholder="Senha anterior"> 
+                    </div>
 
-                <br>
-                
-                <div class="form-group">
-                    <mat-slide-toggle color="primary" formControlName="KeepLogin">Manter login</mat-slide-toggle>
-                </div>
+                    <br>
+                    
+                    <div class="form-group">
+                        <mat-slide-toggle color="primary" formControlName="KeepLogin">Manter login</mat-slide-toggle>
+                    </div>
 
-                <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [text]='"Salvar alterações"' [loading]="loading"></app-pulsing-button>
-              </form>
+                    <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [text]='"Salvar alterações"' [loading]="loading"></app-pulsing-button>
+                </form>
+            </section>
         </section>
-    </section>
-</div>
-<div id="profile-spacer">
-    <br/>
-    <br/>
-</div>
-</div>
-
-
-<!-- <div class="test-container">
-    <div class="profile-basic-information">
-        <div class="profile-picture-container" (click)="openDialog()">
-            <img src="{{user.ImagePath}}" class="profile-picture">
-        </div>
-        <br><br>
-        <p>testeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
     </div>
-</div> -->
+    <div id="profile-spacer">
+        <br/>
+        <br/>
+    </div>
+</div>

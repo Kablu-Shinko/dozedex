@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CardOption } from 'src/app/interfaces/small-interfaces/small-interfaces';
+import { CardOption, Card } from 'src/app/interfaces/small-interfaces/small-interfaces';
 import { DozedexService } from 'src/app/services/dozedex.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -17,26 +17,46 @@ export class HomeComponent implements OnInit {
       private userService: UserService
     ) { }
   
-  CardOptions: CardOption[] = [
+  Cards: Card[] = [
     {
       Title: "Personagens",
-      Description: "Lista de personagens",
-      Function: () => this.router.navigate(['/characters/list'])
+      Options: [
+        {
+          Title: "Lista",
+          Hover: "Lista de personagens",
+          Function: () => this.dozedexService.notImplemented()
+        }
+      ]
     },
     {
       Title: "Raças",
-      Description: "Lista das raças conhecidas até então",
-      Function: () => this.dozedexService.notImplemented()
+      Options: [
+        {
+          Title: "Lista",
+          Hover: "Lista de raças conhecidas",
+          Function: () => this.dozedexService.notImplemented()
+        }
+      ]
     },
     {
       Title: "Mundos",
-      Description: "Mundos atualmente conhecidos e seu estado atual",
-      Function: () => this.dozedexService.notImplemented()
+      Options: [
+        {
+          Title: "Lista",
+          Hover: "Mundos atualmente conhecidos e seu estado atual",
+          Function: () => this.dozedexService.notImplemented()
+        }
+      ]
     },
     {
       Title: "Itens",
-      Description: "Itens conhecidos",
-      Function: () => this.dozedexService.notImplemented()
+      Options: [
+        {
+          Title: "Lista",
+          Hover: "Itens conhecidos",
+          Function: () => this.dozedexService.notImplemented()
+        }
+      ]
     }
   ]
 

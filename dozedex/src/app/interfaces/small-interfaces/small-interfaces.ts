@@ -3,9 +3,14 @@ interface MenuOption {
     Function: Function
 }
 
+interface Card{
+    Title: string,
+    Options: CardOption[]
+}
+
 interface CardOption{
     Title: string,
-    Description: string,
+    Hover?: string,
     Function: Function
 }
 
@@ -25,6 +30,7 @@ interface DialogFormInput{
 
 export {
     MenuOption,
+    Card,
     CardOption,
     DialogData,
     DialogFormInput

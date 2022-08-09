@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 //imports angular material
 import { MatSliderModule } from '@angular/material/slider';
@@ -23,18 +22,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { environment } from '../environments/environment';
 
 //components
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from './components/assets/navbar/navbar.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { CharactersListComponent } from './components/characters/characters-list/characters-list.component';
 import { CharacterCreateComponent } from './components/characters/character-create/character-create.component';
 import { CharacterDetailsComponent } from './components/characters/character-details/character-details.component';
-import { CharacterEditComponent } from './components/characters/character-edit/character-edit.component';
 import { UserProfileComponent } from './components/User/user-profile/user-profile.component';
 import { PulsingButtonComponent } from './components/assets/buttons/pulsing-button/pulsing-button.component';
-import { BottombarComponent } from './components/bottombar/bottombar.component';
-import { DialogComponent } from './components/User/dialog/dialog.component';
+import { BottombarComponent } from './components/assets/bottombar/bottombar.component';
+import { DialogComponent } from './components/assets/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,11 +43,10 @@ import { DialogComponent } from './components/User/dialog/dialog.component';
     CharactersListComponent,
     CharacterCreateComponent,
     CharacterDetailsComponent,
-    CharacterEditComponent,
     UserProfileComponent,
     PulsingButtonComponent,
     BottombarComponent,
-    DialogComponent
+    DialogComponent,
   ],
   imports: [
     MatSliderModule,

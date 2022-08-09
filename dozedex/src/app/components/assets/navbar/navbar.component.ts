@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuOption } from 'src/app/interfaces/small-interfaces/small-interfaces';
-import { DozedexService } from 'src/app/services/dozedex.service';
-import { UserService } from 'src/app/services/user.service';
-import { User } from '../../interfaces/user.interface'
+import { MenuOption } from '../../../interfaces/small-interfaces/small-interfaces';
+import { DozedexService } from '../../../services/dozedex.service';
+import { UserService } from '../../../services/user.service';
+import { User } from '../../../interfaces/user.interface'
 
 @Component({
   selector: 'app-navbar',
@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
     },
     {
       Title: "Personagens",
-      Function: () => this.router.navigate(['/characters/list'])
+      Function: () => this.dozedexService.notImplemented()
     },
     {
       Title: "Raças",

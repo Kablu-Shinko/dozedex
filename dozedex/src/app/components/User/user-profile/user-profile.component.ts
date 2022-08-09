@@ -6,7 +6,7 @@ import { DozedexService } from 'src/app/services/dozedex.service';
 import { ImageService } from 'src/app/services/image.service';
 import { UserService } from 'src/app/services/user.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
+import { DialogComponent } from '../../assets/dialog/dialog.component';
 import { DialogData } from 'src/app/interfaces/small-interfaces/small-interfaces';
 
 @Component({

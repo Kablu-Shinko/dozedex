@@ -2,15 +2,15 @@
 
 <div class="main-home-container">
     <div class="flex-gap">
-        <div style="min-width:200px" *ngFor="let option of CardOptions">
-            <div class="card">
-                <div class="card-header">{{option.Title}}</div>
-                <div class="card-body">
-                    <a class="home-card-link" (click)="option.Function()"><strong>{{option.Description}}</strong></a>
+        <div *ngFor="let card of Cards">
+            <div class="card" style="width: 200px; height: 150px; overflow: hidden;">
+                <div class="card-header" style="text-align: center;"><strong>{{card.Title}}</strong></div>
+                <div class="card-body" *ngFor="let option of card.Options">
+                    <a class="home-card-link" title="{{option.Hover}}" (click)="option.Function()">{{option.Title}} -></a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<app-bottombar></app-bottombar>
+<!-- <app-bottombar></app-bottombar> -->
