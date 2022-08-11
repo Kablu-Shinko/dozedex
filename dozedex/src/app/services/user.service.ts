@@ -192,6 +192,8 @@ export class UserService{
             return "Senha atual incorreta";
         }
 
+        this.setKeepLogin(user.KeepLogin);
+
         try{
             await firstValueFrom(this.http.post(`${this.API_UserRoute}/update`, {
                 Email: user.Email,

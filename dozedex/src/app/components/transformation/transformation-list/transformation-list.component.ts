@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Breed } from 'src/app/interfaces/breed.interface';
 import { Transformation } from 'src/app/interfaces/transformation.interface';
 import { BreedService } from 'src/app/services/breed.service';
+import { DozedexService } from 'src/app/services/dozedex.service';
 import { TransformationService } from 'src/app/services/transformation.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class TransformationListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private transformationService: TransformationService,
-    private router: Router
+    private router: Router,
+    private dozedexService: DozedexService
   ) { }
 
   Area: string = "Transformações";
@@ -55,5 +57,7 @@ export class TransformationListComponent implements OnInit {
 
   async Inactive(key: number | undefined): Promise<void>{
     await this.transformationService.Inactive(key);
+    alert("excluido");
+    await this.dozedexService.RefreshPage(this.router.url);
   }
 }

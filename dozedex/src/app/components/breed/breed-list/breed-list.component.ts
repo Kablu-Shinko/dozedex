@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Breed } from 'src/app/interfaces/breed.interface';
 import { BreedService } from 'src/app/services/breed.service';
+import { DozedexService } from 'src/app/services/dozedex.service';
 
 @Component({
   selector: 'app-breed-list',
@@ -14,7 +15,8 @@ export class BreedListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private breedService: BreedService,
-    private router: Router
+    private router: Router,
+    private dozedexService: DozedexService
   ) { }
 
   Area: string = "Raças";
@@ -49,5 +51,7 @@ export class BreedListComponent implements OnInit {
 
   async Inactive(key: number | undefined): Promise<void>{
     await this.breedService.Inactive(key);
+    alert("Excluido");
+    await this.dozedexService.RefreshPage(this.router.url);
   }
 }
