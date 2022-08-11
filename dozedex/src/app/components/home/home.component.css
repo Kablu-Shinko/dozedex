@@ -1,41 +1,14 @@
-.flex-gap {
-    display: inline-flex;
-    margin-left: 7vh;
-    margin-right: 7vh;
-    flex-wrap: wrap;
-    gap: 2vh;
-}
-
 .main-home-container{
-    margin-top: 2vh;
+    margin: 2vh;
 }
 
-.home-card-link{
-    text-decoration: none;
-    cursor: pointer;
-    color: black !important;
-    size: 12px;
+.home-container{
+  justify-content: center;
 }
 
-.home-card-link:before {
-    content: attr(data-hover);
-    visibility: hidden;
-    opacity: 0;
-    width: 140px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 5px 0;
-    transition: opacity 1s ease-in-out;
-  
-    position: absolute;
-    z-index: 1;
-    left: 0;
-    top: 110%;
-  }
-  
-  .home-card-link:hover:before {
-    opacity: 1;
-    visibility: visible;
-  }
+.home-card{
+  min-width: 150px; 
+  max-width: 300px;
+  max-height: 400px;
+  overflow: hidden;
+}

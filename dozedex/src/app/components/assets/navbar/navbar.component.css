@@ -8,10 +8,6 @@
     border: 0;
 }
 
-.simple-icon{
-  margin-top: 1.5vh;
-}
-
 .navbar-profile-icon{
   object-fit: cover;
   background-color: transparent;
@@ -19,31 +15,15 @@
   border: 0;
 }
 
-.example-container {
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    height: 100vh;
-  }
-  
-  .example-sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .example-sidenav {
-    padding: 20px;
-  }
+@keyframes pulsing-button-animation {
+  0%   {color: white}
+  50%  {color: rgb(0, 206, 58);}
+  100%  {color: white}
+}
 
-  @keyframes pulsing-button-animation {
-    0%   {color: white}
-    50%  {color: rgb(0, 206, 58);}
-    100%  {color: white}
-  }
-
-  .pulsing-button{
-    color: white;
-    animation-name: pulsing-button-animation;
-    animation-duration: 1.5s;
-    animation-iteration-count: infinite;
-  }
+.pulsing-button{
+  color: white;
+  animation-name: pulsing-button-animation;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}

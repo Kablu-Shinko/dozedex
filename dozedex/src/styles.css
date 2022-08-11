@@ -2,4 +2,75 @@
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: rgb(236, 236, 236);
+ }
+
+.body-container{
+   background-color: rgb(236, 236, 236);
+   height: 100%;
+}
+
+.inner-body-container{
+   margin-top: 5vh;
+   margin-left: 5vh;
+   margin-right: 5vh;
+}
+
+.form-container{
+   border-radius: 10px;
+   padding: 30px;
+   margin: auto;
+   max-width: 800px;
+   background-color: white;
+   border: 1px solid lightgray;
+   border-radius: 20px;
+}
+
+ .flex-gap {
+    display: inline-flex;
+    margin-left: 7vh;
+    margin-right: 7vh;
+    flex-wrap: wrap;
+    gap: 2vh;
+}
+
+.inline-spacer{
+   flex: 1 1 auto;
+}
+
+div::-webkit-scrollbar {
+   width: 10px;
+ }
+ 
+div::-webkit-scrollbar-track {
+   border-radius: 10px;
+ }
+ 
+div::-webkit-scrollbar-thumb {
+   background: grey;
+   border-radius: 10px;
+ }
+ 
+div::-webkit-scrollbar-thumb:hover {
+   background: #464e7e;
+ }
+
+ body::-webkit-scrollbar {
+   width: 10px;
+ }
+ 
+body::-webkit-scrollbar-track {
+   border-radius: 10px;
+ }
+ 
+body::-webkit-scrollbar-thumb {
+   background: grey;
+   border-radius: 10px;
+ }
+ 
+body::-webkit-scrollbar-thumb:hover {
+   background: #464e7e;
+ }

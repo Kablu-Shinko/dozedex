@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
       private dozedexService: DozedexService,
       private userService: UserService
     ) { }
+
+  Area: string = "Página inicial";
   
   Cards: Card[] = [
     {
@@ -34,7 +36,7 @@ export class HomeComponent implements OnInit {
         {
           Title: "Lista",
           Hover: "Lista de raças conhecidas",
-          Function: () => this.dozedexService.notImplemented()
+          Function: () => this.router.navigate(['/breed/list'])
         }
       ]
     },
@@ -61,6 +63,9 @@ export class HomeComponent implements OnInit {
   ]
 
   ngOnInit(): void {
+  }
 
+  navigateTo(route: string){
+    this.router.navigate([route]);
   }
 }

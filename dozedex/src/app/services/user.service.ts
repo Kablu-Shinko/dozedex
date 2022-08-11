@@ -61,7 +61,7 @@ export class UserService{
 
     //ok
     GetActualUser(): User{
-        return {
+        var user: User = {
             Email: this.getEmail(),
             KeepLogin: this.getKeepLogin(),
             Password: "",
@@ -71,6 +71,20 @@ export class UserService{
             Token: this.getToken(),
             UserName: this.getUserName()
         };
+
+        return user;
+    }
+
+    VerifyUser(user: User): Boolean{
+        if(!(
+            user.Email.length > 0
+            && user.Token !== undefined
+            && user.Token.length > 0
+        )){
+            return false;
+        }
+
+        return true;
     }
 
     //ok

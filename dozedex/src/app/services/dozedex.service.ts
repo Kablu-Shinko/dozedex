@@ -28,6 +28,12 @@ export class DozedexService implements OnInit{
         this.pathsNavigated.push(this.getLastPath());
     }
 
+    VerifyLogin(): void{
+        if(!(this.userService.VerifyUser(this.userService.GetActualUser()))){
+            this.router.navigate(['/login']);
+        }
+    }
+
     async RefreshPage(path: string): Promise<void>{
         await this.userService.RefreshData();
         await this.router.navigateByUrl('/home', {skipLocationChange: true});

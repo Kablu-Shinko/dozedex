@@ -23,8 +23,12 @@ export class AppComponent implements OnInit {
   user: User = this.userService.GetActualUser();
 
   ngOnInit(): void{
+    let validUser: Boolean = this.userService.VerifyUser(this.user);
 
-    if(!this.user.KeepLogin){
+    if(!validUser){
+      this.router.navigate(['/login']);
+    }
+    else if(!this.user.KeepLogin){
       this.router.navigate(['/login']);
     }
     else if(this.dozedexService.getLastPath().length > 0){

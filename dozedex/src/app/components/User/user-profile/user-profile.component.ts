@@ -24,7 +24,8 @@ export class UserProfileComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog
   ) { }
-
+  
+  Area: string = "Perfil de usuário"
   loading: Boolean = false;
   user: User = this.userService.GetActualUser();
   profilePictureURL: string = "";

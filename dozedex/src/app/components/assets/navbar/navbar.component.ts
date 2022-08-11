@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuOption } from '../../../interfaces/small-interfaces/small-interfaces';
 import { DozedexService } from '../../../services/dozedex.service';
@@ -18,6 +18,7 @@ export class NavbarComponent implements OnInit {
     private router: Router
   ) { }
 
+  @Input() ActualArea: string = 'ESQUECEU DE PASSAR O INPUT DE AREA SEU CORNO';
   user: User = this.userService.GetActualUser();
   altText: string = "imagem de perfil";
   showFiller: Boolean =  false;
@@ -34,15 +35,15 @@ export class NavbarComponent implements OnInit {
     },
     {
       Title: "Raças",
+      Function: () => this.router.navigate(['breed/list'])
+    },
+    {
+      Title: "Habilidades",
       Function: () => this.dozedexService.notImplemented()
     },
     {
-      Title: "Mundos",
-      Function: () => this.dozedexService.notImplemented()
-    },
-    {
-      Title: "Itens",
-      Function: () => this.dozedexService.notImplemented()
+      Title: "Transformações",
+      Function: () => this.router.navigate(['transformation/list'])
     }
   ];
 
@@ -58,6 +59,7 @@ export class NavbarComponent implements OnInit {
   ];
     
   ngOnInit(): void {
+    this.dozedexService.VerifyLogin();
     this.dozedexService.addCurrentPath(this.router.url);
   };
 

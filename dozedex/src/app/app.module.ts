@@ -17,6 +17,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
 
 //environments
 import { environment } from '../environments/environment';
@@ -33,6 +36,12 @@ import { UserProfileComponent } from './components/User/user-profile/user-profil
 import { PulsingButtonComponent } from './components/assets/buttons/pulsing-button/pulsing-button.component';
 import { BottombarComponent } from './components/assets/bottombar/bottombar.component';
 import { DialogComponent } from './components/assets/dialog/dialog.component';
+import { BreedListComponent } from './components/breed/breed-list/breed-list.component';
+import { BreedCreateComponent } from './components/breed/breed-create/breed-create.component';
+import { DozedexSpacerComponent } from './components/assets/dozedex-spacer/dozedex-spacer.component';
+import { TransformationCreateComponent } from './components/transformation/transformation-create/transformation-create.component';
+import { TransformationListComponent } from './components/transformation/transformation-list/transformation-list.component';
+import { TransformationDetailsComponent } from './components/transformation/transformation-details/transformation-details.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +56,12 @@ import { DialogComponent } from './components/assets/dialog/dialog.component';
     PulsingButtonComponent,
     BottombarComponent,
     DialogComponent,
+    BreedListComponent,
+    BreedCreateComponent,
+    DozedexSpacerComponent,
+    TransformationCreateComponent,
+    TransformationListComponent,
+    TransformationDetailsComponent,
   ],
   imports: [
     MatSliderModule,
@@ -58,6 +73,9 @@ import { DialogComponent } from './components/assets/dialog/dialog.component';
     MatListModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
 
     FormsModule,
     ReactiveFormsModule,

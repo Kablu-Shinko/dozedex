@@ -1,0 +1,12 @@
+.breed-picture-container{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 50px;
+}
+
+.breed-picture{
+    cursor: pointer;
+    border-radius: 10%;
+    min-width: 1px;
+    max-width: 600px;
+}
