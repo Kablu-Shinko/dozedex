@@ -7,8 +7,9 @@ import { CharacterDetailsComponent } from './components/characters/character-det
 import { CharactersListComponent } from './components/characters/characters-list/characters-list.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { SkillCreateComponent } from './components/skill/skill-create/skill-create.component';
+import { SkillListComponent } from './components/skill/skill-list/skill-list.component';
 import { TransformationCreateComponent } from './components/transformation/transformation-create/transformation-create.component';
-import { TransformationDetailsComponent } from './components/transformation/transformation-details/transformation-details.component';
 import { TransformationListComponent } from './components/transformation/transformation-list/transformation-list.component';
 import { UserProfileComponent } from './components/User/user-profile/user-profile.component';
 
@@ -28,7 +29,8 @@ function GetRoutes(): Routes{
     GetUserRoutes(),
     GetCharacterRoutes(),
     GetBreedRoutes(),
-    GetTransformationRoutes()
+    GetTransformationRoutes(),
+    GetSkillRoutes()
   ]);
 
   return routes;
@@ -64,8 +66,7 @@ function GetCharacterRoutes(): Route[]{
 function GetTransformationRoutes(): Route[]{
   var routes: Route[] = [
     {path: 'transformation/list', component: TransformationListComponent},
-    {path: 'transformation/create', component: TransformationCreateComponent},
-    {path: 'transformation/details', component: TransformationDetailsComponent}
+    {path: 'transformation/create', component: TransformationCreateComponent}
   ]
 
   return routes;
@@ -75,6 +76,15 @@ function GetBreedRoutes(): Route[]{
   var routes: Route[] = [
     {path: "breed/list", component: BreedListComponent},
     {path: "breed/create", component: BreedCreateComponent},
+  ];
+
+  return routes;
+}
+
+function GetSkillRoutes(): Route[]{
+  var routes: Route[] = [
+    {path: "skill/list", component: SkillListComponent},
+    {path: "skill/create", component: SkillCreateComponent},
   ];
 
   return routes;

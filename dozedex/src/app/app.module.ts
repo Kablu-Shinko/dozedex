@@ -41,7 +41,8 @@ import { BreedCreateComponent } from './components/breed/breed-create/breed-crea
 import { DozedexSpacerComponent } from './components/assets/dozedex-spacer/dozedex-spacer.component';
 import { TransformationCreateComponent } from './components/transformation/transformation-create/transformation-create.component';
 import { TransformationListComponent } from './components/transformation/transformation-list/transformation-list.component';
-import { TransformationDetailsComponent } from './components/transformation/transformation-details/transformation-details.component';
+import { SkillCreateComponent } from './components/skill/skill-create/skill-create.component';
+import { SkillListComponent } from './components/skill/skill-list/skill-list.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { TransformationDetailsComponent } from './components/transformation/tran
     DozedexSpacerComponent,
     TransformationCreateComponent,
     TransformationListComponent,
-    TransformationDetailsComponent,
+    SkillCreateComponent,
+    SkillListComponent
   ],
   imports: [
     MatSliderModule,

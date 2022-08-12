@@ -1,27 +1,16 @@
 import { environment } from '../../environments/environments';
-import { User } from '../interfaces/user.interface'
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { interval, firstValueFrom } from 'rxjs';
-import { Auth } from '../interfaces/auth.interface';
-import { UserService } from './user.service';
-import { Router } from '@angular/router';
-import { Breed } from '../interfaces/breed.interface';
-import { DozedexService } from './dozedex.service';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { ImageService } from './image.service';
 import { Transformation } from '../interfaces/transformation.interface';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransformationService {
-
     constructor(
         private http: HttpClient,
-        private userService: UserService,
-        private router: Router,
-        private dozedexService: DozedexService,
         private imageService: ImageService
     ) { }   
 
@@ -30,15 +19,15 @@ export class TransformationService {
     ngOnInit(): void {}
 
     SetTransformationKey(key: number): void{
-        localStorage.setItem("dozedex_Transformation_key", key.toString());
+        localStorage.setItem("dozedex_transformation_key", key.toString());
     }
 
     GetTransformationKey(): number{
-        return Number(localStorage.getItem("dozedex_Transformation_key") ?? '0');
+        return Number(localStorage.getItem("dozedex_transformation_key") ?? '0');
     }
 
     ResetKey(): void{
-        localStorage.setItem("dozedex_Transformation_key", '');
+        localStorage.setItem("dozedex_transformation_key", '');
     }
 
     //for mapping

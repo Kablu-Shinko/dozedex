@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
     },
     {
       Title: "Habilidades",
-      Function: () => this.dozedexService.notImplemented()
+      Function: () => this.router.navigate(['skill/list'])
     },
     {
       Title: "Transformações",

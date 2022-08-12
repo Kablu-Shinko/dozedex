@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Breed } from 'src/app/interfaces/breed.interface';
+import { Router } from '@angular/router';
 import { Transformation } from 'src/app/interfaces/transformation.interface';
-import { BreedService } from 'src/app/services/breed.service';
 import { DozedexService } from 'src/app/services/dozedex.service';
 import { TransformationService } from 'src/app/services/transformation.service';
 
@@ -14,7 +12,6 @@ import { TransformationService } from 'src/app/services/transformation.service';
 export class TransformationListComponent implements OnInit {
 
   constructor(
-    private route: ActivatedRoute,
     private transformationService: TransformationService,
     private router: Router,
     private dozedexService: DozedexService
@@ -30,12 +27,12 @@ export class TransformationListComponent implements OnInit {
     this.transformations = list;
   } 
 
-  SearchBreed(search: string){
+  SearchTransformation(search: string){
     this.transformations = [];
 
-    this.fullList.forEach((breed: Transformation) =>{
-      if(breed.Name.toLowerCase().indexOf(search.toLowerCase()) != -1){
-        this.transformations.push(breed);
+    this.fullList.forEach((transformation: Transformation) =>{
+      if(transformation.Name.toLowerCase().indexOf(search.toLowerCase()) != -1){
+        this.transformations.push(transformation);
       }
     })
   }
@@ -57,7 +54,6 @@ export class TransformationListComponent implements OnInit {
 
   async Inactive(key: number | undefined): Promise<void>{
     await this.transformationService.Inactive(key);
-    alert("excluido");
     await this.dozedexService.RefreshPage(this.router.url);
   }
 }
