@@ -78,12 +78,18 @@ export class SkillService{
     }
 
     async AddSkill(newSkill: Skill | undefined): Promise<string>{
-        var validator: string = this.Validate(newSkill);
-        if(!(validator === 'ok')){
-            return validator;
+        try{
+            var validator: string = this.Validate(newSkill);
+            if(!(validator === 'ok')){
+                return validator;
+            }
+            await firstValueFrom(this.http.post(`${this.skill_API}/add`, newSkill))
+            return "Adicionado";
         }
-        await firstValueFrom(this.http.post(`${this.skill_API}/add`, newSkill))
-        return "Adicionado";
+        catch(ex: any){
+            console.log(ex);
+            return "Falha ao adicionar";
+        }
     }
 
     async GetAllSkill(): Promise<Skill[]>{
@@ -101,8 +107,14 @@ export class SkillService{
     }
 
     async UpdateSkill(updatedSkill: Skill | undefined): Promise<string>{
-        await firstValueFrom(this.http.post(`${this.skill_API}/update`, updatedSkill));
-        return "Atualizado";
+        try{
+            await firstValueFrom(this.http.post(`${this.skill_API}/update`, updatedSkill));
+            return "Atualizado";
+        }
+        catch(ex: any){
+            console.log(ex);
+            return "Falha ao atualizar";
+        }
     }
 
     async Inactive(key: number | undefined): Promise<void>{

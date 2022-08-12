@@ -33,7 +33,9 @@ export class BreedListComponent implements OnInit {
     this.breeds = [];
 
     this.fullList.forEach((breed: Breed) =>{
-      if(breed.Name.toLowerCase().indexOf(search.toLowerCase()) != -1){
+      if((breed.Name.toLowerCase().indexOf(search.toLowerCase()) != -1)
+        || (breed.Description.toLowerCase().indexOf(search.toLowerCase()) != -1)
+      ){
         this.breeds.push(breed);
       }
     })

@@ -78,12 +78,18 @@ export class TransformationService {
     }
 
     async AddTransformation(newTransformation: Transformation | undefined): Promise<string>{
-        var validator: string = this.Validate(newTransformation);
-        if(!(validator === 'ok')){
-            return validator;
+        try{
+            var validator: string = this.Validate(newTransformation);
+            if(!(validator === 'ok')){
+                return validator;
+            }
+            await firstValueFrom(this.http.post(`${this.transformation_API}/add`, newTransformation))
+            return "Adicionado";
         }
-        await firstValueFrom(this.http.post(`${this.transformation_API}/add`, newTransformation))
-        return "Adicionado";
+        catch(ex: any){
+            console.log(ex);
+            return "Falha ao adicionar";
+        }
     }
 
     async GetAllTransformations(): Promise<Transformation[]>{
@@ -101,10 +107,14 @@ export class TransformationService {
     }
 
     async UpdateTransformation(updatedTransformation: Transformation | undefined): Promise<string>{
-
-
-        await firstValueFrom(this.http.post(`${this.transformation_API}/update`, updatedTransformation));
-        return "Atualizado";
+        try{
+            await firstValueFrom(this.http.post(`${this.transformation_API}/update`, updatedTransformation));
+            return "Atualizado";
+        }
+        catch(ex: any){
+            console.log(ex);
+            return "Falha ao atualizar";
+        }
     }
 
     async Inactive(key: number | undefined): Promise<void>{

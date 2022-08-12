@@ -1,14 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { interval, firstValueFrom } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { DozedexService } from 'src/app/services/dozedex.service';
 import { ImageService } from 'src/app/services/image.service';
-import { UserService } from 'src/app/services/user.service';
-import { Breed } from 'src/app/interfaces/breed.interface';
-import { BreedService } from 'src/app/services/breed.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../assets/dialog/dialog.component';
 import { DialogData } from 'src/app/interfaces/small-interfaces/small-interfaces';
 import { TransformationService } from 'src/app/services/transformation.service';
@@ -71,7 +66,7 @@ export class TransformationCreateComponent implements OnInit {
   InitForm(): void{
     this.transformationForm.controls.Name.setValue(this.transformation.Name);
     this.transformationForm.controls.ShortDescription.setValue(this.transformation.ShortDescription);
-    this.transformationForm.controls.LongDescription.setValue(this.transformation.LongDescription);
+    this.transformationForm.controls.LongDescription.setValue(this.transformation.LongDescription ?? "");
   }
 
   async onSubmit(): Promise<void>{

@@ -1,14 +1,8 @@
 import { environment } from '../../environments/environments';
-import { User } from '../interfaces/user.interface'
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { interval, firstValueFrom } from 'rxjs';
-import { Auth } from '../interfaces/auth.interface';
-import { UserService } from './user.service';
-import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 import { Breed } from '../interfaces/breed.interface';
-import { DozedexService } from './dozedex.service';
 import { ImageService } from './image.service';
 
 @Injectable({
@@ -19,9 +13,6 @@ export class BreedService implements OnInit{
 
     constructor(
         private http: HttpClient,
-        private userService: UserService,
-        private router: Router,
-        private dozedexService: DozedexService,
         private imageService: ImageService
     ){}
 
@@ -103,26 +94,36 @@ export class BreedService implements OnInit{
     }
 
     async AddBreed(newBreed: Breed| undefined): Promise<string>{
-        var validator = this.Validate(newBreed);
-
-        if(!(validator.toLowerCase() === 'ok')){
-            return validator;
+        try{
+            var validator = this.Validate(newBreed);
+            if(!(validator.toLowerCase() === 'ok')){
+                return validator;
+            }
+            
+            await firstValueFrom(this.http.post(`${this.breed_API}/add`, newBreed))
+            return "Adicionado";
         }
-
-        await firstValueFrom(this.http.post(`${this.breed_API}/add`, newBreed))
-
-        return "Adicionado";
+        catch(ex: any){
+            console.log(ex);
+            return "Falha ao adicionar";
+        }
     }
 
     async UpdateBreed(updatedBreed: Breed | undefined): Promise<string>{
-        var validator = this.Validate(updatedBreed);
-
-        if(!(validator.toLowerCase() === 'ok')){
-            return validator;
+        try{
+            var validator = this.Validate(updatedBreed);
+            
+            if(!(validator.toLowerCase() === 'ok')){
+                return validator;
+            }
+            
+            await firstValueFrom(this.http.post(`${this.breed_API}/update`, updatedBreed));
+            return "Atualizado";
         }
-
-        await firstValueFrom(this.http.post(`${this.breed_API}/update`, updatedBreed));
-        return "Atualizado";
+        catch(ex: any){
+            console.log(ex);
+            return "Falha em atualizar";
+        }
     }
 
     async Inactive(key: number | undefined): Promise<void>{

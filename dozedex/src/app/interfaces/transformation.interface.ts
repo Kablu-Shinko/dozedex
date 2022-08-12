@@ -3,7 +3,7 @@ export interface Transformation {
     ImageUrl?: string,
     ImagePath?: string,
     Name: string,
-    LongDescription: string,
     ShortDescription: string,
+    LongDescription?: string,
     Status?: Boolean
 }

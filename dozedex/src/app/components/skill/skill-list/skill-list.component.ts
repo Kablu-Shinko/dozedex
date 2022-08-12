@@ -31,7 +31,9 @@ export class SkillListComponent implements OnInit {
     this.skills = [];
 
     this.fullList.forEach((skill: Skill) =>{
-      if(skill.Name.toLowerCase().indexOf(search.toLowerCase()) != -1){
+      if((skill.Name.toLowerCase().indexOf(search.toLowerCase()) != -1)
+        || (skill.ShortDescription.toLowerCase().indexOf(search.toLowerCase()) != -1)
+      ){
         this.skills.push(skill);
       }
     })

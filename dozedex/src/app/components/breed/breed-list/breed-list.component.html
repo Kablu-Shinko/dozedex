@@ -1,31 +1,33 @@
 <div class="body-container" style="margin-bottom: 5vh;">
 <app-navbar [ActualArea]="Area"></app-navbar>
-<div class="inner-body-container breed-body">
+<div class="inner-body-container">
   <div class="form-group">
-    <div class="breed-header-container">
-      <input #Input_Search class="form-control breed-search-input" title="Pressionar enter também realizará a pesquisa" (change)="SearchBreed(Input_Search.value)" placeholder="Digite uma raça">
+    <div class="card-header-container">
+      <input #Input_Search class="form-control card-container-search" title="Pressionar enter também realizará a pesquisa" (change)="SearchBreed(Input_Search.value)" placeholder="Digite uma raça">
       <button mat-button title="Pressionar enter também realizará a pesquisa">
-        <mat-icon class="breed-search-icon">search</mat-icon>
+        <mat-icon>search</mat-icon>
       </button>
-      <div class="breed-header-spacer"></div>
-      <button mat-mini-fab class="breed-add-icon" (click)="AddNew()">
+      <div class="inline-spacer"></div>
+      <button mat-mini-fab class="card-container-add-btn" (click)="AddNew()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
   </div>
   <mat-divider></mat-divider>
-  <div class="breed-container">
-        <div class="flex-gap breed-gap">
+  <div class="card-container">
+        <div class="flex-gap flex-gap-justify-center">
         <div *ngFor="let breed of breeds">
-          <mat-card class="breed-card">
-            <mat-card-header class="breed-title">
-                <mat-card-title>{{breed.Name}}</mat-card-title>
+          <mat-card class="card-container-body">
+            <mat-card-header class="card-container-title">
+                <mat-card-title title="{{breed.Name}}">{{breed.Name}}</mat-card-title>
             </mat-card-header>
-            <img class="breed-image" mat-card-image src="{{breed.ImagePath}}" alt="{{breed.Description}}" (click)="GoToEdit(breed.Key)">
+            <img class="card-container-image" mat-card-image src="{{breed.ImagePath}}" alt="{{breed.Description}}" (click)="GoToEdit(breed.Key)">
+            <mat-divider></mat-divider><br>
             <mat-card-content>
-              <div class="breed-description">{{breed.Description}}</div>
+              <div class="card-container-description">{{breed.Description}}</div>
             </mat-card-content>
-            <mat-card-actions style="display: flex; justify-content:space-around;">
+            <mat-divider></mat-divider>
+            <mat-card-actions class="card-container-actions">
               <button mat-stroked-button style="background-color: #3487ed; color: white;" (click)="GoToEdit(breed.Key)">EDITAR</button>
               <button mat-stroked-button style="background-color: rgb(205, 0, 0); color: white;" (click)="Inactive(breed.Key)">APAGAR</button>
             </mat-card-actions>

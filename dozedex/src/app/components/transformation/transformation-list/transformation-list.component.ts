@@ -31,7 +31,9 @@ export class TransformationListComponent implements OnInit {
     this.transformations = [];
 
     this.fullList.forEach((transformation: Transformation) =>{
-      if(transformation.Name.toLowerCase().indexOf(search.toLowerCase()) != -1){
+      if((transformation.Name.toLowerCase().indexOf(search.toLowerCase()) != -1)
+        || (transformation.ShortDescription.toLowerCase().indexOf(search.toLowerCase()) != -1)
+      ){
         this.transformations.push(transformation);
       }
     })

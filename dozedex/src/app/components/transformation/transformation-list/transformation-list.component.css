@@ -33,9 +33,16 @@
     border: 1px solid lightgrey;
 }
 
-.transformation-title{
+.transformation-title-header{
   display: flex;
   justify-content: center;
+}
+
+.transformation-title{
+  max-width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .transformation-header-spacer{

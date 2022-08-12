@@ -1,16 +1,26 @@
 <div class="body-container">
   <app-navbar [ActualArea]="Area"></app-navbar>
-  <br>
-  <div class="inner-body-container">
+  <div class="inner-body-container" style="background-color: transparent; border: 0px;">
     <div style="display: flex; justify-content: center;">
-      <div style="border: 5px solid red; max-width:500px; padding: 10px; border-radius: 10px;">
+      <div style="border: 5px solid lightgray; background-color: white;  max-width:500px; max-height: 600px; overflow: auto; padding: 10px; border-radius: 10px; margin-top: 5vh;">
         <div style="padding:10px;">
           <h1 style="color: darkred;">Aviso: essa tela não tem layout definido</h1>
-          <h2>Atualizações recentes: </h2>
+          <h2>Atualização atual:</h2>
+          <h3 style="text-align: center;"><b>Adições e melhorias</b></h3>
+          <p>-  Corrigido problema ao cadastrar com o campo de descrição longa</p>
+          <p>-  Rework em como funciona o css das paginas de listagem</p>
+          <p>-  Rework no css dos cards de listagem</p>
           <br>
+          <h3 style="text-align: center;"><b>Próximos planos</b></h3>
+          <p>-  Criar controle de versão</p>
+          <p>-  Criar botão que mostra as novidades da versão</p>
+          <p>-  Adicionar tela de listagem e cadastro de <b>Guildas</b></p>
+          <p>-  Adicionar tela de listagem e cadastro de <b>Itens</b></p>
+          <p>-  Iniciar tela de listagem e cadastro de <b>Personagens</b></p>
+          <br>
+          <h2>Atualização anterior: </h2>
           <h3 style="text-align: center;"><b>Adições e melhorias</b></h3>
           <p>-  Adicionado tela de cadastro e visualização de <b style="cursor: pointer;" (click)="navigateTo('breed/list')">raças</b></p>
-          <!-- <p>-  Adicionado tela de cadastro e visualização de <b style="cursor: pointer;" (click)="navigateTo('skill/list')">habilidades</b></p> -->
           <p>-  Adicionado tela de cadastro e visualização de <b style="cursor: pointer;" (click)="navigateTo('transformation/list')">transformações</b></p>
           <p>-  Tela de cadastro e visualização de <b style="cursor: pointer;" (click)="navigateTo('skill/list')">Habilidades</b></p>
           <p>-  Tela inicial com quadro de avisos com links</p>

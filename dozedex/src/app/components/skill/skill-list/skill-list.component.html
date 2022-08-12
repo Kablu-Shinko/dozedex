@@ -1,32 +1,32 @@
 <div class="body-container" style="margin-bottom: 5vh;">
     <app-navbar [ActualArea]="Area"></app-navbar>
-    <div class="inner-body-container skill-body">
+    <div class="inner-body-container">
       <div class="form-group">
-        <div class="skill-header-container">
-          <input #Input_Search class="form-control skill-search-input" title="Pressionar enter também realizará a pesquisa" (change)="SearchSkill(Input_Search.value)" placeholder="Digite uma habilidade">
+        <div class="card-header-container">
+          <input #Input_Search class="form-control card-container-search" title="Pressionar enter também realizará a pesquisa" (change)="SearchSkill(Input_Search.value)" placeholder="Digite uma habilidade">
           <button mat-button title="Pressionar enter também realizará a pesquisa">
-            <mat-icon class="skill-search-icon">search</mat-icon>
+            <mat-icon>search</mat-icon>
           </button>
-          <div class="skill-header-spacer"></div>
-          <button mat-mini-fab class="skill-add-icon" (click)="AddNew()">
+          <div class="inline-spacer"></div>
+          <button mat-mini-fab class="card-container-add-btn" (click)="AddNew()">
             <mat-icon>add</mat-icon>
           </button>
         </div>
       </div>
       <mat-divider></mat-divider>
-      <div class="skill-container">
-            <div class="flex-gap skill-gap">
+      <div class="card-container">
+            <div class="flex-gap flex-gap-justify-center">
             <div *ngFor="let skill of skills">
-              <mat-card class="skill-card">
-                <mat-card-header class="skill-title">
+              <mat-card class="card-container-body">
+                <mat-card-header class="card-container-title">
                     <mat-card-title>{{skill.Name}}</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                  <div class="skill-description">{{skill.ShortDescription}}</div>
+                  <div class="card-container-description">{{skill.ShortDescription}}</div>
                 </mat-card-content>
                 <mat-divider></mat-divider>
                 <div class="form-group">
-                    <mat-card-actions>
+                    <mat-card-actions class="card-container-actions">
                         <!-- <button mat-stroked-button style="background-color: #3487ed; color: white;" (click)="GoToDetails(skill.Key)"><mat-icon>add</mat-icon></button> -->
                         <button mat-stroked-button style="background-color: #3487ed; color: white;" (click)="GoToEdit(skill.Key)"><mat-icon>edit</mat-icon></button>
                         <button mat-stroked-button style="background-color: rgb(205, 0, 0); color: white;" (click)="Inactive(skill.Key)"><mat-icon>block</mat-icon></button>

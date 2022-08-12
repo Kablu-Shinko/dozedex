@@ -179,22 +179,21 @@ export class UserService{
     //#endregion set
 
     async UpdateUser(user: User): Promise<string>{
-
-        if(user === undefined || user.OldPassword === undefined || user.OldPassword.length === 0){
-            return "Verifique os campos e tente novamente";
-        }
-
-        var OldPassword: string = user.OldPassword;
-
-        var passwordValid: Boolean = await this.VerifyPassword(user.Email, OldPassword);
-
-        if(!passwordValid){
-            return "Senha atual incorreta";
-        }
-
-        this.setKeepLogin(user.KeepLogin);
-
         try{
+            if(user === undefined || user.OldPassword === undefined || user.OldPassword.length === 0){
+                return "Verifique os campos e tente novamente";
+            }
+
+            var OldPassword: string = user.OldPassword;
+
+            var passwordValid: Boolean = await this.VerifyPassword(user.Email, OldPassword);
+
+            if(!passwordValid){
+                return "Senha atual incorreta";
+            }
+
+            this.setKeepLogin(user.KeepLogin);
+
             await firstValueFrom(this.http.post(`${this.API_UserRoute}/update`, {
                 Email: user.Email,
                 UserName: user.UserName,
@@ -203,12 +202,12 @@ export class UserService{
                 ImageUrl: user.ImageUrl,
                 Name: user.Name
             }));
+            return "Dados Atualizados!";
         }
         catch(ex: any){
-            return ex['error']['Status'];
+            console.log(ex);
+            return "Falha ao atualizar os dados";
         }
-
-        return "Dados Atualizados!";
     }
 
     async VerifyPassword(email: string, password: string): Promise<Boolean>{
