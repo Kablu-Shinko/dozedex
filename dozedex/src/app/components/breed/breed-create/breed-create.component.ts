@@ -31,7 +31,7 @@ export class BreedCreateComponent implements OnInit {
 
   Area: string = "";
   Key: number = 0;
-  loading: Boolean = false;
+  loading: boolean = false;
   breedImagePath: string = '';
   
   breed: Breed = {

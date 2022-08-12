@@ -3,7 +3,7 @@
     <div class="inner-body-container inner-body-with-color">
       <div class="form-group">
         <div class="card-header-container">
-          <input #Input_Search class="form-control card-container-search" title="Pressionar enter também realizará a pesquisa" (change)="SearchTransformation(Input_Search.value)" placeholder="Digite uma transformação">
+          <input #Input_Search class="form-control card-container-search" title="Pressionar enter também realizará a pesquisa" (change)="SearchGuild(Input_Search.value)" placeholder="Digite uma guilda">
           <button mat-button title="Pressionar enter também realizará a pesquisa">
             <mat-icon>search</mat-icon>
           </button>
@@ -16,21 +16,21 @@
       <mat-divider></mat-divider>
       <div class="card-container">
             <div class="flex-gap flex-gap-justify-center">
-            <div *ngFor="let transformation of transformations">
+            <div *ngFor="let guild of guilds">
               <mat-card class="card-container-body">
                 <mat-card-header class="card-container-title">
-                    <mat-card-title class="card-title" title="{{transformation.Name}}">{{transformation.Name}}</mat-card-title>
+                    <mat-card-title class="card-title" title="{{guild.Name}}">{{guild.Name}}</mat-card-title>
                 </mat-card-header>
-                <img class="card-container-image" mat-card-image src="{{transformation.ImagePath}}" alt="{{transformation.ShortDescription}}" (click)="GoToEdit(transformation.Key)">
+                <img class="card-container-image" mat-card-image src="{{guild.ImagePath}}" alt="{{guild.ShortDescription}}" (click)="GoToEdit(guild.Key)">
                 <mat-divider></mat-divider><br>
                 <mat-card-content>
-                  <div class="card-container-description">{{transformation.ShortDescription}}</div>
+                  <div class="card-container-description">{{guild.ShortDescription}}</div>
                 </mat-card-content>
                 <mat-divider></mat-divider>
                 <mat-card-actions class="card-container-actions">
-                    <!-- <button mat-stroked-button style="background-color: #3487ed; color: white;" (click)="GoToDetails(transformation.Key)"><mat-icon>add</mat-icon></button> -->
-                    <button mat-stroked-button style="background-color: #3487ed; color: white;" (click)="GoToEdit(transformation.Key)"><mat-icon>edit</mat-icon></button>
-                    <button mat-stroked-button style="background-color: rgb(205, 0, 0); color: white;" (click)="Inactive(transformation.Key)"><mat-icon>block</mat-icon></button>
+                    <!-- <button mat-stroked-button style="background-color: #3487ed; color: white;" (click)="GoToDetails(guild.Key)"><mat-icon>add</mat-icon></button> -->
+                    <button mat-stroked-button style="background-color: #3487ed; color: white;" (click)="GoToEdit(guild.Key)"><mat-icon>edit</mat-icon></button>
+                    <button mat-stroked-button style="background-color: rgb(205, 0, 0); color: white;" (click)="Inactive(guild.Key)"><mat-icon>block</mat-icon></button>
                 </mat-card-actions>
               </mat-card>
               <dozedex-spacer></dozedex-spacer>

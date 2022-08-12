@@ -1,4 +1,4 @@
-export interface Transformation {
+export interface Item{
     Key?: number,
     ImageUrl?: string,
     ImagePath?: string,

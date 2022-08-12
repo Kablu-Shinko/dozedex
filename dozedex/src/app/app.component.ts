@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { User } from './interfaces/user.interface';
 import { DozedexService } from './services/dozedex.service';
@@ -10,6 +11,7 @@ import { UserService } from './services/user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
   title = 'dozedex';
 
@@ -21,21 +23,30 @@ export class AppComponent implements OnInit {
   {}
 
   user: User = this.userService.GetActualUser();
+  toggled: boolean = this.dozedexService.GetSideNavBar();
+  isLoginPage: boolean = true;
 
   ngOnInit(): void{
-    let validUser: Boolean = this.userService.VerifyUser(this.user);
+    let validUser: boolean = this.userService.VerifyUser(this.user);
+    let path: string = '';
 
     if(!validUser){
-      this.router.navigate(['/login']);
+      path = '/login';
     }
     else if(!this.user.KeepLogin){
-      this.router.navigate(['/login']);
+      path = '/login';
     }
     else if(this.dozedexService.getLastPath().length > 0){
-      this.router.navigate([this.dozedexService.getLastPath()]);
+      path = this.dozedexService.getLastPath();
     }
     else{
-      this.router.navigate(['/home']);
+      path = '/home'
     }
+
+    this.isLoginPage = path === '/login';
+  }
+
+  toogleSideNav(): boolean{
+    return this.dozedexService.NavBarToggle();
   }
 }

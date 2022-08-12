@@ -8,7 +8,7 @@ import { Component, OnInit, Input} from '@angular/core';
 export class PulsingButtonComponent implements OnInit {
 
   @Input() pulsingButtonClass: string = "";
-  @Input() loading: Boolean = false;
+  @Input() loading: boolean = false;
   @Input() text: string = "";
 
   constructor() { }

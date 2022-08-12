@@ -5,6 +5,7 @@ import { Auth } from 'src/app/interfaces/auth.interface';
 import { DozedexService } from 'src/app/services/dozedex.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-login',
@@ -16,12 +17,14 @@ export class LoginComponent implements OnInit {
     private dozedexService: DozedexService,
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private imageService: ImageService
   ) 
   {}
   
-  loading: Boolean = false;
+  loading: boolean = false;
   title = 'Login Dozedex';
+  backgroundImagePath: string = this.imageService.GetFullImageURL('https://drive.google.com/file/d/1-98A51dnUZ2m7KG8ZNv_DdOXKq3NtqHe/view?usp=sharing');
 
   loginForm = this.formBuilder.group({
     Email: ['', [<any>Validators.required, <any>Validators.minLength(5)]],

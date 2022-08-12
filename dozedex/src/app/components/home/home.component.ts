@@ -12,7 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 export class HomeComponent implements OnInit {
 
   constructor(
-      private router: Router
+      private router: Router,
+      private dozedexService: DozedexService
     ) { }
 
   Area: string = "Página inicial";

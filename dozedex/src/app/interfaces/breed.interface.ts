@@ -4,6 +4,6 @@ export interface Breed{
     Description: string,
     ImageUrl?: string,
     ImagePath: string,
-    ShowImage: Boolean, 
-    Status?: Boolean
+    ShowImage: boolean, 
+    Status?: boolean
 }

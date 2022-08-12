@@ -75,7 +75,7 @@ export class UserService{
         return user;
     }
 
-    VerifyUser(user: User): Boolean{
+    VerifyUser(user: User): boolean{
         if(!(
             user.Email.length > 0
             && user.Token !== undefined
@@ -116,7 +116,7 @@ export class UserService{
         return localStorage.getItem("dozedex_user_email") ?? "";
     }
 
-    private getKeepLogin(): Boolean {
+    private getKeepLogin(): boolean {
         var keepLogin: string = localStorage.getItem("dozedex_user_keepLogin") ?? '';
         return keepLogin.length > 0 ? keepLogin === 'true' : false;
     }
@@ -156,7 +156,7 @@ export class UserService{
         localStorage.setItem("dozedex_user_email", email ?? "");
     }
 
-    private setKeepLogin(keepLogin: Boolean | null | undefined): void {
+    private setKeepLogin(keepLogin: boolean | null | undefined): void {
         localStorage.setItem("dozedex_user_keepLogin", keepLogin ? 'true' : 'false');
     }
 
@@ -186,7 +186,7 @@ export class UserService{
 
             var OldPassword: string = user.OldPassword;
 
-            var passwordValid: Boolean = await this.VerifyPassword(user.Email, OldPassword);
+            var passwordValid: boolean = await this.VerifyPassword(user.Email, OldPassword);
 
             if(!passwordValid){
                 return "Senha atual incorreta";
@@ -210,9 +210,9 @@ export class UserService{
         }
     }
 
-    async VerifyPassword(email: string, password: string): Promise<Boolean>{
+    async VerifyPassword(email: string, password: string): Promise<boolean>{
         var response: any = await firstValueFrom(this.http.post(`${this.API_UserRoute}/verifyPassword`, {Email: email, Password: password}));
-        var validator: Boolean = response['isValid'] === true || response['isValid'] === "true";
+        var validator: boolean = response['isValid'] === true || response['isValid'] === "true";
         return validator;
     }
 }

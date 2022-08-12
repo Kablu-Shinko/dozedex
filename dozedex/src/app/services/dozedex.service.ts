@@ -28,6 +28,20 @@ export class DozedexService implements OnInit{
         this.pathsNavigated.push(this.getLastPath());
     }
 
+    SetSideNavBar(open: boolean){
+        localStorage.setItem("dozedex_sidenavbar_isopen", open ? 'true' : 'false');
+    }
+
+    GetSideNavBar(): boolean{
+        return localStorage.getItem("dozedex_sidenavbar_isopen") === 'true';
+    }
+
+    NavBarToggle(): boolean{
+        var isToggled: boolean = this.GetSideNavBar();
+        this.SetSideNavBar(!isToggled);
+        return this.GetSideNavBar();
+    }
+
     VerifyLogin(): void{
         if(!(this.userService.VerifyUser(this.userService.GetActualUser()))){
             this.router.navigate(['/login']);

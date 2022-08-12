@@ -7,7 +7,7 @@
             <button mat-menu-item (click)="option.Function()">{{option.Title}}</button>
         </div>
     </mat-menu>
-    <button mat-button disabled class="navbar-icon simple-icon" style="color: white !important; overflow: hidden;">Você está em: {{ActualArea}}</button>
+    <button mat-button disabled class="navbar-icon simple-icon" style="color: white !important; overflow: hidden;">{{ActualArea}}</button>
     <span class="navbar-spacer"></span>
 
     <button mat-button *ngIf="loading" class="navbar-icon simple-icon" disabled id="navbar-refresh-button" (click)="RefreshPage()">

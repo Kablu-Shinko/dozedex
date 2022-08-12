@@ -5,7 +5,11 @@ import { BreedListComponent } from './components/breed/breed-list/breed-list.com
 import { CharacterCreateComponent } from './components/characters/character-create/character-create.component';
 import { CharacterDetailsComponent } from './components/characters/character-details/character-details.component';
 import { CharactersListComponent } from './components/characters/characters-list/characters-list.component';
+import { GuildCreateComponent } from './components/guild/guild-create/guild-create.component';
+import { GuildListComponent } from './components/guild/guild-list/guild-list.component';
 import { HomeComponent } from './components/home/home.component';
+import { ItemCreateComponent } from './components/item/item-create/item-create.component';
+import { ItemListComponent } from './components/item/item-list/item-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { SkillCreateComponent } from './components/skill/skill-create/skill-create.component';
 import { SkillListComponent } from './components/skill/skill-list/skill-list.component';
@@ -30,7 +34,9 @@ function GetRoutes(): Routes{
     GetCharacterRoutes(),
     GetBreedRoutes(),
     GetTransformationRoutes(),
-    GetSkillRoutes()
+    GetSkillRoutes(),
+    GetItemRoutes(),
+    GetGuildRoutes()
   ]);
 
   return routes;
@@ -85,6 +91,33 @@ function GetSkillRoutes(): Route[]{
   var routes: Route[] = [
     {path: "skill/list", component: SkillListComponent},
     {path: "skill/create", component: SkillCreateComponent},
+  ];
+
+  return routes;
+}
+
+function GetItemRoutes(): Route[]{
+  var routes: Route[] = [
+    {path: "item/list", component: ItemListComponent},
+    {path: "item/create", component: ItemCreateComponent},
+  ];
+
+  return routes;
+}
+
+function GetEquipmentRoutes(): Route[]{
+  var routes: Route[] = [
+    {path: "equipment/list", component: ItemListComponent},
+    {path: "equipment/create", component: ItemCreateComponent},
+  ];
+
+  return routes;
+}
+
+function GetGuildRoutes(): Route[]{
+  var routes: Route[] = [
+    {path: "guild/list", component: GuildListComponent},
+    {path: "guild/create", component: GuildCreateComponent},
   ];
 
   return routes;

@@ -44,6 +44,14 @@ export class NavbarComponent implements OnInit {
     {
       Title: "Transformações",
       Function: () => this.router.navigate(['transformation/list'])
+    },
+    {
+      Title: "Itens",
+      Function: () => this.router.navigate(['item/list'])
+    },
+    {
+      Title: "Guildas",
+      Function: () => this.router.navigate(['guild/list'])
     }
   ];
 

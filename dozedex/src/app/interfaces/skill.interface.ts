@@ -3,5 +3,5 @@ export interface Skill{
     Name: string, 
     ShortDescription: string, 
     LongDescription: string, 
-    Status?: Boolean
+    Status?: boolean
 }

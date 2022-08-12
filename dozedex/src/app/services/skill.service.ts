@@ -66,10 +66,6 @@ export class SkillService{
             return "Preencha o campo de descrição curta";
         }
 
-        if(newSkill.LongDescription.length === 0){
-            return "Preencha o campo de descrição longa";
-        }
-
         if(newSkill.Name.length === 0){
             return "Preencha o campo de nome";
         }

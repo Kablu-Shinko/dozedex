@@ -5,7 +5,7 @@ export interface User {
     Password: string;
     OldPassword?: string;
     ImageUrl?: string;
-    KeepLogin: Boolean;
+    KeepLogin: boolean;
     Token?: string;
     ImagePath?: string;
 }

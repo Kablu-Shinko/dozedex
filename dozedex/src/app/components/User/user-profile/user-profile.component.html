@@ -4,8 +4,8 @@
         <section class="container-fluid">
             <section class="row justify-content-center">
                 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form-container">
-                    <div class="profile-picture-container">
-                        <img src="{{user.ImagePath}}" class="profile-picture" (click)="openDialog()">
+                    <div class="create-action-image-container">
+                        <img src="{{user.ImagePath}}" class="create-action-image-picture" (click)="openDialog()">
                     </div>
                     
                     <div class="form-group">

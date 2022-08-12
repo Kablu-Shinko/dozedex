@@ -1,4 +1,4 @@
 export interface Auth {
-    auth: Boolean,
+    auth: boolean,
     token: string
 }

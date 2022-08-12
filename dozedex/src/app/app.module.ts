@@ -43,6 +43,11 @@ import { TransformationCreateComponent } from './components/transformation/trans
 import { TransformationListComponent } from './components/transformation/transformation-list/transformation-list.component';
 import { SkillCreateComponent } from './components/skill/skill-create/skill-create.component';
 import { SkillListComponent } from './components/skill/skill-list/skill-list.component';
+import { GuildListComponent } from './components/guild/guild-list/guild-list.component';
+import { GuildCreateComponent } from './components/guild/guild-create/guild-create.component';
+import { ItemCreateComponent } from './components/item/item-create/item-create.component';
+import { ItemListComponent } from './components/item/item-list/item-list.component';
+import { DozedexService } from './services/dozedex.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +68,11 @@ import { SkillListComponent } from './components/skill/skill-list/skill-list.com
     TransformationCreateComponent,
     TransformationListComponent,
     SkillCreateComponent,
-    SkillListComponent
+    SkillListComponent,
+    GuildListComponent,
+    GuildCreateComponent,
+    ItemCreateComponent,
+    ItemListComponent
   ],
   imports: [
     MatSliderModule,
