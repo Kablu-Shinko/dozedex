@@ -38,6 +38,7 @@ html, body { height: 100%; }
    border-radius: 10%;
    min-width: 1px;
    max-width: 600px;
+   max-height: 400px;
 }
 
 /* div area */

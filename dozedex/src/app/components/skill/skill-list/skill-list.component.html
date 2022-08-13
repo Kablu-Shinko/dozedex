@@ -21,6 +21,8 @@
                 <mat-card-header class="card-container-title">
                     <mat-card-title>{{skill.Name}}</mat-card-title>
                 </mat-card-header>
+                <img class="card-container-image" mat-card-image src="{{skill.ImagePath}}" alt="{{skill.ShortDescription}}" (click)="GoToEdit(skill.Key)">
+                <mat-divider></mat-divider><br>
                 <mat-card-content>
                   <div class="card-container-description">{{skill.ShortDescription}}</div>
                 </mat-card-content>

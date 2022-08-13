@@ -28,7 +28,24 @@ interface DialogFormInput{
     Type: string
 }
 
+interface Attachment{
+    Key?: number,
+    Title?: string,
+    SubAttachment?: Array<SubAttachment>,
+    Status?: boolean 
+}
+
+interface SubAttachment{
+    Key?:number,
+    Name: string,
+    ShortDescription: string,
+    LongDescription: string,
+    Status?: boolean
+}
+
 export {
+    Attachment,
+    SubAttachment,
     MenuOption,
     Card,
     CardOption,

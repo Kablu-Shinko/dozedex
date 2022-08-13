@@ -36,6 +36,7 @@ export class SkillService{
             let {
                 Key,
                 Name,
+                ImageUrl,
                 ShortDescription,
                 LongDescription,
                 Status                
@@ -46,6 +47,7 @@ export class SkillService{
                 Name: Name,
                 ShortDescription: ShortDescription,
                 LongDescription: LongDescription,
+                ImageUrl: ImageUrl,
                 Status: Status
             }
 

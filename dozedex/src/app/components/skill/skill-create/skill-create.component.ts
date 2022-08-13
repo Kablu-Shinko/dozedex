@@ -29,11 +29,14 @@ export class SkillCreateComponent implements OnInit {
   Key: number = 0;
   loading: boolean = false;
   skillImagePath: string = '';
+  defaultSkillImageUrl: string = 'https://drive.google.com/file/d/10ya4XnetYlQNaEZYJTr9Pwe4xFe2SIEq/view?usp=sharing';
   
   skill: Skill = {
     ShortDescription: '',
     Name: '',
     LongDescription: '',
+    ImageUrl: '',
+    ImagePath: '',
     Key: -1,
     Status: false
   };
@@ -55,7 +58,9 @@ export class SkillCreateComponent implements OnInit {
     else{
       this.Area = "Habilidades > Criação";
     }
-
+    this.skill.ImagePath = this.imageService.GetFullImageURL(this.skill.ImageUrl ?? this.defaultSkillImageUrl);
+    this.skillImagePath = this.skill.ImagePath;
+    console.table(this.skill);
     this.InitForm();
   }
 
@@ -72,6 +77,7 @@ export class SkillCreateComponent implements OnInit {
         Name: this.skillForm.controls.Name.value ?? this.skill.Name,
         ShortDescription: this.skillForm.controls.ShortDescription.value ?? this.skill.ShortDescription,
         LongDescription: this.skillForm.controls.LongDescription.value ?? this.skill.LongDescription,
+        ImageUrl: this.skill.ImageUrl ?? this.defaultSkillImageUrl,
         Key: this.skill.Key ?? -1,
         Status: this.skill.Status ?? false
       }
@@ -94,5 +100,52 @@ export class SkillCreateComponent implements OnInit {
     }
     this.loading = false;
     this.router.navigate(['skill/list']);
+  }
+
+  async SaveUrl(newUrl: string): Promise<string>{
+    var editedSkill: Skill = {
+      Name: this.skill.Name,
+      ImageUrl: newUrl,
+      ShortDescription: this.skill.ShortDescription,
+      LongDescription: this.skill.LongDescription,
+      Key: this.skill.Key,
+      Status: this.skill.Status,
+      ImagePath: this.skill.ImagePath
+    }
+
+    if(editedSkill.Key === undefined || editedSkill.Key === -1){
+      this.skill.ImageUrl = newUrl;
+      return "agora complete o cadastro";
+    }
+
+    var result = await this.skillService.UpdateSkill(editedSkill);
+    await this.dozedexService.RefreshPage(this.router.url);
+
+    return result;
+  }
+
+  openDialog(): void {
+    const data: DialogData = {
+      Title: "Trocar url da imagem",
+      Description: "insira abaixo a url da nova imagem",
+      FunctionDescription: "Atualizar",
+      Inputs: [
+        {
+          Label: "Nova URL",
+          Input: this.skillImagePath,
+          Type: "text"
+        }
+      ],
+      Function: async (inputs: string[]) => { 
+        let response = await this.SaveUrl(inputs[0]); 
+        this.dialog.closeAll();
+        return response; 
+      }
+    }
+    
+    this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: data
+    });
   }
 }

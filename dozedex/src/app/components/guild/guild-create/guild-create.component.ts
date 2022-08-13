@@ -15,8 +15,6 @@ import { Guild } from 'src/app/interfaces/guild.interface';
   styleUrls: ['./guild-create.component.css']
 })
 export class GuildCreateComponent implements OnInit {
-
-
   constructor(
     private imageService: ImageService,
     private formBuilder: FormBuilder,
@@ -35,6 +33,7 @@ export class GuildCreateComponent implements OnInit {
     ShortDescription: '',
     ImagePath: '',
     Name: '',
+    Initials: '',
     LongDescription: '',
     ImageUrl: '',
     Key: -1,
@@ -44,7 +43,8 @@ export class GuildCreateComponent implements OnInit {
   guildForm = this.formBuilder.group({
     Name: [''],
     ShortDescription: [''],
-    LongDescription: ['']
+    LongDescription: [''],
+    Initials: ['']
   });
 
   async ngOnInit(): Promise<void> {
@@ -68,6 +68,7 @@ export class GuildCreateComponent implements OnInit {
     this.guildForm.controls.Name.setValue(this.guild.Name);
     this.guildForm.controls.ShortDescription.setValue(this.guild.ShortDescription);
     this.guildForm.controls.LongDescription.setValue(this.guild.LongDescription ?? "");
+    this.guildForm.controls.Initials.setValue(this.guild.Initials ?? '');
   }
 
   async onSubmit(): Promise<void>{
@@ -76,6 +77,7 @@ export class GuildCreateComponent implements OnInit {
       var editedGuild: Guild = {
         Name: this.guildForm.controls.Name.value ?? this.guild.Name,
         ImageUrl: this.guild.ImageUrl,
+        Initials: this.guildForm.controls.Initials.value ?? this.guild.Initials,
         ShortDescription: this.guildForm.controls.ShortDescription.value ?? this.guild.ShortDescription,
         LongDescription: this.guildForm.controls.LongDescription.value ?? this.guild.LongDescription,
         ImagePath: '',
@@ -109,6 +111,7 @@ export class GuildCreateComponent implements OnInit {
       ImageUrl: newUrl,
       ShortDescription: this.guild.ShortDescription,
       LongDescription: this.guild.LongDescription,
+      Initials: this.guild.Initials,
       Key: this.guild.Key,
       Status: this.guild.Status,
       ImagePath: this.guild.ImagePath

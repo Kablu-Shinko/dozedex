@@ -4,6 +4,10 @@
         <section class="container-fluid">
             <section class="row justify-content-center">
                 <form [formGroup]="skillForm" (ngSubmit)="onSubmit()" class="form-container">
+                    <div class="create-action-image-container">
+                        <img src="{{skill.ImagePath}}" class="create-action-image-picture" (click)="openDialog()">
+                    </div>
+                    
                     <div class="form-group">
                         <label for="Name">Nome da habilidade</label>
                         <input formControlName="Name" type="text" class="form-control" id="InputName" placeholder="Nome da habilidade">

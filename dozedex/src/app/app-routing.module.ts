@@ -105,15 +105,6 @@ function GetItemRoutes(): Route[]{
   return routes;
 }
 
-function GetEquipmentRoutes(): Route[]{
-  var routes: Route[] = [
-    {path: "equipment/list", component: ItemListComponent},
-    {path: "equipment/create", component: ItemCreateComponent},
-  ];
-
-  return routes;
-}
-
 function GetGuildRoutes(): Route[]{
   var routes: Route[] = [
     {path: "guild/list", component: GuildListComponent},

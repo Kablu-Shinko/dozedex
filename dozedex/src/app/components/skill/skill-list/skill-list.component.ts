@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Skill } from 'src/app/interfaces/skill.interface';
 import { DozedexService } from 'src/app/services/dozedex.service';
+import { ImageService } from 'src/app/services/image.service';
 import { SkillService } from 'src/app/services/skill.service';
 
 @Component({
@@ -14,18 +15,27 @@ export class SkillListComponent implements OnInit {
   constructor(
     private skillService: SkillService,
     private router: Router,
-    private dozedexService: DozedexService
+    private dozedexService: DozedexService,
+    private imageService: ImageService
   ) { }
 
   Area: string = "Habilidades";
   skills: Skill[] = [];
   fullList: Skill[] = [];
+  defaultSkillImageUrl: string = 'https://drive.google.com/file/d/10ya4XnetYlQNaEZYJTr9Pwe4xFe2SIEq/view?usp=sharing';
 
   async ngOnInit(): Promise<void> {
     var list: Skill[] = await this.skillService.GetAllSkill();
     this.fullList = list;
     this.skills = list;
+    this.MapSkills();
   } 
+
+  MapSkills(): void{
+    this.skills.forEach((skill: Skill) => {
+      skill.ImagePath = this.imageService.GetFullImageURL(skill.ImageUrl ?? this.defaultSkillImageUrl);
+    });
+  }
 
   SearchSkill(search: string){
     this.skills = [];

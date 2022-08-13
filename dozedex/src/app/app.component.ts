@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
     }
 
     this.isLoginPage = path === '/login';
+    this.router.navigate([path]);
   }
 
   toogleSideNav(): boolean{

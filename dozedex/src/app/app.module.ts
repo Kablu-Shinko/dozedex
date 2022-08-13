@@ -47,7 +47,6 @@ import { GuildListComponent } from './components/guild/guild-list/guild-list.com
 import { GuildCreateComponent } from './components/guild/guild-create/guild-create.component';
 import { ItemCreateComponent } from './components/item/item-create/item-create.component';
 import { ItemListComponent } from './components/item/item-list/item-list.component';
-import { DozedexService } from './services/dozedex.service';
 
 @NgModule({
   declarations: [

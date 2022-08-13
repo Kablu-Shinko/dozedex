@@ -56,6 +56,10 @@ export class GuildService{
                 Status: Status
             }
 
+            if(aux.Initials !== undefined && aux.Initials.length > 0){
+                aux.Name += ` (${aux.Initials})`;
+            }
+
             list.push(aux);
         });
 
@@ -66,7 +70,7 @@ export class GuildService{
         if( newGuild === undefined 
             || newGuild.Key === undefined 
             || newGuild.Status === undefined) {
-            return "Habilidade não encontrada";
+            return "Gulda não encontrada";
         }
 
         if(newGuild.ShortDescription.length === 0){
@@ -130,7 +134,7 @@ export class GuildService{
         var guild: Guild = await this.GetOne(Key);
 
         if(guild === undefined){
-            alert("Habilidade não encontrada");
+            alert("Gulda não encontrada");
             return;
         }
 
