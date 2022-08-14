@@ -9,6 +9,10 @@ import { TransformationService } from './transformation.service';
 import { SkillService } from './skill.service';
 import { GuildService } from './guild.service';
 import { ItemService } from './item.service';
+import { Breed } from '../interfaces/breed.interface';
+import { Transformation } from '../interfaces/transformation.interface';
+import { Item } from '../interfaces/item.interface';
+import { Skill } from '../interfaces/skill.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -105,64 +109,36 @@ export class CharacterService{
                     Status: Status
                 }
 
-                if(aux.Breed === undefined || aux.Breed === null) aux.Breed = [];
-                if(aux.Skills === undefined || aux.Skills === null) aux.Skills = [];
-                if(aux.Parents === undefined || aux.Parents === null) aux.Parents = [];
-                if(aux.Transformations === undefined || aux.Transformations === null) aux.Transformations = [];
-                if(aux.Items === undefined || aux.Items === null) aux.Items = [];
-
-                if(aux.Breed.length === 0 && aux.BreedKeys !== undefined && aux.BreedKeys.length > 0){
-                    let breedKeys: number[] = aux.BreedKeys;
-
-                    for(let i: number = 0; i < breedKeys.length; i++){
-                        let key: number = breedKeys[i];
-                        let breed = await this.breedService.GetOne(key);
-                        if(breed !== undefined && breed.Key !== undefined && breed.Key > 0) aux.Breed.push(breed);
-                    }
+                if(aux.Breed !== undefined && aux.Breed.length > 0){
+                    aux.Breed.forEach((breed: Breed) => {
+                        breed.ImagePath = this.imageService.GetFullImageURL(breed.ImageUrl ?? '');
+                    });
                 }
 
-                if(aux.Skills.length === 0 && aux.SkillsKeys !== undefined && aux.SkillsKeys.length > 0){
-                    let skillsKeys: number[] = aux.SkillsKeys;
-
-                    for(let i: number = 0; i < skillsKeys.length; i++){
-                        let key: number = aux.BreedKeys[i];
-                        let skill = await this.skillService.GetOne(key);
-                        if(skill !== undefined && skill.Key !== undefined && skill.Key > 0) aux.Skills.push(skill);
-                    }
+                if(aux.Parents !== undefined && aux.Parents.length > 0){
+                    aux.Parents.forEach((parent: Character) => {
+                        parent.ImagePath = this.imageService.GetFullImageURL(parent.ImageUrl ?? '');
+                    });
                 }
 
-                if(aux.Parents.length === 0 && aux.ParentsKeys !== undefined && aux.ParentsKeys.length > 0){
-                    let parentsKeys: number[] = aux.ParentsKeys;
-
-                    for(let i: number = 0; i < parentsKeys.length; i++){
-                        let key: number = Number(parentsKeys[i]);
-                        if(key > 0){
-                            let parent = await this.GetOne(key);
-                            if(parent !== undefined && parent.Key !== undefined && parent.Key > 0) aux.Parents.push(parent);
-                        }
-                    }
-                }
-
-                if(aux.Transformations.length === 0 && aux.TransformationKeys !== undefined && aux.TransformationKeys.length > 0){
-                    let transformations: number[] = aux.TransformationKeys;
-
-                    for(let i: number = 0; i < transformations.length; i++){
-                        let key: number = transformations[i];
-                        let transformation = await this.transformationService.GetOne(key);
-                        if(transformation !== undefined && transformation.Key !== undefined && transformation.Key > 0) aux.Transformations.push(transformation);
-                    }
-                }
-
-                if(aux.Items.length === 0 && aux.ItemKeys !== undefined && aux.ItemKeys.length > 0){
-                    let items: number[] = aux.ItemKeys;
-
-                    for(let i: number = 0; i < items.length; i++){
-                        let key: number = items[i];
-                        let item = await this.itemService.GetOne(key);
-                        if(item !== undefined && item.Key !== undefined && item.Key > 0) aux.Transformations.push(item);
-                    }
+                if(aux.Transformations !== undefined && aux.Transformations.length > 0){
+                    aux.Transformations.forEach((transformation: Transformation) => {
+                        transformation.ImagePath = this.imageService.GetFullImageURL(transformation.ImageUrl ?? '');
+                    });
                 }
                 
+                if(aux.Items !== undefined && aux.Items.length > 0){
+                    aux.Items.forEach((item: Item) => {
+                        item.ImagePath = this.imageService.GetFullImageURL(item.ImageUrl ?? '');
+                    });
+                }
+
+                if(aux.Skills !== undefined && aux.Skills.length > 0){
+                    aux.Skills.forEach((skill: Skill) => {
+                        skill.ImagePath = this.imageService.GetFullImageURL(skill.ImageUrl ?? '');
+                    });
+                }
+
                 list.push(aux);
             };
             
@@ -209,6 +185,13 @@ export class CharacterService{
             console.log(ex);
             return "Falha ao adicionar";
         }
+    }
+
+    async GetAllCharactersMinified(): Promise<Character[]>{
+        var response: any = await firstValueFrom(this.http.get(`${this.character_API}/minifiedList`));
+        var mapped: Character[] = await this.MapCharacter(response); 
+
+        return mapped;
     }
 
     async GetAllCharacters(): Promise<Character[]>{

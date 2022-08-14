@@ -22,7 +22,7 @@ export class CharactersListComponent implements OnInit {
   fullList: Character[] = [];
 
   async ngOnInit(): Promise<void> {
-    var list: Character[] = await this.characterService.GetAllCharacters();
+    var list: Character[] = await this.characterService.GetAllCharactersMinified();
     this.fullList = list;
     this.characters = list;
   } 

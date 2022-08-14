@@ -52,6 +52,10 @@ export class NavbarComponent implements OnInit {
     {
       Title: "Guildas",
       Function: () => this.router.navigate(['guild/list'])
+    },
+    {
+      Title: "Curiosidades",
+      Function: () => this.dozedexService.notImplemented()
     }
   ];
 

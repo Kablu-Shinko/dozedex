@@ -114,54 +114,11 @@
                                 </mat-form-field>
                             </mat-expansion-panel>
                         </mat-accordion>
-                        <!-- <div *ngIf="characterAttachments.length > 0">
-                            <div *ngFor="let attachment of characterAttachments">
-                                <br>
-                                <mat-accordion>
-                                    <mat-expansion-panel *ngFor="let subAttachment of attachment.SubAttachment">
-                                        <mat-expansion-panel-header>
-                                            <mat-panel-title>
-                                                <b class="create-character-information-title">{{attachment.Title}}</b>
-                                            </mat-panel-title>
-                                            <mat-form-field appearance="fill" style="width: 100%;">
-                                                <mat-label>{{subAttachment.Name}}</mat-label>
-                                                <textarea matInput placeholder="Descrição do anexo" style="min-height: 200px;" formControlName="Personality"></textarea>
-                                            </mat-form-field>
-                                        </mat-expansion-panel-header>
-                                    </mat-expansion-panel>
-                                </mat-accordion>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="form-group">
                         <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [text]='"Salvar alterações"' [loading]="loading"></app-pulsing-button>
                     </div>
                 </form>
-
-                <!-- <form [formGroup]="characterForm" (ngSubmit)="onSubmit()" class="form-container">
-                    <div class="create-action-image-container">
-                        <img src="{{character.ImagePath}}" class="create-action-image-picture" (click)="openDialog()">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="Name">Nome do personagem</label>
-                        <input formControlName="Name" type="text" class="form-control" id="InputName" placeholder="Nome do personagem">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="ShortDescription">Descrição curta</label>
-                        <textarea formControlName="ShortDescription" class="form-control" id="InputDescription" placeholder="Descrição curta do personagem" style="min-height: 200px;"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="LongDescription">Descrição longa</label>
-                        <textarea formControlName="LongDescription" class="form-control" id="InputDescription" placeholder="Descrição longa do personagem" style="min-height: 200px;"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [text]='"Salvar alterações"' [loading]="loading"></app-pulsing-button>
-                    </div>
-                </form> -->
             </section>
         </section>
     </div>

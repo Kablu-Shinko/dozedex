@@ -1,1 +1,212 @@
-<p>character-details works!</p>
+<div class="body-container">
+    <app-navbar [ActualArea]="Area"></app-navbar>
+    <div class="inner-body-container" *ngIf="!characterLoading">
+        <section class="container-fluid">
+            <section class="row justify-content-center">
+                <div class="form-container details-form-container">
+                    <div class="details-character-container">  
+                        <button mat-mini-fab class="card-container-add-btn float-right details-edit-button" (click)="GoToEdit(character.Key)">
+                            <mat-icon> border_color</mat-icon>
+                        </button>
+                        <div class="form-group details-header-form-group">
+                            <div class="details-character-image-container">
+                                <img src="{{characterImagePath}}" class="details-character-image">
+                            </div>
+                            <div class="details-character-information" style="width: 70%;">
+                                <h2 class="details-character-information-title">
+                                    <b>Informações básicas</b>
+                                </h2>
+
+                                <mat-card class="details-card">
+                                    <mat-card-subtitle><b>Raça:</b></mat-card-subtitle>
+                                    <mat-card-content>{{GetBreeds()}}</mat-card-content>
+                                </mat-card>
+                                
+                                <mat-card class="details-card">
+                                    <mat-card-subtitle><b>Nome:</b></mat-card-subtitle>
+                                    <mat-card-content>{{GetName()}}</mat-card-content>
+                                </mat-card>
+
+                                <mat-card class="details-card">
+                                    <mat-card-subtitle><b>Idade:</b></mat-card-subtitle>
+                                    <mat-card-content>{{GetAge()}}</mat-card-content>
+                                </mat-card>
+
+                                <mat-card class="details-card">
+                                    <mat-card-subtitle><b>Altura:</b></mat-card-subtitle>
+                                    <mat-card-content>{{GetHeight()}} M</mat-card-content>
+                                </mat-card>
+
+                                <mat-card class="details-card">
+                                    <mat-card-subtitle><b>Peso:</b></mat-card-subtitle>
+                                    <mat-card-content>{{GetWeight()}} Kg</mat-card-content>
+                                </mat-card>
+
+                                <mat-card class="details-card">
+                                    <mat-card-subtitle><b>Olhos:</b></mat-card-subtitle>
+                                    <mat-card-content>{{GetEyes()}}</mat-card-content>
+                                </mat-card>
+
+                                <mat-card class="details-card">
+                                    <mat-card-subtitle><b>Cabelo:</b></mat-card-subtitle>
+                                    <mat-card-content>{{GetHair()}}</mat-card-content>
+                                </mat-card>
+
+                                <mat-card class="details-card">
+                                    <mat-card-subtitle><b>Pele:</b></mat-card-subtitle>
+                                    <mat-card-content>{{GetSkin()}}</mat-card-content>
+                                </mat-card>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                        <br>
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <b class="details-character-information-title">Descrição</b>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <span class="details-text">{{GetDescription()}}</span>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <b class="details-character-information-title">História</b>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <span class="details-text">{{GetHistory()}}</span>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <b class="details-character-information-title">Personalidade</b>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <span class="details-text">{{GetPersonality()}}</span>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <b class="details-character-information-title">Parentesco</b>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="card-container">
+                                    <div *ngIf="haveParents" class="flex-gap flex-gap-justify-center">
+                                        <div *ngFor="let character of character.Parents">
+                                            <mat-card class="card-container-body" style="max-height: 300px !important;">
+                                                <mat-card-header class="card-container-title">
+                                                    <mat-card-title class="card-title" title="{{character.Name}}">{{character.Name}}</mat-card-title>
+                                                </mat-card-header>
+                                                <img class="card-container-image" mat-card-image src="{{character.ImagePath}}" alt="{{character.ShortDescription}}" (click)="GoToCharacterDetails(character.Key)">
+                                                <mat-divider></mat-divider><br>
+                                                <mat-card-content>
+                                                <div class="card-container-description">{{character.ShortDescription}}</div>
+                                                </mat-card-content>
+                                            </mat-card>
+                                            <dozedex-spacer></dozedex-spacer>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!haveParents">
+                                        <p>Sem parentes adicionados</p>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <b class="details-character-information-title">Transformações</b>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="card-container">
+                                    <div *ngIf="haveTransformations" class="flex-gap flex-gap-justify-center">
+                                        <div *ngFor="let transformation of character.Transformations">
+                                            <mat-card class="card-container-body" style="max-height: 300px !important;">
+                                                <mat-card-header class="card-container-title">
+                                                    <mat-card-title class="card-title" title="{{transformation.Name}}">{{transformation.Name}}</mat-card-title>
+                                                </mat-card-header>
+                                                <img class="card-container-image" mat-card-image src="{{transformation.ImagePath}}" alt="{{transformation.ShortDescription}}" (click)="GoToTransformationDetails(transformation.Key)">
+                                                <mat-divider></mat-divider><br>
+                                                <mat-card-content>
+                                                <div class="card-container-description">{{transformation.ShortDescription}}</div>
+                                                </mat-card-content>
+                                            </mat-card>
+                                            <dozedex-spacer></dozedex-spacer>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!haveTransformations">
+                                        <p>Sem transformações adicionadas</p>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <b class="details-character-information-title">Itens / Equipamentos</b>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="card-container">
+                                    <div *ngIf="haveItems" class="flex-gap flex-gap-justify-center">
+                                        <div *ngFor="let item of character.Items">
+                                            <mat-card class="card-container-body" style="max-height: 300px !important;">
+                                                <mat-card-header class="card-container-title">
+                                                    <mat-card-title class="card-title" title="{{item.Name}}">{{item.Name}}</mat-card-title>
+                                                </mat-card-header>
+                                                <img class="card-container-image" mat-card-image src="{{item.ImagePath}}" alt="{{item.ShortDescription}}" (click)="GoToItemDetails(item.Key)">
+                                                <mat-divider></mat-divider><br>
+                                                <mat-card-content>
+                                                <div class="card-container-description">{{item.ShortDescription}}</div>
+                                                </mat-card-content>
+                                            </mat-card>
+                                            <dozedex-spacer></dozedex-spacer>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!haveItems">
+                                        <p>Sem itens adicionados</p>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <b class="details-character-information-title">Habilidades</b>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="card-container">
+                                    <div *ngIf="haveSkills" class="flex-gap flex-gap-justify-center">
+                                        <div *ngFor="let skill of character.Skills">
+                                            <mat-card class="card-container-body" style="max-height: 300px !important;">
+                                                <mat-card-header class="card-container-title">
+                                                    <mat-card-title class="card-title" title="{{skill.Name}}">{{skill.Name}}</mat-card-title>
+                                                </mat-card-header>
+                                                <img class="card-container-image" mat-card-image src="{{skill.ImagePath}}" alt="{{skill.ShortDescription}}" (click)="GoToSkillDetails(skill.Key)">
+                                                <mat-divider></mat-divider><br>
+                                                <mat-card-content>
+                                                <div class="card-container-description">{{skill.ShortDescription}}</div>
+                                                </mat-card-content>
+                                            </mat-card>
+                                            <dozedex-spacer></dozedex-spacer>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!haveSkills">
+                                        <p>Sem habilidades adicionadas</p>
+                                    </div>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+    <div *ngIf="characterLoading" class="inner-body-container" style="display: flex; justify-content: center;">
+        <img src="{{loadingUrl}}" alt="loading" style="border-radius: 20px;">
+    </div>
+    <dozedex-spacer></dozedex-spacer>
+</div>

@@ -18,7 +18,7 @@
                 <mat-card-header class="card-container-title">
                     <mat-card-title class="card-title" title="{{character.Name}}">{{character.Name}}</mat-card-title>
                 </mat-card-header>
-                <img class="card-container-image" mat-card-image src="{{character.ImagePath}}" alt="{{character.ShortDescription}}" (click)="GoToEdit(character.Key)">
+                <img class="card-container-image" mat-card-image src="{{character.ImagePath}}" alt="{{character.ShortDescription}}" (click)="GoToDetails(character.Key)">
                 <mat-divider></mat-divider><br>
                 <mat-card-content>
                   <div class="card-container-description">{{character.ShortDescription}}</div>
@@ -33,6 +33,6 @@
               <dozedex-spacer></dozedex-spacer>
             </div>
           </div>
-        </div>
+      </div>
     </div>
     </div>

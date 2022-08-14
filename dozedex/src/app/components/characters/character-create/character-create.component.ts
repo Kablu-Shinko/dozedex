@@ -149,9 +149,9 @@ export class CharacterCreateComponent implements OnInit {
 
     this.skills = await this.skillService.GetAllSkill();
     this.breeds = await this.breedService.GetAllBreeds();
-    this.parents = await this.characterService.GetAllCharacters();
     this.transformations = await this.transformationService.GetAllTransformations();
     this.items = await this.itemService.GetAllItems();
+    this.parents = await this.characterService.GetAllCharactersMinified();
 
     this.breeds.forEach((breed: Breed) =>{
       this.breedMultiSelect.List.push({
@@ -161,10 +161,12 @@ export class CharacterCreateComponent implements OnInit {
     });
 
     this.parents.forEach((parent: Character) => {
-      this.parentsMultiSelect.List.push({
-        Title: parent.Name,
-        Key: parent.Key ?? -1
-      });
+      if(parent.Key !== this.character.Key){
+        this.parentsMultiSelect.List.push({
+          Title: parent.Name,
+          Key: parent.Key ?? -1
+        });
+      }
     });
 
     this.transformations.forEach((transformation: Transformation) => {
@@ -220,7 +222,6 @@ export class CharacterCreateComponent implements OnInit {
     this.characterForm.controls.ParentsKeys.setValue(this.parentsKeys.value);
     this.characterForm.controls.TransformationKeys.setValue(this.transformationsKeys.value);
     this.characterForm.controls.ItemKeys.setValue(this.itemsKeys.value);
-    this.characterForm.controls.ImageUrl.setValue(this.characterImagePath);
 
     if(this.characterForm.valid){
       this.loading = true;
