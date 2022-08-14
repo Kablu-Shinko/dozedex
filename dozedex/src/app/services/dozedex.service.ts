@@ -28,6 +28,10 @@ export class DozedexService implements OnInit{
         this.pathsNavigated.push(this.getLastPath());
     }
 
+    GetLoadingImage(): string{
+        return "https://gifmania.com.br/wp-content/uploads/2020/01/carregando.gif";
+    }
+
     SetSideNavBar(open: boolean){
         localStorage.setItem("dozedex_sidenavbar_isopen", open ? 'true' : 'false');
     }

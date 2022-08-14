@@ -5,21 +5,7 @@ import { HttpClientModule }    from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-
-//imports angular material
-import { MatSliderModule } from '@angular/material/slider';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';import {DragDropModule} from '@angular/cdk/drag-drop';
 
 //environments
 import { environment } from '../environments/environment';
@@ -47,6 +33,8 @@ import { GuildListComponent } from './components/guild/guild-list/guild-list.com
 import { GuildCreateComponent } from './components/guild/guild-create/guild-create.component';
 import { ItemCreateComponent } from './components/item/item-create/item-create.component';
 import { ItemListComponent } from './components/item/item-list/item-list.component';
+import { MultiSelectInputComponent } from './components/assets/inputs/multi-select-input/multi-select-input.component';
+import { MaterialModule } from './modules/material-module';
 
 @NgModule({
   declarations: [
@@ -71,22 +59,11 @@ import { ItemListComponent } from './components/item/item-list/item-list.compone
     GuildListComponent,
     GuildCreateComponent,
     ItemCreateComponent,
-    ItemListComponent
+    ItemListComponent,
+    MultiSelectInputComponent
   ],
   imports: [
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatListModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatCardModule,
-    MatButtonModule,
-    MatInputModule,
-
+    MaterialModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,

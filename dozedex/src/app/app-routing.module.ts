@@ -61,9 +61,10 @@ function GetUserRoutes(): Route[]{
 
 function GetCharacterRoutes(): Route[]{
   var routes: Route[] = [
-    {path: 'characters/list', component: CharactersListComponent},
-    {path: 'characters/details', component: CharacterDetailsComponent},
-    {path: 'characters/create', component: CharacterCreateComponent}
+    {path: 'character/list', component: CharactersListComponent},
+    {path: 'character/details', component: CharacterCreateComponent},
+    {path: 'character/create', component: CharacterCreateComponent},
+    {path: 'character/edit', component: CharacterCreateComponent}
   ];
 
   return routes;

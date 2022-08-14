@@ -3,10 +3,7 @@
     <div class="inner-body-container inner-body-with-color">
       <div class="form-group">
         <div class="card-header-container">
-          <input #Input_Search class="form-control card-container-search" title="Pressionar enter também realizará a pesquisa" (change)="SearchGuild(Input_Search.value)" placeholder="Digite uma guilda">
-          <button mat-button title="Pressionar enter também realizará a pesquisa">
-            <mat-icon>search</mat-icon>
-          </button>
+          <input #Input_Search class="form-control card-container-search" title="Basta digitar para pesquisar" (input)="SearchGuild(Input_Search.value)" placeholder="Digite uma guilda">
           <div class="inline-spacer"></div>
           <button mat-mini-fab class="card-container-add-btn" (click)="AddNew()">
             <mat-icon>add</mat-icon>

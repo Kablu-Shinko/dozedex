@@ -38,12 +38,24 @@ interface Attachment{
 interface SubAttachment{
     Key?:number,
     Name: string,
-    ShortDescription: string,
-    LongDescription: string,
+    Description: string,
     Status?: boolean
 }
 
+
+interface MultiSelect{
+    Title: string,
+    List: MultiSelectOption[]
+  }
+  
+  interface MultiSelectOption{
+    Title: string,
+    Key: number
+  }
+
 export {
+    MultiSelect,
+    MultiSelectOption,
     Attachment,
     SubAttachment,
     MenuOption,

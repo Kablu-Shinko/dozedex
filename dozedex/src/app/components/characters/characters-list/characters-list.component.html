@@ -1,70 +1,38 @@
-<app-navbar></app-navbar>
-
-<div class="character-list-container">
-    <div>
-        <button class="btn btn-primary btn-block character-list-button">Adicionar novo</button>
+<div class="body-container" style="margin-bottom: 5vh;">
+    <app-navbar [ActualArea]="Area"></app-navbar>
+    <div class="inner-body-container inner-body-with-color">
+      <div class="form-group">
+        <div class="card-header-container">
+          <input #Input_Search class="form-control card-container-search character-search-input" title="Pressionar enter também realizará a pesquisa" (input)="SearchCharacter(Input_Search.value)" placeholder="Digite o nome de um personagem">
+          <div class="inline-spacer"></div>
+          <button mat-mini-fab class="card-container-add-btn" (click)="AddNew()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="card-container">
+            <div class="flex-gap flex-gap-justify-center">
+            <div *ngFor="let character of characters">
+              <mat-card class="card-container-body">
+                <mat-card-header class="card-container-title">
+                    <mat-card-title class="card-title" title="{{character.Name}}">{{character.Name}}</mat-card-title>
+                </mat-card-header>
+                <img class="card-container-image" mat-card-image src="{{character.ImagePath}}" alt="{{character.ShortDescription}}" (click)="GoToEdit(character.Key)">
+                <mat-divider></mat-divider><br>
+                <mat-card-content>
+                  <div class="card-container-description">{{character.ShortDescription}}</div>
+                </mat-card-content>
+                <mat-divider></mat-divider>
+                <mat-card-actions class="card-container-actions">
+                    <!-- <button mat-stroked-button style="background-color: #3487ed; color: white;" (click)="GoToDetails(character.Key)"><mat-icon>add</mat-icon></button> -->
+                    <button mat-stroked-button style="background-color: #3487ed; color: white;" (click)="GoToEdit(character.Key)"><mat-icon>edit</mat-icon></button>
+                    <button mat-stroked-button style="background-color: rgb(205, 0, 0); color: white;" (click)="Inactive(character.Key)"><mat-icon>block</mat-icon></button>
+                </mat-card-actions>
+              </mat-card>
+              <dozedex-spacer></dozedex-spacer>
+            </div>
+          </div>
+        </div>
     </div>
-
-    <div class="table-responsive characters-list-table">
-        <table class="table table-striped table-dark table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Ícone</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Idade</th>
-                <th scope="col">Cor de cabelo</th>
-                <th scope="col">Olho esquerdo</th>
-                <th scope="col">Olho direito</th>
-                <th scope="col">Altura</th>
-                <th scope="col">Raça</th>
-                <th scope="col">Classe primária</th>
-                <th scope="col">Descrição curta</th>
-                <th scope="col">Especialidade</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>se está lendo isso é corno</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-                <td>ala é corno memo</td>
-                <td>xxxxx</td>
-                <td>xxxxx</td>
-            </tr>
-            </tbody>
-      </table>
     </div>
-</div>
-
-

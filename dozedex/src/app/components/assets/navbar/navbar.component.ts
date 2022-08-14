@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit {
     },
     {
       Title: "Personagens",
-      Function: () => this.dozedexService.notImplemented()
+      Function: () => this.router.navigate(['character/list'])
     },
     {
       Title: "Raças",
