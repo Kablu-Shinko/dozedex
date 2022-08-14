@@ -56,10 +56,6 @@ export class GuildService{
                 Status: Status
             }
 
-            if(aux.Initials !== undefined && aux.Initials.length > 0){
-                aux.Name += ` (${aux.Initials})`;
-            }
-
             list.push(aux);
         });
 
