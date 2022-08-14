@@ -41,7 +41,7 @@ export class GuildListComponent implements OnInit {
   
   GoToEdit(key: number | undefined): void{
     this.guildService.SetGuildKey(key ?? 0);
-    this.router.navigate(['guild/create']);
+    this.router.navigate(['guild/edit']);
   }
 
   GoToDetails(key: number | undefined): void{

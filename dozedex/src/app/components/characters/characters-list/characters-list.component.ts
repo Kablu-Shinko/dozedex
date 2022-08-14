@@ -41,7 +41,7 @@ export class CharactersListComponent implements OnInit {
   
   GoToEdit(key: number | undefined): void{
     this.characterService.SetCharacterKey(key ?? 0);
-    this.router.navigate(['character/create']);
+    this.router.navigate(['character/edit']);
   }
 
   GoToDetails(key: number | undefined): void{

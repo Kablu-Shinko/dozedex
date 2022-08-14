@@ -43,7 +43,7 @@ export class BreedListComponent implements OnInit {
   
   GoToEdit(key: number | undefined): void{
     this.breedService.SetBreedKey(key ?? 0);
-    this.router.navigate(['breed/create']);
+    this.router.navigate(['breed/edit']);
   }
 
   AddNew(){

@@ -16,7 +16,7 @@
         <div *ngFor="let breed of breeds">
           <mat-card class="card-container-body">
             <mat-card-header class="card-container-title">
-                <mat-card-title title="{{breed.Name}}">{{breed.Name}}</mat-card-title>
+                <mat-card-title class="card-title" title="{{breed.Name}}">{{breed.Name}}</mat-card-title>
             </mat-card-header>
             <img class="card-container-image" mat-card-image src="{{breed.ImagePath}}" alt="{{breed.Description}}" (click)="GoToEdit(breed.Key)">
             <mat-divider></mat-divider><br>

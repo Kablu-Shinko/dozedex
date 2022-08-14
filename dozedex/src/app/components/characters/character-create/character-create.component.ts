@@ -90,6 +90,7 @@ export class CharacterCreateComponent implements OnInit {
     Name: '',
     ShortDescription: '',
     LongDescription: '',
+    Appearence: '',
     ImageUrl: '',
     ImagePath: '',
     HairColor: '',
@@ -117,6 +118,7 @@ export class CharacterCreateComponent implements OnInit {
     Age: [''],
     ShortDescription: [''],
     LongDescription: [''],
+    Appearence: [''],
     HairColor: [''],
     SkinColor: [''],
     LeftEyeColor: [''],
@@ -201,6 +203,7 @@ export class CharacterCreateComponent implements OnInit {
     this.characterForm.controls.Age.setValue(this.character.Age ?? "");
     this.characterForm.controls.ShortDescription.setValue(this.character.ShortDescription);
     this.characterForm.controls.LongDescription.setValue(this.character.LongDescription ?? "");
+    this.characterForm.controls.Appearence.setValue(this.character.Appearence ?? "");
     this.characterForm.controls.HairColor.setValue(this.character.HairColor ?? "");
     this.characterForm.controls.SkinColor.setValue(this.character.SkinColor ?? "");
     this.characterForm.controls.LeftEyeColor.setValue(this.character.LeftEyeColor ?? "");
@@ -229,6 +232,7 @@ export class CharacterCreateComponent implements OnInit {
         Key: this.character.Key,
         Name: this.characterForm.controls.Name.value ?? this.character.Name,
         Age: this.characterForm.controls.Age.value ?? this.character.Age,
+        Appearence: this.characterForm.controls.Appearence.value ?? this.character.Appearence,
         Height: this.characterForm.controls.Height.value ?? this.character.Height,
         Weight: this.characterForm.controls.Weight.value ?? this.character.Weight,
         LeftEyeColor: this.characterForm.controls.LeftEyeColor.value ?? this.character.LeftEyeColor,
@@ -248,7 +252,6 @@ export class CharacterCreateComponent implements OnInit {
       }
 
       var result: string = '';
-
       if(editedCharacter.Key === -1){
         result = await this.characterService.AddCharacter(editedCharacter);
       }
@@ -263,11 +266,10 @@ export class CharacterCreateComponent implements OnInit {
       if(result === 'Atualizado' || result === 'Adicionado'){
         this.router.navigate(['character/list']);
       }
+      else{
+        alert("algo deu errado, tente novamente");
+      }
     }
-    // else{
-    //   alert("Verifique os campos e tente novamente")
-    // }
-
   }
 
   async SaveUrl(newUrl: string): Promise<string>{

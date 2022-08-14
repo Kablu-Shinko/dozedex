@@ -41,7 +41,7 @@ export class ItemListComponent implements OnInit {
   
   GoToEdit(key: number | undefined): void{
     this.itemService.SetItemKey(key ?? 0);
-    this.router.navigate(['item/create']);
+    this.router.navigate(['item/edit']);
   }
 
   GoToDetails(key: number | undefined): void{

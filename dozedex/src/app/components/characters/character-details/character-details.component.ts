@@ -96,7 +96,7 @@ export class CharacterDetailsComponent implements OnInit {
 
   GoToEdit(key: number | undefined): void{
     this.characterService.SetCharacterKey(key ?? 0);
-    this.router.navigate(['character/create']);
+    this.router.navigate(['character/edit']);
   }
 
   GoToCharacterDetails(key: number | undefined): void{
@@ -117,6 +117,16 @@ export class CharacterDetailsComponent implements OnInit {
   GoToItemDetails(key: number | undefined): void{
     this.itemService.SetItemKey(key ?? 0);
     this.router.navigate(['item/create']);
+  }
+
+  GetAppearence(): string {
+    let appearence: string = this.character.Appearence ?? '';
+    if(appearence.length > 0){
+      return appearence;
+    }
+    else{
+      return "Sem aparência descrita";
+    }
   }
 
   GetBreeds(): string{

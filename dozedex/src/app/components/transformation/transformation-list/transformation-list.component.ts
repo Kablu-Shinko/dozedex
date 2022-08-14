@@ -41,7 +41,7 @@ export class TransformationListComponent implements OnInit {
   
   GoToEdit(key: number | undefined): void{
     this.transformationService.SetTransformationKey(key ?? 0);
-    this.router.navigate(['transformation/create']);
+    this.router.navigate(['transformation/edit']);
   }
 
   GoToDetails(key: number | undefined): void{

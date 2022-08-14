@@ -63,7 +63,9 @@ function GetCharacterRoutes(): Route[]{
   var routes: Route[] = [
     {path: 'character/list', component: CharactersListComponent},
     {path: 'character/details', component: CharacterDetailsComponent},
-    {path: 'character/create', component: CharacterCreateComponent}
+    {path: 'character/create', component: CharacterCreateComponent},
+    {path: 'character/edit', component: CharacterCreateComponent}
+
   ];
 
   return routes;
@@ -72,7 +74,8 @@ function GetCharacterRoutes(): Route[]{
 function GetTransformationRoutes(): Route[]{
   var routes: Route[] = [
     {path: 'transformation/list', component: TransformationListComponent},
-    {path: 'transformation/create', component: TransformationCreateComponent}
+    {path: 'transformation/create', component: TransformationCreateComponent},
+    {path: 'transformation/edit', component: TransformationCreateComponent}
   ]
 
   return routes;
@@ -82,6 +85,7 @@ function GetBreedRoutes(): Route[]{
   var routes: Route[] = [
     {path: "breed/list", component: BreedListComponent},
     {path: "breed/create", component: BreedCreateComponent},
+    {path: "breed/edit", component: BreedCreateComponent}
   ];
 
   return routes;
@@ -91,6 +95,7 @@ function GetSkillRoutes(): Route[]{
   var routes: Route[] = [
     {path: "skill/list", component: SkillListComponent},
     {path: "skill/create", component: SkillCreateComponent},
+    {path: "skill/edit", component: SkillCreateComponent}
   ];
 
   return routes;
@@ -100,6 +105,7 @@ function GetItemRoutes(): Route[]{
   var routes: Route[] = [
     {path: "item/list", component: ItemListComponent},
     {path: "item/create", component: ItemCreateComponent},
+    {path: "item/edit", component: ItemCreateComponent}
   ];
 
   return routes;
@@ -109,13 +115,13 @@ function GetGuildRoutes(): Route[]{
   var routes: Route[] = [
     {path: "guild/list", component: GuildListComponent},
     {path: "guild/create", component: GuildCreateComponent},
+    {path: "guild/edit", component: GuildCreateComponent}
   ];
 
   return routes;
 }
 
 @NgModule({
-  // imports: [RouterModule.forRoot(routes)],
   imports: [RouterModule.forRoot(GetRoutes(), {useHash: true})],
   exports: [RouterModule]
 })

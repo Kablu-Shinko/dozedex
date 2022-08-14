@@ -16,7 +16,7 @@
             <div *ngFor="let skill of skills">
               <mat-card class="card-container-body">
                 <mat-card-header class="card-container-title">
-                    <mat-card-title>{{skill.Name}}</mat-card-title>
+                    <mat-card-title class="card-title" title="{{skill.Name}}">{{skill.Name}}</mat-card-title>
                 </mat-card-header>
                 <img class="card-container-image" mat-card-image src="{{skill.ImagePath}}" alt="{{skill.ShortDescription}}" (click)="GoToEdit(skill.Key)">
                 <mat-divider></mat-divider><br>

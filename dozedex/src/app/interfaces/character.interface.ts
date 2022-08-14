@@ -10,6 +10,7 @@ export interface Character {
     Age?: string,
     ImageUrl?: string,
     ImagePath?: string,
+    Appearence?: string,
     Attachments?: Array<Attachment>,
     Breed?: Array<Breed>, //get those from keys
     Parents?: Array<Character>, //get those from keys

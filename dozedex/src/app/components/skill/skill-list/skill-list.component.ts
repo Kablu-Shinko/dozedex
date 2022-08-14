@@ -51,7 +51,7 @@ export class SkillListComponent implements OnInit {
   
   GoToEdit(key: number | undefined): void{
     this.skillService.SetSkillKey(key ?? 0);
-    this.router.navigate(['skill/create']);
+    this.router.navigate(['skill/edit']);
   }
 
   GoToDetails(key: number | undefined): void{
