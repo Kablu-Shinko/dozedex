@@ -21,7 +21,7 @@
             <img class="card-container-image" mat-card-image src="{{breed.ImagePath}}" alt="{{breed.Description}}" (click)="GoToEdit(breed.Key)">
             <mat-divider></mat-divider><br>
             <mat-card-content>
-              <div class="card-container-description">{{breed.Description}}</div>
+              <div class="card-container-description"><span class="details-text">{{breed.Description}}</span></div>
             </mat-card-content>
             <mat-divider></mat-divider>
             <mat-card-actions class="card-container-actions">

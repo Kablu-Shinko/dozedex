@@ -188,3 +188,9 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 
 /* cards area */
+
+/* other areas */
+
+.details-text{
+   white-space: pre-wrap;
+}

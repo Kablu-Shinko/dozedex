@@ -21,7 +21,7 @@
                 <img class="card-container-image" mat-card-image src="{{transformation.ImagePath}}" alt="{{transformation.ShortDescription}}" (click)="GoToEdit(transformation.Key)">
                 <mat-divider></mat-divider><br>
                 <mat-card-content>
-                  <div class="card-container-description">{{transformation.ShortDescription}}</div>
+                  <div class="card-container-description"><span class="details-text">{{transformation.ShortDescription}}</span></div>
                 </mat-card-content>
                 <mat-divider></mat-divider>
                 <mat-card-actions class="card-container-actions">

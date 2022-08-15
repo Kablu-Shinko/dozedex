@@ -21,7 +21,7 @@
                 <img class="card-container-image" mat-card-image src="{{character.ImagePath}}" alt="{{character.ShortDescription}}" (click)="GoToDetails(character.Key)">
                 <mat-divider></mat-divider><br>
                 <mat-card-content>
-                  <div class="card-container-description">{{character.ShortDescription}}</div>
+                  <div class="card-container-description"><span class="details-text">{{character.ShortDescription}}</span></div>
                 </mat-card-content>
                 <mat-divider></mat-divider>
                 <mat-card-actions class="card-container-actions">
