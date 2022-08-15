@@ -19,6 +19,10 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   @Input() ActualArea: string = 'ESQUECEU DE PASSAR O INPUT DE AREA SEU CORNO';
+  @Input() AreaAction: Function = () => {};
+  @Input() HaveAreaAction: boolean = false;
+  @Input() AreaActionTitle: string = '';
+  
   user: User = this.userService.GetActualUser();
   altText: string = "imagem de perfil";
   showFiller: Boolean =  false;
@@ -56,6 +60,10 @@ export class NavbarComponent implements OnInit {
     {
       Title: "Curiosidades",
       Function: () => this.dozedexService.notImplemented()
+    },
+    {
+      Title: "Drive (4Shared)",
+      Function: () => this.router.navigate(['dozedex/drive'])
     }
   ];
 

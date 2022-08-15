@@ -35,6 +35,7 @@ import { ItemCreateComponent } from './components/item/item-create/item-create.c
 import { ItemListComponent } from './components/item/item-list/item-list.component';
 import { MultiSelectInputComponent } from './components/assets/inputs/multi-select-input/multi-select-input.component';
 import { MaterialModule } from './modules/material-module';
+import { DozedexDriveComponent } from './components/dozedex-drive/dozedex-drive.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { MaterialModule } from './modules/material-module';
     GuildCreateComponent,
     ItemCreateComponent,
     ItemListComponent,
-    MultiSelectInputComponent
+    MultiSelectInputComponent,
+    DozedexDriveComponent
   ],
   imports: [
     MaterialModule,

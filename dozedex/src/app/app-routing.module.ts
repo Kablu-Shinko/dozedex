@@ -5,6 +5,7 @@ import { BreedListComponent } from './components/breed/breed-list/breed-list.com
 import { CharacterCreateComponent } from './components/characters/character-create/character-create.component';
 import { CharacterDetailsComponent } from './components/characters/character-details/character-details.component';
 import { CharactersListComponent } from './components/characters/characters-list/characters-list.component';
+import { DozedexDriveComponent } from './components/dozedex-drive/dozedex-drive.component';
 import { GuildCreateComponent } from './components/guild/guild-create/guild-create.component';
 import { GuildListComponent } from './components/guild/guild-list/guild-list.component';
 import { HomeComponent } from './components/home/home.component';
@@ -45,7 +46,8 @@ function GetRoutes(): Routes{
 function GetDefaultRoutes(): Route[]{
   var routes: Route[] = [
     {path: 'login', component: LoginComponent},
-    {path: 'home', component: HomeComponent}
+    {path: 'home', component: HomeComponent},
+    {path: 'dozedex/drive', component: DozedexDriveComponent}
   ]
 
   return routes;

@@ -24,6 +24,9 @@
 
         </mat-menu> -->
         <button mat-button disabled class="navbar-icon simple-icon" style="color: white !important; overflow: hidden;">{{ActualArea}}</button>
+        
+        <button mat-button *ngIf="HaveAreaAction" class="navbar-icon simple-icon" style="color: white !important; overflow: hidden;" (click)="AreaAction()">{{AreaActionTitle}}</button>
+        
         <span class="navbar-spacer"></span>
     
         <button mat-button *ngIf="loading" class="navbar-icon simple-icon" disabled id="navbar-refresh-button" (click)="RefreshPage()">
