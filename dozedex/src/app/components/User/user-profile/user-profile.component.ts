@@ -69,7 +69,7 @@ export class UserProfileComponent implements OnInit {
       var result = await this.userService.UpdateUser(editedUser);
       await this.dozedexService.RefreshPage(this.router.url);
 
-      alert(result);
+      alert(result ?? "Dados atualizados!");
     }
     else{
       alert("Verifique os campos obrigatórios e tente novamente")
