@@ -17,7 +17,7 @@ export class GuildListComponent implements OnInit {
     private dozedexService: DozedexService
   ) { }
 
-  Area: string = "Guildas";
+  Area: string = "Guildas e Grupos";
   guilds: Guild[] = [];
   fullList: Guild[] = [];
   loading: boolean = false;

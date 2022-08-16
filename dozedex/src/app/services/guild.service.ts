@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { ImageService } from './image.service';
+import { Character } from '../interfaces/character.interface';
+import { CharacterService } from './character.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +14,8 @@ import { ImageService } from './image.service';
 export class GuildService{
     constructor(
         private http: HttpClient,
-        private imageService: ImageService
+        private imageService: ImageService,
+        private characterService: CharacterService
     ) { }   
 
     guild_API: string = `${environment.API_URL}/guild`;
@@ -32,14 +35,16 @@ export class GuildService{
     }
 
     //for mapping
-    MapGuild(unmapped: any): Guild[]{
+    async MapGuild(unmapped: any, minified: boolean = false): Promise<Guild[]>{
         var list: Guild[] = [];
-        unmapped.forEach( (guild: any) => {
+        for(let i: number = 0; i < unmapped.length; i++){
+            let guild: any = unmapped[i];
             let {
                 Key,
                 Name,
                 Initials,
                 ImageUrl,
+                CharacterKeys,
                 ShortDescription,
                 LongDescription,
                 Status                
@@ -49,6 +54,7 @@ export class GuildService{
                 Key: Key,
                 Initials: Initials,
                 Name: Name,
+                CharacterKeys: CharacterKeys,
                 ImageUrl: ImageUrl,
                 ImagePath: this.imageService.GetFullImageURL(ImageUrl ?? ''),
                 ShortDescription: ShortDescription,
@@ -56,8 +62,31 @@ export class GuildService{
                 Status: Status
             }
 
+            
+            if(!minified && aux.CharacterKeys !== undefined && aux.CharacterKeys.length > 0){
+                aux.Characters = [];
+                
+                for(let j: number = 0; j < aux.CharacterKeys.length; j++){
+                    let key = aux.CharacterKeys[j];
+                    let _key: number = -1;
+                    let character: Character;
+
+                    try{
+                        _key = Number(key);
+                    }
+                    catch{
+                        _key = -1;
+                    }
+
+                    if(_key > 0){
+                        character = await this.characterService.GetOneMinified(_key);
+                        aux.Characters.push(character)
+                    }
+                }
+            }
+
             list.push(aux);
-        });
+        };
 
         return list;
     }
@@ -97,14 +126,14 @@ export class GuildService{
 
     async GetAllGuilds(): Promise<Guild[]>{
         var response: any = await firstValueFrom(this.http.get(`${this.guild_API}/list`));
-        var mapped: Guild[] = this.MapGuild(response); 
+        var mapped: Guild[] = await this.MapGuild(response); 
 
         return mapped;
     }
 
     async GetOne(key: number): Promise<Guild>{
         var response = await firstValueFrom(this.http.post(`${this.guild_API}/details`, {Key: key}));
-        var mapped: Guild = this.MapGuild([response])[0];
+        var mapped: Guild = (await this.MapGuild([response]))[0];
 
         return mapped;
     }

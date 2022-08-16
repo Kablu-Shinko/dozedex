@@ -56,6 +56,7 @@ export class DozedexService implements OnInit{
         await this.userService.RefreshData();
         await this.router.navigateByUrl('/home', {skipLocationChange: true});
         await this.router.navigate([path]);
+        window.location.reload();
     }
 
     async VerifyUser(user: User): Promise<Auth>{

@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DozedexService } from 'src/app/services/dozedex.service';
 import { ImageService } from 'src/app/services/image.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../assets/dialog/dialog.component';
-import { DialogData } from 'src/app/interfaces/small-interfaces/small-interfaces';
+import { DialogData, MultiSelect } from 'src/app/interfaces/small-interfaces/small-interfaces';
 import { GuildService } from 'src/app/services/guild.service';
 import { Guild } from 'src/app/interfaces/guild.interface';
+import { Character } from 'src/app/interfaces/character.interface';
+import { CharacterService } from 'src/app/services/character.service';
 
 @Component({
   selector: 'app-guild-create',
@@ -20,6 +22,7 @@ export class GuildCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dozedexService: DozedexService,
     private guildService: GuildService,
+    private characterService: CharacterService,
     private router: Router,
     public dialog: MatDialog
   ) { }
@@ -29,6 +32,13 @@ export class GuildCreateComponent implements OnInit {
   btnLoading: boolean = false;
   guildImagePath: string = '';
   loading: boolean = false;
+
+  characters: Character[] = [];
+  characterKeys: FormControl = new FormControl('');
+  characterMultiSelect: MultiSelect = {
+    Title: "Personagens",
+    List: []
+  };
   
   guild: Guild = {
     ShortDescription: '',
@@ -37,6 +47,7 @@ export class GuildCreateComponent implements OnInit {
     Initials: '',
     LongDescription: '',
     ImageUrl: '',
+    CharacterKeys: [],
     Key: -1,
     Status: false
   };
@@ -45,7 +56,8 @@ export class GuildCreateComponent implements OnInit {
     Name: [''],
     ShortDescription: [''],
     LongDescription: [''],
-    Initials: ['']
+    Initials: [''],
+    CharacterKeys: [Array<number>()]
   });
 
   async ngOnInit(): Promise<void> {
@@ -54,15 +66,24 @@ export class GuildCreateComponent implements OnInit {
     this.Key = this.guildService.GetGuildKey();
 
     if(this.Key > 0){
-      this.Area = "Guildas > Edição";
+      this.Area = "Guildas e Grupos > Edição";
       this.guild = await this.guildService.GetOne(this.Key);
     }
     else{
-      this.Area = "Guildas > Criação";
+      this.Area = "Guildas e Grupos > Criação";
     }
 
     this.guild.ImagePath = this.imageService.GetFullImageURL(this.guild.ImagePath ?? '');
     this.guildImagePath = this.guild.ImagePath;
+    this.characters = await this.characterService.GetAllCharactersMinified();
+    
+    this.characters.forEach((character: Character) => {
+      this.characterMultiSelect.List.push({
+        Title: character.Name,
+        Key: character.Key ?? -1
+      });
+    });
+
     this.InitForm();
     this.loading = false;
   }
@@ -72,10 +93,14 @@ export class GuildCreateComponent implements OnInit {
     this.guildForm.controls.ShortDescription.setValue(this.guild.ShortDescription);
     this.guildForm.controls.LongDescription.setValue(this.guild.LongDescription ?? "");
     this.guildForm.controls.Initials.setValue(this.guild.Initials ?? '');
+    this.guildForm.controls.CharacterKeys.setValue(this.guild.CharacterKeys ?? Array<number>());
   }
 
   async onSubmit(): Promise<void>{
     this.btnLoading = true;
+
+    this.guildForm.controls.CharacterKeys.setValue(this.characterKeys.value);
+
     if(this.guildForm.valid){
       var editedGuild: Guild = {
         Name: this.guildForm.controls.Name.value ?? this.guild.Name,
@@ -84,6 +109,7 @@ export class GuildCreateComponent implements OnInit {
         ShortDescription: this.guildForm.controls.ShortDescription.value ?? this.guild.ShortDescription,
         LongDescription: this.guildForm.controls.LongDescription.value ?? this.guild.LongDescription,
         ImagePath: '',
+        CharacterKeys: this.guildForm.controls.CharacterKeys.value ?? this.guild.CharacterKeys,
         Key: this.guild.Key ?? -1,
         Status: this.guild.Status ?? false
       }
@@ -115,6 +141,7 @@ export class GuildCreateComponent implements OnInit {
       ShortDescription: this.guild.ShortDescription,
       LongDescription: this.guild.LongDescription,
       Initials: this.guild.Initials,
+      CharacterKeys: this.guild.CharacterKeys,
       Key: this.guild.Key,
       Status: this.guild.Status,
       ImagePath: this.guild.ImagePath

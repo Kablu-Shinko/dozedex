@@ -9,31 +9,52 @@
                         <div class="create-action-image-container">
                             <img src="{{guild.ImagePath}}" class="create-action-image-picture" (click)="openDialog()">
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="Name">Nome da guilda</label>
-                            <input formControlName="Name" type="text" class="form-control" id="InputName" placeholder="Nome da guilda">
+
+                        <div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between;">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Nome</mat-label>
+                                <input matInput autocomplete="off" placeholder="Nome do grupo/guilda" type="text" formControlName="Name">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>Sigla</mat-label>
+                                <input matInput autocomplete="off" placeholder="Sigla do grupo/guilda" type="text" formControlName="Initials">
+                            </mat-form-field>
+
+                            <app-multi-select-input 
+                                [multiSelectForm]="characterKeys" 
+                                [multiSelect]="characterMultiSelect" 
+                                [selectedValues]="guild.CharacterKeys ?? []">
+                                <!-- Personagens -->
+                            </app-multi-select-input>
                         </div>
 
-                        <div class="form-group">
-                            <label for="Initials">Iniciais</label>
-                            <input formControlName="Initials" class="form-control" id="InputInitials" placeholder="Sigla">
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="ShortDescription">Descrição curta</label>
-                            <textarea formControlName="ShortDescription" class="form-control" id="InputDescription" placeholder="Descrição curta da guilda" style="min-height: 200px;"></textarea>
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="LongDescription">Descrição longa</label>
-                            <textarea formControlName="LongDescription" class="form-control" id="InputDescription" placeholder="Descrição longa da guilda" style="min-height: 200px;"></textarea>
-                        </div>
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <b class="create-character-information-title">Descrição</b>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <mat-form-field appearance="fill" style="width: 100%;">
+                                    <mat-label>Descrição</mat-label>
+                                    <textarea matInput placeholder="Pessoal gente fina demais..." style="min-height: 200px;" formControlName="ShortDescription"></textarea>
+                                </mat-form-field>
+                            </mat-expansion-panel>
 
-                        <div class="form-group">
-                            <label></label>
-                        </div>
-    
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <b class="create-character-information-title">História</b>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <mat-form-field appearance="fill" style="width: 100%;">
+                                    <mat-label>História</mat-label>
+                                    <textarea matInput placeholder="Surgiu em meados dos anos..." style="min-height: 200px;" formControlName="LongDescription"></textarea>
+                                </mat-form-field>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                        <br>
                         <div class="form-group">
                             <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [text]='"Salvar alterações"' [loading]="btnLoading"></app-pulsing-button>
                         </div>

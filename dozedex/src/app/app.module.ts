@@ -37,6 +37,7 @@ import { MultiSelectInputComponent } from './components/assets/inputs/multi-sele
 import { MaterialModule } from './modules/material-module';
 import { DozedexDriveComponent } from './components/dozedex-drive/dozedex-drive.component';
 import { LoadingScreenComponent } from './components/assets/loading-screen/loading-screen.component';
+import { GuildDetailsComponent } from './components/guild/guild-details/guild-details.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { LoadingScreenComponent } from './components/assets/loading-screen/loadi
     ItemListComponent,
     MultiSelectInputComponent,
     DozedexDriveComponent,
-    LoadingScreenComponent
+    LoadingScreenComponent,
+    GuildDetailsComponent
   ],
   imports: [
     MaterialModule,

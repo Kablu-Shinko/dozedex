@@ -21,12 +21,7 @@ import { Skill } from '../interfaces/skill.interface';
 export class CharacterService{
     constructor(
         private http: HttpClient,
-        private imageService: ImageService,
-        private breedService: BreedService,
-        private transformationService: TransformationService,
-        private skillService: SkillService,
-        private itemService: ItemService,
-        private guildService: GuildService
+        private imageService: ImageService
     ) { }   
 
     character_API: string = `${environment.API_URL}/character`;
@@ -205,6 +200,13 @@ export class CharacterService{
 
     async GetOne(key: number): Promise<Character>{
         var response = await firstValueFrom(this.http.post(`${this.character_API}/details`, {Key: key}));
+        var mapped: Character = (await this.MapCharacter([response]))[0];
+
+        return mapped;
+    }
+
+    async GetOneMinified(key: number): Promise<Character>{
+        var response = await firstValueFrom(this.http.post(`${this.character_API}/minified`, {Key: key}));
         var mapped: Character = (await this.MapCharacter([response]))[0];
 
         return mapped;

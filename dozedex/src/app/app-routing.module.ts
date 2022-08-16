@@ -7,6 +7,7 @@ import { CharacterDetailsComponent } from './components/characters/character-det
 import { CharactersListComponent } from './components/characters/characters-list/characters-list.component';
 import { DozedexDriveComponent } from './components/dozedex-drive/dozedex-drive.component';
 import { GuildCreateComponent } from './components/guild/guild-create/guild-create.component';
+import { GuildDetailsComponent } from './components/guild/guild-details/guild-details.component';
 import { GuildListComponent } from './components/guild/guild-list/guild-list.component';
 import { HomeComponent } from './components/home/home.component';
 import { ItemCreateComponent } from './components/item/item-create/item-create.component';
@@ -117,7 +118,8 @@ function GetGuildRoutes(): Route[]{
   var routes: Route[] = [
     {path: "guild/list", component: GuildListComponent},
     {path: "guild/create", component: GuildCreateComponent},
-    {path: "guild/edit", component: GuildCreateComponent}
+    {path: "guild/edit", component: GuildCreateComponent},
+    {path: "guild/details", component: GuildDetailsComponent}
   ];
 
   return routes;
