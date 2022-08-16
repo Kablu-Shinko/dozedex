@@ -20,11 +20,14 @@ export class TransformationListComponent implements OnInit {
   Area: string = "Transformações";
   transformations: Transformation[] = [];
   fullList: Transformation[] = [];
+  loading: boolean = false;
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
     var list: Transformation[] = await this.transformationService.GetAllTransformations();
     this.fullList = list;
     this.transformations = list;
+    this.loading = false;
   } 
 
   SearchTransformation(search: string){

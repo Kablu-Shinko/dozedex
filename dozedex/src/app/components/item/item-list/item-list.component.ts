@@ -20,11 +20,14 @@ export class ItemListComponent implements OnInit {
   Area: string = "Itens";
   items: Item[] = [];
   fullList: Item[] = [];
+  loading: boolean = false;
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
     var list: Item[] = await this.itemService.GetAllItems();
     this.fullList = list;
     this.items = list;
+    this.loading = false;
   } 
 
   SearchItem(search: string){

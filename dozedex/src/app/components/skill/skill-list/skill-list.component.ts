@@ -23,12 +23,15 @@ export class SkillListComponent implements OnInit {
   skills: Skill[] = [];
   fullList: Skill[] = [];
   defaultSkillImageUrl: string = 'https://drive.google.com/file/d/10ya4XnetYlQNaEZYJTr9Pwe4xFe2SIEq/view?usp=sharing';
+  loading: boolean = false;
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
     var list: Skill[] = await this.skillService.GetAllSkill();
     this.fullList = list;
     this.skills = list;
     this.MapSkills();
+    this.loading = false;
   } 
 
   MapSkills(): void{

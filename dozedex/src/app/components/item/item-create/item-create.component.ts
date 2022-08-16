@@ -27,8 +27,9 @@ export class ItemCreateComponent implements OnInit {
 
   Area: string = "";
   Key: number = 0;
-  loading: boolean = false;
+  btnLoading: boolean = false;
   itemImagePath: string = '';
+  loading: boolean = false;
   
   item: Item = {
     ShortDescription: '',
@@ -47,6 +48,7 @@ export class ItemCreateComponent implements OnInit {
   });
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
     this.Area = "";
     this.Key = this.itemService.GetItemKey();
 
@@ -61,6 +63,7 @@ export class ItemCreateComponent implements OnInit {
     this.item.ImagePath = this.imageService.GetFullImageURL(this.item.ImagePath ?? '');
     this.itemImagePath = this.item.ImagePath;
     this.InitForm();
+    this.loading = false;
   }
 
   InitForm(): void{
@@ -71,7 +74,7 @@ export class ItemCreateComponent implements OnInit {
 
   async onSubmit(): Promise<void>{
     if(this.itemForm.valid){
-      this.loading = true;
+      this.btnLoading = true;
       var editedItem: Item = {
         Name: this.itemForm.controls.Name.value ?? this.item.Name,
         ImageUrl: this.item.ImageUrl,
@@ -98,7 +101,7 @@ export class ItemCreateComponent implements OnInit {
     else{
       alert("Verifique os campos e tente novamente")
     }
-    this.loading = false;
+    this.btnLoading = false;
     this.router.navigate(['item/list']);
   }
 

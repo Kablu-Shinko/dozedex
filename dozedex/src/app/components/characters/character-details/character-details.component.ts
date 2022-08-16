@@ -34,9 +34,7 @@ export class CharacterDetailsComponent implements OnInit {
   Area: string = "";
   Key: number = -1;
   loading: boolean = false;
-  characterLoading: boolean = false;
   characterImagePath: string = '';
-  loadingUrl: string = this.dozedexService.GetLoadingImage();
 
   breeds: Breed[] = [];
   parents: Character[] = [];
@@ -79,7 +77,7 @@ export class CharacterDetailsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.Area = "";
-    this.characterLoading = true;
+    this.loading = true;
     this.Key = this.characterService.GetCharacterKey();
 
     this.Area = "Personagens > Detalhes";
@@ -91,7 +89,7 @@ export class CharacterDetailsComponent implements OnInit {
     this.haveSkills = this.character.Skills !== undefined && this.character.Skills.length > 0;
     this.haveTransformations = this.character.Transformations !== undefined && this.character.Transformations.length > 0;
   
-    this.characterLoading = false;
+    this.loading = false;
   }
 
   GoToEdit(key: number | undefined): void{

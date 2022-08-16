@@ -22,11 +22,14 @@ export class BreedListComponent implements OnInit {
   Area: string = "Raças";
   breeds: Breed[] = [];
   fullList: Breed[] = [];
+  loading: boolean = false;
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
     var list: Breed[] = await this.breedService.GetAllBreeds();
     this.fullList = list;
     this.breeds = list;
+    this.loading = false;
   } 
 
   SearchBreed(search: string){

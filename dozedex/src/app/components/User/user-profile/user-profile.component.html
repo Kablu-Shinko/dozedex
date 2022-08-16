@@ -1,4 +1,6 @@
-<div class="body-container">
+<app-loading-screen *ngIf="loading"></app-loading-screen>
+
+<div *ngIf="!loading" class="body-container">
     <app-navbar [ActualArea]="Area"></app-navbar>
     <div class="inner-body-container">
         <section class="container-fluid">
@@ -37,7 +39,7 @@
                         <mat-slide-toggle color="primary" formControlName="KeepLogin">Manter login</mat-slide-toggle>
                     </div>
 
-                    <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [text]='"Salvar alterações"' [loading]="loading"></app-pulsing-button>
+                    <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [text]='"Salvar alterações"' [loading]="btnLoading"></app-pulsing-button>
                 </form>
             </section>
         </section>

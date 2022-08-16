@@ -1,4 +1,6 @@
-<div class="body-container" style="margin-bottom: 5vh;">
+<app-loading-screen *ngIf="loading"></app-loading-screen>
+
+<div *ngIf="!loading" class="body-container" style="margin-bottom: 5vh;">
     <app-navbar [ActualArea]="Area"></app-navbar>
     <div class="inner-body-container inner-body-with-color">
       <div class="form-group">

@@ -27,8 +27,9 @@ export class TransformationCreateComponent implements OnInit {
 
   Area: string = "";
   Key: number = 0;
-  loading: boolean = false;
+  btnLoading: boolean = false;
   transformationImagePath: string = '';
+  loading: boolean = false;
   
   transformation: Transformation = {
     ShortDescription: '',
@@ -47,6 +48,7 @@ export class TransformationCreateComponent implements OnInit {
   });
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
     this.Area = "";
     this.Key = this.transformationService.GetTransformationKey();
 
@@ -61,6 +63,7 @@ export class TransformationCreateComponent implements OnInit {
     this.transformation.ImagePath = this.imageService.GetFullImageURL(this.transformation.ImagePath ?? '');
     this.transformationImagePath = this.transformation.ImagePath;
     this.InitForm();
+    this.loading = false;
   }
 
   InitForm(): void{
@@ -70,8 +73,8 @@ export class TransformationCreateComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void>{
+    this.btnLoading = true;
     if(this.transformationForm.valid){
-      this.loading = true;
       var editedTransformation: Transformation = {
         Name: this.transformationForm.controls.Name.value ?? this.transformation.Name,
         ImageUrl: this.transformation.ImageUrl,
@@ -98,7 +101,7 @@ export class TransformationCreateComponent implements OnInit {
     else{
       alert("Verifique os campos e tente novamente")
     }
-    this.loading = false;
+    this.btnLoading = false;
     this.router.navigate(['transformation/list']);
   }
 

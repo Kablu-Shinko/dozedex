@@ -31,8 +31,9 @@ export class BreedCreateComponent implements OnInit {
 
   Area: string = "";
   Key: number = 0;
-  loading: boolean = false;
+  btnloading: boolean = false;
   breedImagePath: string = '';
+  loading: boolean = false;
   
   breed: Breed = {
     Description: '',
@@ -47,6 +48,7 @@ export class BreedCreateComponent implements OnInit {
   });
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
     this.Area = "";
     this.Key = this.breedService.GetBreedKey();
 
@@ -61,6 +63,7 @@ export class BreedCreateComponent implements OnInit {
     this.breed.ImagePath = this.imageService.GetFullImageURL(this.breed.ImagePath);
     this.breedImagePath = this.breed.ImagePath;
     this.InitForm();
+    this.loading = false;
   }
 
   InitForm(): void{
@@ -70,7 +73,7 @@ export class BreedCreateComponent implements OnInit {
 
   async onSubmit(): Promise<void>{
     if(this.breedForm.valid){
-      this.loading = true;
+      this.btnloading = true;
       var editedBreed: Breed = {
         Name: this.breedForm.controls.Name.value ?? this.breed.Name,
         ImageUrl: this.breed.ImageUrl,
@@ -97,7 +100,7 @@ export class BreedCreateComponent implements OnInit {
     else{
       alert("Verifique os campos e tente novamente")
     }
-    this.loading = false;
+    this.btnloading = false;
     this.router.navigate(['breed/list']);
   }
 

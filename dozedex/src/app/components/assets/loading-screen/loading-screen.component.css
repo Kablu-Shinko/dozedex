@@ -1,0 +1,6 @@
+.loading-screen{
+    display: flex; 
+    justify-content: center; 
+    padding-top: 33%; 
+    padding-bottom: 33%;
+}

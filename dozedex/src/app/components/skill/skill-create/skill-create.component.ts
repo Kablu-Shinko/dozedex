@@ -30,7 +30,8 @@ export class SkillCreateComponent implements OnInit {
   loading: boolean = false;
   skillImagePath: string = '';
   defaultSkillImageUrl: string = 'https://drive.google.com/file/d/10ya4XnetYlQNaEZYJTr9Pwe4xFe2SIEq/view?usp=sharing';
-  
+  btnLoading: boolean = false;
+
   skill: Skill = {
     ShortDescription: '',
     Name: '',
@@ -48,6 +49,7 @@ export class SkillCreateComponent implements OnInit {
   });
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
     this.Area = "";
     this.Key = this.skillService.GetSkillKey();
 
@@ -62,6 +64,7 @@ export class SkillCreateComponent implements OnInit {
     this.skillImagePath = this.skill.ImagePath;
     console.table(this.skill);
     this.InitForm();
+    this.loading = false;
   }
 
   InitForm(): void{
@@ -72,7 +75,7 @@ export class SkillCreateComponent implements OnInit {
 
   async onSubmit(): Promise<void>{
     if(this.skillForm.valid){
-      this.loading = true;
+      this.btnLoading = true;
       var editedskill: Skill = {
         Name: this.skillForm.controls.Name.value ?? this.skill.Name,
         ShortDescription: this.skillForm.controls.ShortDescription.value ?? this.skill.ShortDescription,
@@ -98,7 +101,7 @@ export class SkillCreateComponent implements OnInit {
     else{
       alert("Verifique os campos e tente novamente")
     }
-    this.loading = false;
+    this.btnLoading = false;
     this.router.navigate(['skill/list']);
   }
 

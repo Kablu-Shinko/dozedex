@@ -20,8 +20,10 @@ export class GuildListComponent implements OnInit {
   Area: string = "Guildas";
   guilds: Guild[] = [];
   fullList: Guild[] = [];
+  loading: boolean = false;
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
     var list: Guild[] = await this.guildService.GetAllGuilds();
 
     list.forEach((guild: Guild) => {
@@ -32,6 +34,7 @@ export class GuildListComponent implements OnInit {
 
     this.fullList = list;
     this.guilds = list;
+    this.loading = false;
   } 
 
   SearchGuild(search: string){

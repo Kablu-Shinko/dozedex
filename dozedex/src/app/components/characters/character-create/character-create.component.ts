@@ -40,7 +40,7 @@ export class CharacterCreateComponent implements OnInit {
   Area: string = "";
   Key: number = -1;
   loading: boolean = false;
-  characterLoading: boolean = false;
+  btnloading: boolean = false;
   characterImagePath: string = '';
   loadingUrl: string = this.dozedexService.GetLoadingImage();
 
@@ -137,7 +137,7 @@ export class CharacterCreateComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.Area = "";
-    this.characterLoading = true;
+    this.loading = true;
     this.Key = this.characterService.GetCharacterKey();
 
     if(this.Key > 0){
@@ -195,7 +195,7 @@ export class CharacterCreateComponent implements OnInit {
     this.character.ImagePath = this.imageService.GetFullImageURL(this.character.ImagePath ?? '');
     this.characterImagePath = this.character.ImagePath;
     this.InitForm();
-    this.characterLoading = false;
+    this.loading = false;
   }
 
   InitForm(): void{
@@ -220,6 +220,8 @@ export class CharacterCreateComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void>{
+    this.btnloading = true;
+
     this.characterForm.controls.BreedKeys.setValue(this.breedKeys.value);
     this.characterForm.controls.SkillsKeys.setValue(this.skillsKeys.value);
     this.characterForm.controls.ParentsKeys.setValue(this.parentsKeys.value);
@@ -227,7 +229,6 @@ export class CharacterCreateComponent implements OnInit {
     this.characterForm.controls.ItemKeys.setValue(this.itemsKeys.value);
 
     if(this.characterForm.valid){
-      this.loading = true;
       var editedCharacter: Character = {
         Key: this.character.Key,
         Name: this.characterForm.controls.Name.value ?? this.character.Name,
@@ -262,7 +263,6 @@ export class CharacterCreateComponent implements OnInit {
       await this.dozedexService.RefreshPage(this.router.url);
 
       alert(result);
-      this.loading = false;
       if(result === 'Atualizado' || result === 'Adicionado'){
         this.router.navigate(['character/list']);
       }
@@ -270,6 +270,7 @@ export class CharacterCreateComponent implements OnInit {
         alert("algo deu errado, tente novamente");
       }
     }
+    this.btnloading = false;
   }
 
   async SaveUrl(newUrl: string): Promise<string>{

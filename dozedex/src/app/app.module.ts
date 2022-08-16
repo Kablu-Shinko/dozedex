@@ -36,6 +36,7 @@ import { ItemListComponent } from './components/item/item-list/item-list.compone
 import { MultiSelectInputComponent } from './components/assets/inputs/multi-select-input/multi-select-input.component';
 import { MaterialModule } from './modules/material-module';
 import { DozedexDriveComponent } from './components/dozedex-drive/dozedex-drive.component';
+import { LoadingScreenComponent } from './components/assets/loading-screen/loading-screen.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { DozedexDriveComponent } from './components/dozedex-drive/dozedex-drive.
     ItemCreateComponent,
     ItemListComponent,
     MultiSelectInputComponent,
-    DozedexDriveComponent
+    DozedexDriveComponent,
+    LoadingScreenComponent
   ],
   imports: [
     MaterialModule,

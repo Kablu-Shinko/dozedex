@@ -1,6 +1,8 @@
-<div class="body-container">
+<app-loading-screen *ngIf="loading"></app-loading-screen>
+
+<div *ngIf="!loading" class="body-container">
     <app-navbar [ActualArea]="Area"></app-navbar>
-    <div class="inner-body-container" *ngIf="!characterLoading">
+    <div class="inner-body-container">
         <section class="container-fluid">
             <section class="row justify-content-center">
                 <div class="form-container details-form-container">
@@ -213,9 +215,6 @@
                 </div>
             </section>
         </section>
-    </div>
-    <div *ngIf="characterLoading" class="inner-body-container" style="display: flex; justify-content: center;">
-        <img src="{{loadingUrl}}" alt="loading" style="border-radius: 20px;">
     </div>
     <dozedex-spacer></dozedex-spacer>
 </div>

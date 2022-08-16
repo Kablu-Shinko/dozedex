@@ -20,11 +20,14 @@ export class CharactersListComponent implements OnInit {
   Area: string = "Personagens";
   characters: Character[] = [];
   fullList: Character[] = [];
+  loading: boolean = false;
 
   async ngOnInit(): Promise<void> {
+    this.loading = true;
     var list: Character[] = await this.characterService.GetAllCharactersMinified();
     this.fullList = list;
     this.characters = list;
+    this.loading = false;
   } 
 
   SearchCharacter(search: string){

@@ -27,6 +27,7 @@ export class UserProfileComponent implements OnInit {
   
   Area: string = "Perfil de usuário"
   loading: boolean = false;
+  btnLoading: boolean = false;
   user: User = this.userService.GetActualUser();
   profilePictureURL: string = "";
   actualPassword: string = "";
@@ -42,14 +43,17 @@ export class UserProfileComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.loading = true;
     this.profileForm.controls.Email.setValue(this.user.Email);
     this.profileForm.controls.ImageUrl.setValue(this.user.ImageUrl ?? "");
     this.profileForm.controls.KeepLogin.setValue(this.user.KeepLogin === true);
     this.profileForm.controls.Name.setValue(this.user.Name ?? "");
     this.profileForm.controls.UserName.setValue(this.user.UserName ?? "");
+    this.loading = false;
   }
 
   async onSubmit(): Promise<void> {
+    this.btnLoading = true;
     if(this.profileForm.valid){
       this.loading = true;
       var editedUser: User = {
@@ -70,7 +74,7 @@ export class UserProfileComponent implements OnInit {
     else{
       alert("Verifique os campos obrigatórios e tente novamente")
     }
-    this.loading = false;
+    this.btnLoading = false;
   }
 
   async SaveUrl(newUrl: string, actualPassword: string): Promise<string>{
