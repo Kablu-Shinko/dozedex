@@ -131,12 +131,18 @@ export class CharacterDetailsComponent implements OnInit {
     let breedName: string = '';
     let _breeds: Breed[] = this.character.Breed ?? [];
     if(_breeds.length > 0){
-      breedName += 'Nefilim (';
-      _breeds.forEach((breed: Breed) => {
-        breedName += `${breed.Name}, `;
-      });
-      breedName = breedName.substring(0, breedName.length -2);
-      breedName += ')';
+      if(_breeds.length > 1){
+
+        breedName += 'Híbrido (';
+        _breeds.forEach((breed: Breed) => {
+          breedName += `${breed.Name}, `;
+        });
+        breedName = breedName.substring(0, breedName.length -2);
+        breedName += ')';
+      }
+      else{
+        breedName = _breeds[0].Name;
+      }
     }
     else{
       breedName = "Desconhecida";
