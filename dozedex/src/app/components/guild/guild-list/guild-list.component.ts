@@ -24,7 +24,7 @@ export class GuildListComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.loading = true;
-    var list: Guild[] = await this.guildService.GetAllGuilds();
+    var list: Guild[] = await this.guildService.GetAllGuildsMinified();
 
     list.forEach((guild: Guild) => {
       if(guild.Initials !== undefined && guild.Initials.length > 0){

@@ -124,6 +124,13 @@ export class GuildService{
         }
     }
 
+    async GetAllGuildsMinified(): Promise<Guild[]>{
+        var response: any = await firstValueFrom(this.http.get(`${this.guild_API}/list`));
+        var mapped: Guild[] = await this.MapGuild(response, true); 
+
+        return mapped;
+    }
+
     async GetAllGuilds(): Promise<Guild[]>{
         var response: any = await firstValueFrom(this.http.get(`${this.guild_API}/list`));
         var mapped: Guild[] = await this.MapGuild(response); 
