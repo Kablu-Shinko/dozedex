@@ -1,4 +1,5 @@
-const API_URL: string = "https://dozedex-api.herokuapp.com";
+// const API_URL: string = "https://dozedex-api.herokuapp.com";
+const API_URL: string = "https://dozedex-api.onrender.com";
 const LOCAL_URL: string = "http://localhost:3333";
 const IMG_FROM_GOOGLEDRIVE_BASE_URL: string = "https://drive.google.com/uc?export=view&id="
 
