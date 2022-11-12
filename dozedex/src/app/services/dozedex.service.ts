@@ -28,6 +28,16 @@ export class DozedexService implements OnInit{
         this.pathsNavigated.push(this.getLastPath());
     }
 
+    async verifyStatusAPI(): Promise<boolean> { 
+        try{
+            return await firstValueFrom(this.http.get(`${this.DozedexApiURL}/app/ping`)) == 'TA FUNCIONANDO, SAI';
+        }
+        catch(error){
+            console.log(error)
+            return false;
+        }
+    } 
+
     GetLoadingImage(): string{
         return "https://gifmania.com.br/wp-content/uploads/2020/01/carregando.gif";
     }

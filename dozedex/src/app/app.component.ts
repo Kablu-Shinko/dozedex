@@ -25,10 +25,15 @@ export class AppComponent implements OnInit {
   user: User = this.userService.GetActualUser();
   toggled: boolean = this.dozedexService.GetSideNavBar();
   isLoginPage: boolean = true;
+  statusAPI: boolean = false;
 
-  ngOnInit(): void{
+  async ngOnInit(): Promise<void>{
     let validUser: boolean = this.userService.VerifyUser(this.user);
     let path: string = '';
+
+    while(!this.statusAPI){
+      this.statusAPI = await this.dozedexService.verifyStatusAPI();
+    }
 
     if(!validUser){
       path = '/login';
