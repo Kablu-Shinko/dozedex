@@ -1,11 +1,8 @@
 import { environment } from '../../environments/environments';
 import { User } from '../interfaces/user.interface'
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { interval, firstValueFrom } from 'rxjs';
-import { Auth } from '../interfaces/auth.interface';
-import { throwToolbarMixedModesError } from '@angular/material/toolbar';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 import { ImageService } from './image.service';
 
 @Injectable({
@@ -59,6 +56,30 @@ export class UserService{
         this.setImagePath(user.ImagePath);
     }
 
+    GetUser(): User{
+        var user: User;
+        var keepLogin: boolean = this.getKeepLogin();
+
+        if(keepLogin){
+            user = this.GetUserCache();
+        }
+        else{
+            user = {
+                Email: '',
+                KeepLogin: false,
+                Password: '',
+                ImagePath: '',
+                ImageUrl: '',
+                Name: '',
+                OldPassword: '',
+                Token: '',
+                UserName: ''
+            }
+        }
+
+        return user;
+    }
+
     //ok
     GetActualUser(): User{
         var user: User = {
@@ -76,11 +97,7 @@ export class UserService{
     }
 
     VerifyUser(user: User): boolean{
-        if(!(
-            user.Email.length > 0
-            && user.Token !== undefined
-            && user.Token.length > 0
-        )){
+        if(!(user.Email.length > 0 && user.Token !== undefined && user.Token.length > 0)){
             return false;
         }
 
@@ -108,12 +125,27 @@ export class UserService{
     //ok
     //#region get
 
+    private GetUserCache() : User {
+        var user: User = {
+            Email: localStorage.getItem("dozedex_user_email") ?? "",
+            KeepLogin: this.getKeepLogin(),
+            Password: '',
+            ImageUrl: localStorage.getItem("dozedex_user_userImageUrl") ?? "",
+            Name: localStorage.getItem("dozedex_user_name") ?? "",
+            UserName: localStorage.getItem("dozedex_user_username") ?? "",
+            ImagePath: localStorage.getItem("dozedex_user_userImagePath") ?? "",
+            Token: localStorage.getItem("dozedex_user_token") ?? ""
+        }
+
+        return user;
+    }
+
     private getToken(): string {
-        return localStorage.getItem("dozedex_user_token") ?? "";
+        return sessionStorage.getItem("dozedex_user_token") ?? "";
     }
 
     private getEmail(): string {
-        return localStorage.getItem("dozedex_user_email") ?? "";
+        return sessionStorage.getItem("dozedex_user_email") ?? "";
     }
 
     private getKeepLogin(): boolean {
@@ -122,7 +154,7 @@ export class UserService{
     }
 
     private getImageURL(): string {
-        var url = localStorage.getItem("dozedex_user_userImageUrl") ?? '';
+        var url = sessionStorage.getItem("dozedex_user_userImageUrl") ?? '';
         
         if(url?.length === 0){
             return "https://cdn.glitch.com/0e4d1ff3-5897-47c5-9711-d026c01539b8%2Fbddfd6e4434f42662b009295c9bab86e.gif?v=1573157191712";
@@ -147,13 +179,22 @@ export class UserService{
 
     //ok
     //#region set
-
-    private setToken(token: string | null | undefined): void {
-        localStorage.setItem("dozedex_user_token", token ?? "");
+    private configUserCache(user: User): void {
+        localStorage.setItem("dozedex_user_token", user.Token ?? "");
+        localStorage.setItem("dozedex_user_email", user.Email ?? "");
+        localStorage.setItem("dozedex_user_keepLogin", user.KeepLogin ? 'true' : 'false');
+        localStorage.setItem("dozedex_user_userImageUrl", user.ImageUrl ?? "");
+        localStorage.setItem("dozedex_user_username", user.UserName ?? "");
+        localStorage.setItem("dozedex_user_name", user.Name ?? "");
+        localStorage.setItem("dozedex_user_userImagePath", user.ImagePath ?? "");
     }
 
-    private setEmail(email: string | null | undefined) : void {
-        localStorage.setItem("dozedex_user_email", email ?? "");
+    private setToken(token: string | null | undefined): void {
+        sessionStorage.setItem("dozedex_user_token", token ?? "");
+    }
+
+    private setEmail(email: string | null | undefined): void {
+        sessionStorage.setItem("dozedex_user_email", email ?? "");
     }
 
     private setKeepLogin(keepLogin: boolean | null | undefined): void {
@@ -161,19 +202,19 @@ export class UserService{
     }
 
     private setImageUrl(imageUrl: string | null | undefined): void {
-        localStorage.setItem("dozedex_user_userImageUrl", imageUrl ?? "");
+        sessionStorage.setItem("dozedex_user_userImageUrl", imageUrl ?? "");
     }
 
     private setUserName(username: string | null | undefined): void{
-        localStorage.setItem("dozedex_user_username", username ?? "");
+        sessionStorage.setItem("dozedex_user_username", username ?? "");
     }
 
     private setName(name: string | null | undefined): void{
-        localStorage.setItem("dozedex_user_name", name ?? "");
+        sessionStorage.setItem("dozedex_user_name", name ?? "");
     }
 
     private setImagePath(path: string | null | undefined): void{
-        localStorage.setItem("dozedex_user_userImagePath", path ?? "");
+        sessionStorage.setItem("dozedex_user_userImagePath", path ?? "");
     }
 
     //#endregion set

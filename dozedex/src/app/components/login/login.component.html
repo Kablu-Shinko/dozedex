@@ -14,16 +14,7 @@
           <br>
           <mat-slide-toggle color="primary" formControlName="KeepLogin">Manter login</mat-slide-toggle>
         </div>
-
         <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [loading]="loading" [text]='"Entrar"'></app-pulsing-button>
-
-        <!-- <button *ngIf="loading" class="btn btn-primary btn-block login-pulsing-button">
-          Entrar
-        </button>
-
-        <button *ngIf="!loading" [disabled]="!loginForm.valid" type="submit" class="btn btn-primary btn-block">
-          Entrar
-        </button> -->
       </form>
     </section>
   </section>

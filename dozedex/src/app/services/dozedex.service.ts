@@ -1,12 +1,14 @@
 import { environment } from '../../environments/environments';
-import { User } from '../interfaces/user.interface'
+import { User } from '../interfaces/user.interface';
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { interval, firstValueFrom } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 import { Auth } from '../interfaces/auth.interface';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
+import { AppVersion } from '../interfaces/small-interfaces/small-interfaces';
+import DozedexAppBinary from '../../../package.json';
+
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +18,7 @@ export class DozedexService implements OnInit{
 
     private DozedexApiURL = environment.API_URL;
     private AuthApiURL = `${this.DozedexApiURL}/auth`
-    private pathsNavigated: string[] = [];
+    private pathsNavigated: string[] = []; 
 
     constructor(
         private http: HttpClient,
@@ -28,15 +30,42 @@ export class DozedexService implements OnInit{
         this.pathsNavigated.push(this.getLastPath());
     }
 
-    async verifyStatusAPI(): Promise<boolean> { 
+    async VerifyAppVersion(): Promise<AppVersion> {
+        var appVersion: AppVersion = {
+            ActualVersion: DozedexAppBinary.version,
+            ServerVersion: '',
+            IsUpdated: false
+        }; 
+
         try{
-            return await firstValueFrom(this.http.get(`${this.DozedexApiURL}/app/ping`)) == 'TA FUNCIONANDO, SAI';
+            var serverVersion : any = await firstValueFrom(this.http.post(`${this.DozedexApiURL}/app/verify-version`, { Version : appVersion.ActualVersion }))
+            appVersion.ServerVersion = serverVersion['ServerVersion']
+            appVersion.IsUpdated = serverVersion['IsUpdated']
         }
         catch(error){
-            console.log(error)
-            return false;
+            console.log(error);
+            appVersion.ServerVersion = '0.0.0';
+            appVersion.IsUpdated = true;
         }
-    } 
+        finally{
+            return appVersion;
+        }
+    }
+
+    async verifyStatusAPI(): Promise<boolean> { 
+        var ping: boolean = false;
+        
+        try{
+            ping = await firstValueFrom(this.http.get(`${this.DozedexApiURL}/app/ping`)) == 'TA FUNCIONANDO, SAI';
+        }
+        catch(error){
+            console.log(error);
+            ping = false;
+        }
+        finally{
+            return ping;
+        }
+    }
 
     GetLoadingImage(): string{
         return "https://gifmania.com.br/wp-content/uploads/2020/01/carregando.gif";

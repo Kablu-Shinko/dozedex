@@ -9,26 +9,25 @@
         </div>
     </mat-drawer>
     
-    <!-- <div class="dozedex-sidenav-content">
-        <button type="button" mat-button (click)="drawer.toggle(toogleSideNav())">
-            Toggle sidenav
-        </button>
-    </div> -->
-
     <mat-toolbar color="primary" style="overflow-x: hidden;">
         <button mat-button (click)="drawer.toggle()" class="navbar-icon simple-icon">
-        <!-- <button mat-button [matMenuTriggerFor]="menu" class="navbar-icon simple-icon"> -->
             <mat-icon>menu</mat-icon>
         </button>
-        <!-- <mat-menu #menu="matMenu">
 
-        </mat-menu> -->
         <button mat-button disabled class="navbar-icon simple-icon" style="color: white !important; overflow: hidden;">{{ActualArea}}</button>
         
         <button mat-button *ngIf="HaveAreaAction" class="navbar-icon simple-icon" style="color: white !important; overflow: hidden;" (click)="AreaAction()">{{AreaActionTitle}}</button>
         
         <span class="navbar-spacer"></span>
     
+        <button *ngIf="AppVersion.IsUpdated" mat-button class="btn btn-success" style="background-color: green;">
+            {{AppVersion.ActualVersion}}
+        </button>
+
+        <button *ngIf="!AppVersion.IsUpdated" mat-button class="btn btn-danger" style="background-color: red;">
+            {{AppVersion.ActualVersion}}
+        </button>
+
         <button mat-button *ngIf="loading" class="navbar-icon simple-icon" disabled id="navbar-refresh-button" (click)="RefreshPage()">
             <mat-icon class="pulsing-button">refresh</mat-icon>
         </button>

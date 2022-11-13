@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuOption } from '../../../interfaces/small-interfaces/small-interfaces';
+import { AppVersion, MenuOption } from '../../../interfaces/small-interfaces/small-interfaces';
 import { DozedexService } from '../../../services/dozedex.service';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../interfaces/user.interface'
@@ -27,6 +27,11 @@ export class NavbarComponent implements OnInit {
   altText: string = "imagem de perfil";
   showFiller: Boolean =  false;
   loading: Boolean = false;
+  AppVersion: AppVersion = {
+    ActualVersion: '0.0.0',
+    ServerVersion: '0.0.0',
+    IsUpdated: false
+  };
 
   menuOptions: MenuOption[] = [
     {
@@ -81,6 +86,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.dozedexService.VerifyLogin();
     this.dozedexService.addCurrentPath(this.router.url);
+    this.GetAppVersion();
   };
 
   logOut(): void{
@@ -93,6 +99,10 @@ export class NavbarComponent implements OnInit {
     this.loading = false;
     alert("Atualizado");
   };
+
+  async GetAppVersion(): Promise<void> {
+    this.AppVersion = await this.dozedexService.VerifyAppVersion();
+  }
 
   goToCharacters(): void{
     this.router.navigate(['/characters/list']);

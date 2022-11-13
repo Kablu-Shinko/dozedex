@@ -42,16 +42,21 @@ interface SubAttachment{
     Status?: boolean
 }
 
-
 interface MultiSelect{
     Title: string,
     List: MultiSelectOption[]
-  }
-  
-  interface MultiSelectOption{
+}
+
+interface MultiSelectOption{
     Title: string,
     Key: number
-  }
+}
+
+interface AppVersion {
+    ActualVersion: string,
+    ServerVersion: string,
+    IsUpdated: boolean
+}
 
 export {
     MultiSelect,
@@ -62,5 +67,6 @@ export {
     Card,
     CardOption,
     DialogData,
-    DialogFormInput
+    DialogFormInput,
+    AppVersion
 }

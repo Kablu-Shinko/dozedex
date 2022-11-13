@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { User } from './interfaces/user.interface';
 import { DozedexService } from './services/dozedex.service';
@@ -22,7 +21,7 @@ export class AppComponent implements OnInit {
   )
   {}
 
-  user: User = this.userService.GetActualUser();
+  user: User = this.userService.GetUser();
   toggled: boolean = this.dozedexService.GetSideNavBar();
   isLoginPage: boolean = true;
   statusAPI: boolean = false;
@@ -35,20 +34,18 @@ export class AppComponent implements OnInit {
       this.statusAPI = await this.dozedexService.verifyStatusAPI();
     }
 
-    if(!validUser){
-      path = '/login';
-    }
-    else if(!this.user.KeepLogin){
-      path = '/login';
-    }
-    else if(this.dozedexService.getLastPath().length > 0){
-      path = this.dozedexService.getLastPath();
+    if(validUser && this.user.KeepLogin){
+      if(this.dozedexService.getLastPath().length > 0){
+        path = this.dozedexService.getLastPath() === '/login' ? '/home' : this.dozedexService.getLastPath();
+      }
+      else{
+        path = '/home';
+      }
     }
     else{
-      path = '/home'
+      path = '/login'
     }
 
-    this.isLoginPage = path === '/login';
     this.router.navigate([path]);
   }
 
