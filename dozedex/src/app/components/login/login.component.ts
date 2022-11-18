@@ -26,14 +26,31 @@ export class LoginComponent implements OnInit {
   title = 'Login Dozedex';
   backgroundImagePath: string = this.imageService.GetFullImageURL('https://drive.google.com/file/d/1-98A51dnUZ2m7KG8ZNv_DdOXKq3NtqHe/view?usp=sharing');
 
+
   loginForm = this.formBuilder.group({
     Email: ['', [<any>Validators.required, <any>Validators.minLength(5)]],
     Password: ['', [<any>Validators.required, <any>Validators.minLength(5)]],
     KeepLogin: [false]
   });
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void{
+    this.ensureVideoPlays();
+}
+
+private ensureVideoPlays(): void{
+    const video = document.querySelector("video");
+
+    if(!video) return;
+    
+    const promise = video.play();
+    if(promise !== undefined){
+        promise.then(() => {
+        }).catch(error => {
+            video.muted = true;
+            video.play();
+        });
+    }
+}
 
   async onSubmit(){
     if(this.loginForm.valid){

@@ -1,26 +1,28 @@
-<video autoplay muted loop id="background-video">
-  <source src="../../../assets/videos/Sunset.mp4" type="video/mp4">
-</video>
+<div >
+  <video autoplay muted loop id="background-video">
+    <source src="https://github.com/Kablu-Shinko/dozedex/raw/gh-pages/assets/videos/Sunset.mp4" type="video/mp4">
+  </video>
 
-<div class="LoginBody" style="background-image: url('{{backgroundImagePath}}');">
-  <section class="container-fluid">
-  <section class="row justify-content-center">
-    <section class="col-12">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
-        <div class="form-group">
-          <h4 class="text-center font-weight-bold"> {{title}} </h4>
-          <label for="Email">Seu Email</label>
-          <input formControlName="Email" type="email" class="form-control" id="InputEmail1" placeholder="Email">
-        </div>
-        <div class="form-group">
-          <label for="Password">Sua senha</label>
-          <input formControlName="Password" type="password" class="form-control" id="InputPassword1" placeholder="Senha">
-          <br>
-          <mat-slide-toggle color="primary" formControlName="KeepLogin">Manter login</mat-slide-toggle>
-        </div>
-        <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [loading]="loading" [text]='"Entrar"'></app-pulsing-button>
-      </form>
+  <div class="LoginBody">
+    <section class="container-fluid">
+    <section class="row justify-content-center">
+      <section class="col-12">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
+          <div class="form-group">
+            <h4 class="text-center font-weight-bold"> {{title}} </h4>
+            <label for="Email">Seu Email</label>
+            <input formControlName="Email" type="email" class="form-control" id="InputEmail1" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="Password">Sua senha</label>
+            <input formControlName="Password" type="password" class="form-control" id="InputPassword1" placeholder="Senha">
+            <br>
+            <mat-slide-toggle color="primary" formControlName="KeepLogin">Manter login</mat-slide-toggle>
+          </div>
+          <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [loading]="loading" [text]='"Entrar"'></app-pulsing-button>
+        </form>
+      </section>
     </section>
   </section>
-</section>
+  </div>
 </div>
