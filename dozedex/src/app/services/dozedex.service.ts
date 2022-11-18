@@ -30,6 +30,10 @@ export class DozedexService implements OnInit{
         this.pathsNavigated.push(this.getLastPath());
     }
 
+    public GetLocalVersion(): string {
+        return DozedexAppBinary.version;
+    }
+
     async VerifyAppVersion(): Promise<AppVersion> {
         var appVersion: AppVersion = {
             ActualVersion: DozedexAppBinary.version,
@@ -86,13 +90,13 @@ export class DozedexService implements OnInit{
     }
 
     VerifyLogin(): void{
-        if(!(this.userService.VerifyUser(this.userService.GetActualUser()))){
+        if(!(this.userService.VerifyUser(this.userService.GetUser()))){
             this.router.navigate(['/login']);
         }
     }
 
     async RefreshPage(path: string): Promise<void>{
-        await this.userService.RefreshData();
+        // await this.userService.Re();
         await this.router.navigateByUrl('/home', {skipLocationChange: true});
         await this.router.navigate([path]);
     }
@@ -113,8 +117,8 @@ export class DozedexService implements OnInit{
     }
 
     logOut(): void {
-        this.userService.Reset();
-        this.systemCacheReset();
+        this.userService.ResetUser(false); //removes sessioned user
+        this.userService.ResetUser(true); //removes cached user
         this.router.navigate(['/login']);
     }
 
@@ -142,8 +146,8 @@ export class DozedexService implements OnInit{
         localStorage.setItem("dozedex_system_lastPath", path ?? "");
     }
 
-    systemCacheReset(){
-        this.setLastPath("");
+    resetLastPath(){
+        localStorage.removeItem("dozedex_system_lastPath");
     }
 
     //#endregion system features

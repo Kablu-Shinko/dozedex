@@ -1,8 +1,19 @@
-.loading-screen{
-    display: flex; 
-    justify-content: center; 
-    padding-top: 33%; 
-    padding-bottom: 33%;
-    width: 100px;
+.loading-screen {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-screen-child {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px;
+}
+
+.loadingAPI{
     height: 100px;
+    width: 200px;
 }

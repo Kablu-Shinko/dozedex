@@ -23,14 +23,14 @@ export class NavbarComponent implements OnInit {
   @Input() HaveAreaAction: boolean = false;
   @Input() AreaActionTitle: string = '';
   
-  user: User = this.userService.GetActualUser();
+  user: User = this.userService.GetUser();
   altText: string = "imagem de perfil";
   showFiller: Boolean =  false;
   loading: Boolean = false;
   AppVersion: AppVersion = {
-    ActualVersion: '0.0.0',
+    ActualVersion: this.dozedexService.GetLocalVersion(),
     ServerVersion: '0.0.0',
-    IsUpdated: false
+    IsUpdated: true
   };
 
   menuOptions: MenuOption[] = [

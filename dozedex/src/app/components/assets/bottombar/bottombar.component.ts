@@ -15,7 +15,7 @@ export class BottombarComponent implements OnInit {
     private imageService: ImageService
   ) { }
 
-  user: User = this.userService.GetActualUser();
+  user: User = this.userService.GetUser();
   friend: User = {Email:"", KeepLogin:false, Password: ""}
   i:number = 0;
 
@@ -28,7 +28,7 @@ export class BottombarComponent implements OnInit {
   }
 
   async getFriend(){
-    this.friend = await this.userService.GetUserByEmail(this.verifyAccount());
+    // this.friend = await this.userService.GetUserByEmail(this.verifyAccount());
     this.friend.ImagePath = this.imageService.GetFullImageURL(this.friend.ImageUrl ?? "");
   }
 

@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class ImageService{
-    private NotFoundImageURL = "https://cdn.glitch.com/0e4d1ff3-5897-47c5-9711-d026c01539b8%2Fbddfd6e4434f42662b009295c9bab86e.gif?v=1573157191712"; 
+    public NotFoundImageURL: string = "https://cdn.glitch.com/0e4d1ff3-5897-47c5-9711-d026c01539b8%2Fbddfd6e4434f42662b009295c9bab86e.gif?v=1573157191712"; 
 
     ValidImage(url: string): number{
         if(url.indexOf("/d/") !== -1 && url.indexOf("/view") !== -1){

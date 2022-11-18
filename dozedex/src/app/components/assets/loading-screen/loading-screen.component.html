@@ -1,12 +1,12 @@
 <div class="body-container" style="margin-bottom: 5vh;">
     <app-navbar [ActualArea]="Area"></app-navbar>
     <div style="display: flex; justify-content: center;">
-        <div class="inner-body-container inner-body-with-color" style="width: 25%;">
-            <div *ngIf="!HasProgressStatus" class="loading-screen">
+        <div class="inner-body-container inner-body-with-color loading-screen">
+            <div *ngIf="!HasProgressStatus" class="loading-screen-child">
                 <mat-spinner></mat-spinner>
             </div>
 
-            <div *ngIf="HasProgressStatus" class="loading-screen">
+            <div *ngIf="HasProgressStatus" class="loading-screen-child">
                 <mat-progress-spinner
                 class="example-margin"
                 [color]="Color"

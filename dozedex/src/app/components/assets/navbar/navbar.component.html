@@ -20,21 +20,21 @@
         
         <span class="navbar-spacer"></span>
     
-        <button *ngIf="AppVersion.IsUpdated" mat-button class="btn btn-success" style="background-color: green;">
+        <button *ngIf="AppVersion.IsUpdated" mat-button class="btn btn-success" style="background-color: green;" title="Atualizado">
             {{AppVersion.ActualVersion}}
         </button>
 
-        <button *ngIf="!AppVersion.IsUpdated" mat-button class="btn btn-danger" style="background-color: red;">
+        <button *ngIf="!AppVersion.IsUpdated" mat-button class="btn btn-danger" style="background-color: red;" title="Desatualizado">
             {{AppVersion.ActualVersion}}
         </button>
 
-        <button mat-button *ngIf="loading" class="navbar-icon simple-icon" disabled id="navbar-refresh-button" (click)="RefreshPage()">
+        <!-- <button mat-button *ngIf="loading" class="navbar-icon simple-icon" disabled id="navbar-refresh-button" (click)="RefreshPage()">
             <mat-icon class="pulsing-button">refresh</mat-icon>
         </button>
     
         <button mat-button *ngIf="!loading" class="navbar-icon simple-icon" id="navbar-refresh-button" (click)="RefreshPage()">
-            <mat-icon>refresh</mat-icon>
-        </button>
+            <mat-icon color="white">refresh</mat-icon>
+        </button> -->
         
         <button mat-button [matMenuTriggerFor]="profile" class="navbar-icon">
             <img src="{{user.ImagePath}}" alt="{{altText}}" height="25vh" width="25vh" class="navbar-profile-icon">

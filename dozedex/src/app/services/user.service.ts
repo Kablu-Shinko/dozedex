@@ -18,8 +18,8 @@ export class UserService{
         private imageService: ImageService    
     ) {}
     
-    //ok
-    async GetUserByEmail(email: string): Promise<User>{
+    //TODO: adicionar verificação de token
+    private async GetUserByEmail(email: string): Promise<User>{
         var objeto: {Email: string} = {Email: email};
         var response: any = await firstValueFrom(this.http.post(`${this.API_UserRoute}/getUserByEmail`, objeto));
         var result: User = {
@@ -47,177 +47,138 @@ export class UserService{
         user.KeepLogin = keepLogin;  
         user.ImagePath = this.imageService.GetFullImageURL(user.ImageUrl ?? "");
         
-        this.setEmail(user.Email);
-        this.setImageUrl(user.ImageUrl);
-        this.setKeepLogin(user.KeepLogin);
-        this.setName(user.Name);
-        this.setToken(user.Token);
-        this.setUserName(user.UserName);
-        this.setImagePath(user.ImagePath);
+		this.SetUser(user, user.KeepLogin);
     }
 
-    GetUser(): User{
-        var user: User;
-        var keepLogin: boolean = this.getKeepLogin();
+	public GetUser(cached: boolean = false): User{
+		let email: string;		
+		let imagePath: string; 	
+		let keepLogin: boolean; 	
+		let imageUrl: string;	
+		let name: string; 		
+		let token: string; 		
+		let userName: string; 	
 
-        if(keepLogin){
-            user = this.GetUserCache();
-        }
-        else{
-            user = {
-                Email: '',
-                KeepLogin: false,
-                Password: '',
-                ImagePath: '',
-                ImageUrl: '',
-                Name: '',
-                OldPassword: '',
-                Token: '',
-                UserName: ''
-            }
-        }
+		if(cached){
+			email = 	localStorage.getItem("dozedex_user_email") ?? "";
+			imagePath = localStorage.getItem("dozedex_user_userImagePath") ?? ""
+			keepLogin = (localStorage.getItem("dozedex_user_keepLogin") ?? '') === 'true';
+			imageUrl = 	(localStorage.getItem("dozedex_user_userImageUrl") ?? '').length > 0 ? localStorage.getItem("dozedex_user_userImageUrl") ?? '' : this.imageService.NotFoundImageURL;
+			name = 		localStorage.getItem("dozedex_user_name") ?? "";
+			token = 	localStorage.getItem("dozedex_user_token") ?? "";
+			userName = 	localStorage.getItem("dozedex_user_username") ?? "";
+		}
+		else{
+			email = 	sessionStorage.getItem("dozedex_user_email") ?? "";
+			imagePath = sessionStorage.getItem("dozedex_user_userImagePath") ?? ""
+			keepLogin = (sessionStorage.getItem("dozedex_user_keepLogin") ?? '') === 'true';
+			imageUrl = 	(sessionStorage.getItem("dozedex_user_userImageUrl") ?? '').length > 0 ? sessionStorage.getItem("dozedex_user_userImageUrl") ?? '' : this.imageService.NotFoundImageURL;
+			name = 		sessionStorage.getItem("dozedex_user_name") ?? "";
+			token = 	sessionStorage.getItem("dozedex_user_token") ?? "";
+			userName = 	sessionStorage.getItem("dozedex_user_username") ?? "";
+		}
 
-        return user;
-    }
-
-    //ok
-    GetActualUser(): User{
-        var user: User = {
-            Email: this.getEmail(),
-            KeepLogin: this.getKeepLogin(),
-            Password: "",
-            ImageUrl: this.getImageURL(),
-            ImagePath: this.getImagePath(),
-            Name: this.getName(),
-            Token: this.getToken(),
-            UserName: this.getUserName()
-        };
-
-        return user;
-    }
-
-    VerifyUser(user: User): boolean{
-        if(!(user.Email.length > 0 && user.Token !== undefined && user.Token.length > 0)){
-            return false;
-        }
-
-        return true;
-    }
-
-    //ok
-    Reset(){
-        this.setImagePath('');
-        this.setEmail('');
-        this.setToken('');
-        this.setImageUrl('');
-        this.setKeepLogin(false);
-        this.setName('');
-        this.setUserName('');
-    }
-
-    //ok
-    async RefreshData(): Promise<void>{
-        var user: User = this.GetActualUser();
-        this.Reset();
-        await this.ConfigDefault(user);
-    }
-
-    //ok
-    //#region get
-
-    private GetUserCache() : User {
-        var user: User = {
-            Email: localStorage.getItem("dozedex_user_email") ?? "",
-            KeepLogin: this.getKeepLogin(),
+        return {
+            Email: email,
             Password: '',
-            ImageUrl: localStorage.getItem("dozedex_user_userImageUrl") ?? "",
-            Name: localStorage.getItem("dozedex_user_name") ?? "",
-            UserName: localStorage.getItem("dozedex_user_username") ?? "",
-            ImagePath: localStorage.getItem("dozedex_user_userImagePath") ?? "",
-            Token: localStorage.getItem("dozedex_user_token") ?? ""
+            ImagePath: imagePath,
+            KeepLogin: keepLogin,
+			ImageUrl: imageUrl,
+			Name: name,
+			OldPassword: '',
+			Token: token,
+			UserName: userName
         }
+	}
 
-        return user;
-    }
+	public SetUser(user: User, cached: boolean = false): void{
+		if(cached){
+			localStorage.setItem("dozedex_user_email", user.Email ?? "");
+			localStorage.setItem("dozedex_user_userImagePath", user.ImagePath ?? "");
+			localStorage.setItem("dozedex_user_keepLogin", user.KeepLogin ? 'true' : 'false');
+			localStorage.setItem("dozedex_user_userImageUrl", user.ImageUrl ?? "");
+			localStorage.setItem("dozedex_user_name", user.Name ?? "");
+			localStorage.setItem("dozedex_user_token", user.Token ?? "");
+			localStorage.setItem("dozedex_user_username", user.UserName ?? "");
+		}
 
-    private getToken(): string {
-        return sessionStorage.getItem("dozedex_user_token") ?? "";
-    }
+		sessionStorage.setItem("dozedex_user_email", user.Email ?? "");
+		sessionStorage.setItem("dozedex_user_userImagePath", user.ImagePath ?? "");
+		sessionStorage.setItem("dozedex_user_keepLogin", user.KeepLogin ? 'true' : 'false');
+		sessionStorage.setItem("dozedex_user_userImageUrl", user.ImageUrl ?? "");
+		sessionStorage.setItem("dozedex_user_name", user.Name ?? "");
+		sessionStorage.setItem("dozedex_user_token", user.Token ?? "");
+		sessionStorage.setItem("dozedex_user_username", user.UserName ?? "");
+	}
 
-    private getEmail(): string {
-        return sessionStorage.getItem("dozedex_user_email") ?? "";
-    }
+	public ResetUser(cached: boolean): void{
+		if(cached){
+			localStorage.removeItem("dozedex_user_email");
+			localStorage.removeItem("dozedex_user_userImagePath");
+			localStorage.removeItem("dozedex_user_keepLogin");
+			localStorage.removeItem("dozedex_user_userImageUrl");
+			localStorage.removeItem("dozedex_user_name");
+			localStorage.removeItem("dozedex_user_token");
+			localStorage.removeItem("dozedex_user_username");
+		}
+		else{
+			sessionStorage.removeItem("dozedex_user_email");
+			sessionStorage.removeItem("dozedex_user_userImagePath");
+			sessionStorage.removeItem("dozedex_user_keepLogin");
+			sessionStorage.removeItem("dozedex_user_userImageUrl");
+			sessionStorage.removeItem("dozedex_user_name");
+			sessionStorage.removeItem("dozedex_user_token");
+			sessionStorage.removeItem("dozedex_user_username");
+		}
+	}
 
-    private getKeepLogin(): boolean {
-        var keepLogin: string = localStorage.getItem("dozedex_user_keepLogin") ?? '';
-        return keepLogin.length > 0 ? keepLogin === 'true' : false;
-    }
+	private setKeepLogin(keepLogin: boolean): void{
+		localStorage.setItem("dozedex_user_keepLogin", keepLogin ? 'true' : 'false');
+		sessionStorage.setItem("dozedex_user_keepLogin", keepLogin ? 'true' : 'false');
+	}
 
-    private getImageURL(): string {
-        var url = sessionStorage.getItem("dozedex_user_userImageUrl") ?? '';
-        
-        if(url?.length === 0){
-            return "https://cdn.glitch.com/0e4d1ff3-5897-47c5-9711-d026c01539b8%2Fbddfd6e4434f42662b009295c9bab86e.gif?v=1573157191712";
-        }
-        
-        return url;
-    }
+	public VerifyUser(user: User): boolean {
+		if(user === undefined){
+			return false;
+		}
 
-    private getName(): string {
-        return localStorage.getItem("dozedex_user_name") ?? "";
-    }
+		if(user.Email === undefined || user.Email.length === 0){
+			return false;
+		}
 
-    private getUserName(): string {
-        return localStorage.getItem("dozedex_user_username") ?? "";
-    }
+		if(user.ImagePath === undefined || user.ImagePath.length === 0){
+			return false;
+		}
 
-    private getImagePath(): string {
-        return localStorage.getItem("dozedex_user_userImagePath") ?? "";
-    }
+		if(user.ImageUrl === undefined || user.ImageUrl.length === 0){
+			return false;
+		}
 
-    //#endregion get
+		if(user.KeepLogin === undefined){
+			return false;
+		}
 
-    //ok
-    //#region set
-    private configUserCache(user: User): void {
-        localStorage.setItem("dozedex_user_token", user.Token ?? "");
-        localStorage.setItem("dozedex_user_email", user.Email ?? "");
-        localStorage.setItem("dozedex_user_keepLogin", user.KeepLogin ? 'true' : 'false');
-        localStorage.setItem("dozedex_user_userImageUrl", user.ImageUrl ?? "");
-        localStorage.setItem("dozedex_user_username", user.UserName ?? "");
-        localStorage.setItem("dozedex_user_name", user.Name ?? "");
-        localStorage.setItem("dozedex_user_userImagePath", user.ImagePath ?? "");
-    }
+		if(user.Name === undefined || user.Name.length === 0){
+			return false;
+		}
 
-    private setToken(token: string | null | undefined): void {
-        sessionStorage.setItem("dozedex_user_token", token ?? "");
-    }
+		if(user.UserName === undefined || user.UserName.length === 0){
+			return false;
+		}
 
-    private setEmail(email: string | null | undefined): void {
-        sessionStorage.setItem("dozedex_user_email", email ?? "");
-    }
+		if(user.Token === undefined || user.Token.length === 0){
+			return false;
+		}
 
-    private setKeepLogin(keepLogin: boolean | null | undefined): void {
-        localStorage.setItem("dozedex_user_keepLogin", keepLogin ? 'true' : 'false');
-    }
+		return true;
+	}
 
-    private setImageUrl(imageUrl: string | null | undefined): void {
-        sessionStorage.setItem("dozedex_user_userImageUrl", imageUrl ?? "");
-    }
-
-    private setUserName(username: string | null | undefined): void{
-        sessionStorage.setItem("dozedex_user_username", username ?? "");
-    }
-
-    private setName(name: string | null | undefined): void{
-        sessionStorage.setItem("dozedex_user_name", name ?? "");
-    }
-
-    private setImagePath(path: string | null | undefined): void{
-        sessionStorage.setItem("dozedex_user_userImagePath", path ?? "");
-    }
-
-    //#endregion set
+    // desabilitado temporariamente
+    // async RefreshData(): Promise<void>{
+    //     var user: User = this.getUser();
+    //     this.resetUser();
+    //     await this.ConfigDefault(user);
+    // }
 
     async UpdateUser(user: User): Promise<string>{
         try{
@@ -243,6 +204,7 @@ export class UserService{
                 ImageUrl: user.ImageUrl,
                 Name: user.Name
             }));
+
             return "Dados Atualizados!";
         }
         catch(ex: any){

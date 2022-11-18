@@ -28,7 +28,7 @@ export class UserProfileComponent implements OnInit {
   Area: string = "Perfil de usuário"
   loading: boolean = false;
   btnLoading: boolean = false;
-  user: User = this.userService.GetActualUser();
+  user: User = this.userService.GetUser();
   profilePictureURL: string = "";
   actualPassword: string = "";
 
