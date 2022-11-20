@@ -5,7 +5,7 @@ import { User } from 'src/app/interfaces/user.interface';
 import { DozedexService } from 'src/app/services/dozedex.service';
 import { ImageService } from 'src/app/services/image.service';
 import { UserService } from 'src/app/services/user.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA} from '@angular/material/legacy-dialog';
 import { DialogComponent } from '../../assets/dialog/dialog.component';
 import { DialogData } from 'src/app/interfaces/small-interfaces/small-interfaces';
 

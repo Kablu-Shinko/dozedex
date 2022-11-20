@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DozedexService } from 'src/app/services/dozedex.service';
 import { ImageService } from 'src/app/services/image.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { DialogComponent } from '../../assets/dialog/dialog.component';
 import { DialogData } from 'src/app/interfaces/small-interfaces/small-interfaces';
 import { ItemService } from 'src/app/services/item.service';
