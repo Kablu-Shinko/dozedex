@@ -1,0 +1,31 @@
+<app-loading-screen *ngIf="loading"></app-loading-screen>
+
+<div class="body-container" *ngIf="!loading">
+<app-navbar [ActualArea]="Area"></app-navbar>
+    <div class="inner-body-container">
+        <section class="container-fluid">
+            <section class="row justify-content-center">
+                <form [formGroup]="breedForm" (ngSubmit)="onSubmit()" class="form-container">
+                    <div class="create-action-image-container">
+                        <img src="{{breed.ImagePath}}" class="create-action-image-picture" (click)="openDialog()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="Name">Nome da raça</label>
+                        <input formControlName="Name" type="text" class="form-control" id="InputName" placeholder="Nome da raça">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Description"></label>
+                        <textarea formControlName="Description" class="form-control" id="InputDescription" placeholder="Descrição da raça" style="min-height: 200px;"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [text]='"Salvar alterações"' [loading]="btnloading"></app-pulsing-button>
+                    </div>
+                </form>
+            </section>
+        </section>
+    </div>
+    <dozedex-spacer></dozedex-spacer>
+</div>

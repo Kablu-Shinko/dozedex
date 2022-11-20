@@ -1,0 +1,29 @@
+.LoginBody{
+    background: #383a3d;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    padding-top: 30vh;
+    height: 100vh;
+  }
+
+form{
+  background: rgb(255, 255, 255);
+}
+
+.form-container{
+  border-radius: 10px;
+  padding: 30px;
+  max-width: 400px;
+  max-height: 450px;
+  margin: auto;
+}
+
+#background-video{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+

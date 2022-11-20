@@ -1,0 +1,53 @@
+<mat-drawer-container>
+    <mat-drawer #drawer class="dozedex-sidenav" mode="side">
+        <br>
+        <h2 style="text-align: center; margin-top: -5px;">Menu</h2>
+        <mat-divider></mat-divider>
+        <br>
+        <div *ngFor="let option of menuOptions">
+            <button mat-menu-item (click)="option.Function()" style="color: white;">{{option.Title}}</button>
+        </div>
+    </mat-drawer>
+    
+    <mat-toolbar color="primary" style="overflow-x: hidden;">
+        <button mat-button (click)="drawer.toggle()" class="navbar-icon simple-icon">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        <button mat-button disabled class="navbar-icon simple-icon" style="color: white !important; overflow: hidden;">{{ActualArea}}</button>
+        
+        <button mat-button *ngIf="HaveAreaAction" class="navbar-icon simple-icon" style="color: white !important; overflow: hidden;" (click)="AreaAction()">{{AreaActionTitle}}</button>
+        
+        <span class="navbar-spacer"></span>
+    
+        <button *ngIf="AppVersion.IsUpdated" mat-button class="btn btn-success" style="background-color: green;" title="Atualizado">
+            {{AppVersion.ActualVersion}}
+        </button>
+
+        <button *ngIf="!AppVersion.IsUpdated" mat-button class="btn btn-danger" style="background-color: red;" title="Desatualizado">
+            {{AppVersion.ActualVersion}}
+        </button>
+
+        <!-- <button mat-button *ngIf="loading" class="navbar-icon simple-icon" disabled id="navbar-refresh-button" (click)="RefreshPage()">
+            <mat-icon class="pulsing-button">refresh</mat-icon>
+        </button>
+    
+        <button mat-button *ngIf="!loading" class="navbar-icon simple-icon" id="navbar-refresh-button" (click)="RefreshPage()">
+            <mat-icon color="white">refresh</mat-icon>
+        </button> -->
+        
+        <button mat-button [matMenuTriggerFor]="profile" class="navbar-icon">
+            <img src="{{user.ImagePath}}" alt="{{altText}}" height="25vh" width="25vh" class="navbar-profile-icon">
+        </button>
+        <mat-menu #profile="matMenu">
+            <div *ngFor="let option of profileOptions">
+                <button mat-menu-item (click)="option.Function()">{{option.Title}}</button>
+            </div>
+        </mat-menu>
+    
+        <button class="navbar-icon">
+        </button>
+    </mat-toolbar>
+</mat-drawer-container>
+
+

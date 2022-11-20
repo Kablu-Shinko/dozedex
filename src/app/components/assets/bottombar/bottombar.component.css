@@ -1,0 +1,11 @@
+.bottombar{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding-right: 50px; 
+    padding-bottom: 20px;
+}
+
+.div-clicavel{
+    cursor: pointer;
+}

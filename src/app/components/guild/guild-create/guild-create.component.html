@@ -1,0 +1,66 @@
+<app-loading-screen *ngIf="loading"></app-loading-screen>
+
+<div *ngIf="!loading" class="body-container">
+    <app-navbar [ActualArea]="Area"></app-navbar>
+        <div class="inner-body-container">
+            <section class="container-fluid">
+                <section class="row justify-content-center">
+                    <form [formGroup]="guildForm" (ngSubmit)="onSubmit()" class="form-container">
+                        <div class="create-action-image-container">
+                            <img src="{{guild.ImagePath}}" class="create-action-image-picture" (click)="openDialog()">
+                        </div>
+
+                        <div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between;">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Nome</mat-label>
+                                <input matInput autocomplete="off" placeholder="Nome do grupo/guilda" type="text" formControlName="Name">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>Sigla</mat-label>
+                                <input matInput autocomplete="off" placeholder="Sigla do grupo/guilda" type="text" formControlName="Initials">
+                            </mat-form-field>
+
+                            <app-multi-select-input 
+                                [multiSelectForm]="characterKeys" 
+                                [multiSelect]="characterMultiSelect" 
+                                [selectedValues]="guild.CharacterKeys ?? []">
+                                <!-- Personagens -->
+                            </app-multi-select-input>
+                        </div>
+
+                        <mat-accordion>
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <b class="create-character-information-title">Descrição</b>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <mat-form-field appearance="fill" style="width: 100%;">
+                                    <mat-label>Descrição</mat-label>
+                                    <textarea matInput placeholder="Pessoal gente fina demais..." style="min-height: 200px;" formControlName="ShortDescription"></textarea>
+                                </mat-form-field>
+                            </mat-expansion-panel>
+
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <b class="create-character-information-title">História</b>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <mat-form-field appearance="fill" style="width: 100%;">
+                                    <mat-label>História</mat-label>
+                                    <textarea matInput placeholder="Surgiu em meados dos anos..." style="min-height: 200px;" formControlName="LongDescription"></textarea>
+                                </mat-form-field>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                        <br>
+                        <div class="form-group">
+                            <app-pulsing-button [pulsingButtonClass]='"pulsing-button-blue"' [text]='"Salvar alterações"' [loading]="btnLoading"></app-pulsing-button>
+                        </div>
+                    </form>
+                </section>
+            </section>
+        </div>
+        <dozedex-spacer></dozedex-spacer>
+    </div>
