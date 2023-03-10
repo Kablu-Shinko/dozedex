@@ -38,17 +38,17 @@ export class AppComponent implements OnInit {
 	}
 
 	private getPath(): string{
-		let validUser: boolean = this.userService.VerifyUser(this.user);
+        let user = this.userService.GetUser()
+		let validUser: boolean = this.userService.VerifyUser(user);
 
 		if(!validUser){
-			this.user = this.userService.GetUser(true);
-			validUser = this.userService.VerifyUser(this.user);
+			user = this.userService.GetUser(true);
+			validUser = this.userService.VerifyUser(user);
 
-			if((!validUser) || (!this.user.KeepLogin)){
+			if((!validUser) || (!user.KeepLogin)){
 				return '/login';
 			}
 		}
-
 		//in this part, session user is valid or cached user is login keeped
 		
 		let lastPath: string = this.dozedexService.getLastPath();
@@ -56,6 +56,8 @@ export class AppComponent implements OnInit {
 		if(lastPath.length === 0){
 			return '/login';
 		}
+
+		this.userService.SetUser(user, false);
 
 		return lastPath;
 	}
