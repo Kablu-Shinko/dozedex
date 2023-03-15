@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1668744971642,
+  "timestamp": 1678842769065,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -13,11 +13,11 @@
       "urls": [
         "./favicon.ico",
         "./index.html",
-        "./main.a8539d1f9d21862f.js",
+        "./main.8b956075b4125544.js",
         "./manifest.webmanifest",
         "./polyfills.aa572aabee44c857.js",
         "./runtime.7f2a1851522ffb61.js",
-        "./styles.62387e2545faee6a.css"
+        "./styles.e7163a5f31617095.css"
       ],
       "patterns": []
     },
@@ -56,12 +56,12 @@
     "./assets/icons/icon-96x96.png": "58075ee7c38b2d229fba77a58643ae981a71e89c",
     "./assets/videos/Sunset.mp4": "6b60f2db4b9294dd3b72f3c4938a8f58fe75f069",
     "./favicon.ico": "02cfb373bdc6f7761f0e0370591f8df60b15fc70",
-    "./index.html": "53a051a55cfa201f06bd3b500a8d6bbab56d9023",
-    "./main.a8539d1f9d21862f.js": "f7ce83e751f2d33d1452d92fe2adc4309f80ad1b",
+    "./index.html": "6e138746d3dee78b948dded75b3f2073a64f0e44",
+    "./main.8b956075b4125544.js": "029992ada14c0027fc0a119a416bdf6236c0b86f",
     "./manifest.webmanifest": "6247b94c7cd3d53df2f46bda10e18e43de8af8aa",
     "./polyfills.aa572aabee44c857.js": "c16dcb22db91d3cd9f2ef788f2db2d104fcd7714",
     "./runtime.7f2a1851522ffb61.js": "5f007732a6f6ff42a6c015be7e3c434f553da5b0",
-    "./styles.62387e2545faee6a.css": "4d27584ee2ef1f964ea1dc8badc3299f8c23737c"
+    "./styles.e7163a5f31617095.css": "4f5a00f6976fb5f5d06187eddb6e26fd0c04b52d"
   },
   "navigationUrls": [
     {
