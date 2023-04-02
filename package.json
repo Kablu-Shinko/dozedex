@@ -1,6 +1,6 @@
 {
   "name": "dozedex",
-  "version": "1.0.3A",
+  "version": "1.0.3B",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
