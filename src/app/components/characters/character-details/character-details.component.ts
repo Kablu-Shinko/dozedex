@@ -73,7 +73,12 @@ export class CharacterDetailsComponent implements OnInit {
     Status: false
   };
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
+    this.LoadPage();
+  }
+
+  async LoadPage(): Promise<void> {
+    this.loading = true;
     this.Area = "";
     this.loading = true;
     this.Key = this.characterService.GetCharacterKey();
@@ -99,7 +104,7 @@ export class CharacterDetailsComponent implements OnInit {
   GoToCharacterDetails(key: number | undefined): void{
     this.SelectItem();
     this.characterService.SetCharacterKey(key ?? 0);
-    this.router.navigate(['character/details']);
+    window.location.reload();
   }
 
   GoToSkillDetails(key: number | undefined): void{

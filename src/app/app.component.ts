@@ -28,15 +28,9 @@ export class AppComponent implements OnInit {
 	statusAPI: boolean = false;
 
 	async ngOnInit(): Promise<void>{
-		while(!this.statusAPI){
-			this.statusAPI = await this.dozedexService.verifyStatusAPI();
-		}
+		while(!this.statusAPI) this.statusAPI = await this.dozedexService.verifyStatusAPI();
 
 		let path = this.getPath();
-
-		if(path !== '/login') {
-			this.audioService.LoginSuccess();
-		}
 
 		this.router.navigate([path]);
 	}
@@ -53,17 +47,13 @@ export class AppComponent implements OnInit {
 			user = this.userService.GetUser(true);
 			validUser = this.userService.VerifyUser(user);
 
-			if((!validUser) || (!user.KeepLogin)){
-				return '/login';
-			}
+			if((!validUser) || (!user.KeepLogin)) return '/login';
 		}
 		//in this part, session user is valid or cached user is login keeped
 		
 		let lastPath: string = this.dozedexService.getLastPath();
 
-		if(lastPath.length === 0){
-			return '/login';
-		}
+		if(lastPath.length === 0) return '/login';
 
 		this.userService.SetUser(user, false);
 		this
