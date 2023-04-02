@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1680424364354,
+  "timestamp": 1680427164865,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "./favicon.ico",
         "./index.html",
-        "./main.471952588f4f1b6d.js",
+        "./main.8832d4b59914e731.js",
         "./manifest.webmanifest",
         "./polyfills.aa572aabee44c857.js",
         "./runtime.7f2a1851522ffb61.js",
@@ -64,8 +64,8 @@
     "./assets/songs/turned-on/turned-on.mp3": "50ab1e6ad6691747bcc985949065a2485c477395",
     "./assets/videos/Sunset.mp4": "6b60f2db4b9294dd3b72f3c4938a8f58fe75f069",
     "./favicon.ico": "02cfb373bdc6f7761f0e0370591f8df60b15fc70",
-    "./index.html": "b4a276fe21ab4af2528fd5da8af003b27ea63f10",
-    "./main.471952588f4f1b6d.js": "735a1a86f3dc5da2c6d2c50abd957df709d0875f",
+    "./index.html": "152b45f52119d81964dec37a44e1fa52b0aeb671",
+    "./main.8832d4b59914e731.js": "740af1c66bfea76f3312db617853b17b71dd3f05",
     "./manifest.webmanifest": "6247b94c7cd3d53df2f46bda10e18e43de8af8aa",
     "./polyfills.aa572aabee44c857.js": "c16dcb22db91d3cd9f2ef788f2db2d104fcd7714",
     "./runtime.7f2a1851522ffb61.js": "5f007732a6f6ff42a6c015be7e3c434f553da5b0",
