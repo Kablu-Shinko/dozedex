@@ -108,7 +108,7 @@
                                 <div class="card-container">
                                     <div *ngIf="haveParents" class="flex-gap flex-gap-justify-center">
                                         <div *ngFor="let character of character.Parents">
-                                            <mat-card class="card-container-body" style="max-height: 300px !important;">
+                                            <mat-card class="card-container-body" style="max-height: 300px !important;" (mouseenter)="ChangeItem()">
                                                 <mat-card-header class="card-container-title">
                                                     <mat-card-title class="card-title" title="{{character.Name}}">{{character.Name}}</mat-card-title>
                                                 </mat-card-header>

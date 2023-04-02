@@ -1,6 +1,6 @@
 {
   "name": "dozedex",
-  "version": "1.0.2B",
+  "version": "1.0.3A",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
     "@angular/service-worker": "^15.0.0",
+    "ngx-toastr": "^16.1.0",
     "nodemon": "^2.0.20",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

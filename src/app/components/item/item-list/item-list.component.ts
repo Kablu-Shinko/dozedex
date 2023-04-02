@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Item } from 'src/app/interfaces/item.interface';
+import { AudioService } from 'src/app/services/audio.service';
 import { DozedexService } from 'src/app/services/dozedex.service';
 import { ItemService } from 'src/app/services/item.service';
 
@@ -14,7 +15,8 @@ export class ItemListComponent implements OnInit {
   constructor(
     private itemService: ItemService,
     private router: Router,
-    private dozedexService: DozedexService
+    private dozedexService: DozedexService,
+    private audioService: AudioService
   ) { }
 
   Area: string = "Itens";
@@ -43,23 +45,35 @@ export class ItemListComponent implements OnInit {
   }
   
   GoToEdit(key: number | undefined): void{
+    this.SelectItem();
     this.itemService.SetItemKey(key ?? 0);
     this.router.navigate(['item/edit']);
   }
 
   GoToDetails(key: number | undefined): void{
+    this.SelectItem();
     this.itemService.SetItemKey(key ?? 0);
     this.router.navigate(['item/details']);
   }
 
   AddNew(){
+    this.SelectItem();
     this.itemService.ResetKey();
     this.router.navigate(['item/create']);
   }
 
   async Inactive(key: number | undefined): Promise<void>{
+    this.SelectItem();
     await this.itemService.Inactive(key);
     await this.dozedexService.RefreshPage(this.router.url);
+  }
+
+  SelectItem(): void {
+    this.audioService.SelectItem();
+  }
+
+  ChangeItem(): void {
+    this.audioService.ChangeItem();
   }
 
 }

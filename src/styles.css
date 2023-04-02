@@ -119,6 +119,7 @@ textarea::-webkit-scrollbar-thumb:hover {
    margin-right: 7vh;
    flex-wrap: wrap;
    gap: 2vh;
+   padding: 10px;
 }
 
 .flex-gap-justify-center{
@@ -148,7 +149,26 @@ textarea::-webkit-scrollbar-thumb:hover {
    width: 250px;
    height: 400px;
    border: 1px solid lightgrey;
+   top: 10%;
+   left: 10%;
+   transform: translate(-10%,-10%);
+   border-radius: 10px !important;
+   box-shadow: 0 0 0 rgba(0,0,0,0), 0 0 0 rgba(0,0,0,0);
+   transition: ease-in-out .3s !important;
 }
+
+ .card-container-body:hover {
+   top: calc( 10% - 7px );
+   border: 1px solid rgba(#fdfeff, 0) !important;
+   box-shadow: 0 15px 20px rgb(0, 197, 223), 0 0 5px rgba(0,0,0,.1) !important;
+ }
+ 
+ .card-container-body:active {
+   top: 10%;
+   box-shadow: 0 5px 10px rgba(0,0,0,.05), 0 0 2px rgba(0,0,0,.1);
+   transition: ease-in-out .1s;
+ }
+
 
 .card-container-title{
    display: flex;

@@ -75,6 +75,17 @@ export class DozedexService implements OnInit{
         return "https://gifmania.com.br/wp-content/uploads/2020/01/carregando.gif";
     }
 
+    EnabledSystemSounds(): boolean{
+        let enabled: boolean = (localStorage.getItem("dozedex_system_sound_effects")?.toLocaleLowerCase() === 'true');
+
+        return enabled;
+    }
+
+    EnableSystemSounds(): void {
+        let enabled: boolean = !(localStorage.getItem("dozedex_system_sound_effects")?.toLocaleLowerCase() === 'true');
+        localStorage.setItem("dozedex_system_sound_effects", enabled ? 'true' : 'false');
+    }
+
     SetSideNavBar(open: boolean){
         localStorage.setItem("dozedex_sidenavbar_isopen", open ? 'true' : 'false');
     }

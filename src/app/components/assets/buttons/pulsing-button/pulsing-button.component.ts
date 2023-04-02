@@ -1,4 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
+import { AudioService } from 'src/app/services/audio.service';
 
 @Component({
   selector: 'app-pulsing-button',
@@ -11,8 +12,14 @@ export class PulsingButtonComponent implements OnInit {
   @Input() loading: boolean = false;
   @Input() text: string = "";
 
-  constructor() { }
+  constructor(
+    private audioService: AudioService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  SelectItem(): void {
+    this.audioService.SelectItem();
   }
 }

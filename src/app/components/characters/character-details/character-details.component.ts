@@ -5,9 +5,8 @@ import { Character } from 'src/app/interfaces/character.interface';
 import { Item } from 'src/app/interfaces/item.interface';
 import { Skill } from 'src/app/interfaces/skill.interface';
 import { Transformation } from 'src/app/interfaces/transformation.interface';
-import { BreedService } from 'src/app/services/breed.service';
+import { AudioService } from 'src/app/services/audio.service';
 import { CharacterService } from 'src/app/services/character.service';
-import { DozedexService } from 'src/app/services/dozedex.service';
 import { ImageService } from 'src/app/services/image.service';
 import { ItemService } from 'src/app/services/item.service';
 import { SkillService } from 'src/app/services/skill.service';
@@ -22,13 +21,12 @@ export class CharacterDetailsComponent implements OnInit {
 
   constructor(
     private imageService: ImageService,
-    private dozedexService: DozedexService,
     private characterService: CharacterService,
     private router: Router,
-    private breedService: BreedService,
     private transformationService: TransformationService,
     private skillService: SkillService,
     private itemService: ItemService,
+    private audioService: AudioService
   ) { }
 
   Area: string = "";
@@ -93,26 +91,31 @@ export class CharacterDetailsComponent implements OnInit {
   }
 
   GoToEdit(key: number | undefined): void{
+    this.SelectItem();
     this.characterService.SetCharacterKey(key ?? 0);
     this.router.navigate(['character/edit']);
   }
 
   GoToCharacterDetails(key: number | undefined): void{
+    this.SelectItem();
     this.characterService.SetCharacterKey(key ?? 0);
     this.router.navigate(['character/details']);
   }
 
   GoToSkillDetails(key: number | undefined): void{
+    this.SelectItem();
     this.skillService.SetSkillKey(key ?? 0);
     this.router.navigate(['skill/create']);
   }
 
   GoToTransformationDetails(key: number | undefined): void{
+    this.SelectItem();
     this.transformationService.SetTransformationKey(key ?? 0);
     this.router.navigate(['transformation/create']);
   }
 
   GoToItemDetails(key: number | undefined): void{
+    this.SelectItem();
     this.itemService.SetItemKey(key ?? 0);
     this.router.navigate(['item/create']);
   }
@@ -249,4 +252,11 @@ export class CharacterDetailsComponent implements OnInit {
     }
   }
 
+  SelectItem(): void {
+    this.audioService.SelectItem();
+  }
+
+  ChangeItem(): void {
+    this.audioService.ChangeItem();
+  }
 }

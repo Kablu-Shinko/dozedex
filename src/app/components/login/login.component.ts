@@ -6,6 +6,7 @@ import { DozedexService } from 'src/app/services/dozedex.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { ImageService } from 'src/app/services/image.service';
+import { AudioService } from 'src/app/services/audio.service';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +16,10 @@ import { ImageService } from 'src/app/services/image.service';
 export class LoginComponent implements OnInit {
   constructor(
     private dozedexService: DozedexService,
-    private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private audioService: AudioService
   ) 
   {}
   
@@ -53,6 +54,7 @@ private ensureVideoPlays(): void{
 }
 
   async onSubmit(){
+    this.audioService.SelectItem();
     if(this.loginForm.valid){
       this.loading = true;
       var loggedUser: User = {
@@ -74,6 +76,7 @@ private ensureVideoPlays(): void{
       }
       
       if(response.auth){
+        this.audioService.LoginSuccess();
         this.router.navigate(['/home']);
       }
       else{

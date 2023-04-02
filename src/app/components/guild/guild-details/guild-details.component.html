@@ -19,8 +19,6 @@
                             <br style="height: 33%;">
                         </div>
 
-
-
                         <mat-divider></mat-divider>
                         <br>
                         <mat-accordion>
@@ -51,7 +49,7 @@
                                 <div class="card-container">
                                     <div *ngIf="HaveMembers" class="flex-gap flex-gap-justify-center">
                                         <div *ngFor="let character of guild.Characters">
-                                            <mat-card class="card-container-body" style="max-height: 300px !important;">
+                                            <mat-card class="card-container-body" style="max-height: 300px !important;" (mouseenter)="ChangeItem()">
                                                 <mat-card-header class="card-container-title">
                                                     <mat-card-title class="card-title" title="{{character.Name}}">{{character.Name}}</mat-card-title>
                                                 </mat-card-header>

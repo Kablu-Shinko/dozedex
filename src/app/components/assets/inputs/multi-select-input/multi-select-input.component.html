@@ -12,7 +12,7 @@
         </mat-form-field>
         <br>
         <div *ngIf="selectList.length > 0">
-            <mat-option *ngFor="let option of selectList" [value]="option.Key">{{option.Title}}</mat-option>
+            <mat-option *ngFor="let option of selectList" [value]="option.Key" (click)="SelectItem()">{{option.Title}}</mat-option>
         </div>
         <div *ngIf="selectList.length === 0">
             <mat-option disabled>Sem opções</mat-option>

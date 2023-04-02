@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Guild } from 'src/app/interfaces/guild.interface';
+import { AudioService } from 'src/app/services/audio.service';
 import { DozedexService } from 'src/app/services/dozedex.service';
 import { GuildService } from 'src/app/services/guild.service';
 
@@ -14,7 +15,8 @@ export class GuildListComponent implements OnInit {
   constructor(
     private guildService: GuildService,
     private router: Router,
-    private dozedexService: DozedexService
+    private dozedexService: DozedexService,
+    private audioService: AudioService
   ) { }
 
   Area: string = "Guildas e Grupos";
@@ -50,22 +52,34 @@ export class GuildListComponent implements OnInit {
   }
   
   GoToEdit(key: number | undefined): void{
+    this.SelectItem();
     this.guildService.SetGuildKey(key ?? 0);
     this.router.navigate(['guild/edit']);
   }
 
   GoToDetails(key: number | undefined): void{
+    this.SelectItem();
     this.guildService.SetGuildKey(key ?? 0);
     this.router.navigate(['guild/details']);
   }
 
   AddNew(){
+    this.SelectItem();
     this.guildService.ResetKey();
     this.router.navigate(['guild/create']);
   }
 
   async Inactive(key: number | undefined): Promise<void>{
+    this.SelectItem();
     await this.guildService.Inactive(key);
     await this.dozedexService.RefreshPage(this.router.url);
+  }
+
+  SelectItem(): void {
+    this.audioService.SelectItem();
+  }
+
+  ChangeItem(): void {
+    this.audioService.ChangeItem();
   }
 }

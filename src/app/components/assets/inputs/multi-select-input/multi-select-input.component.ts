@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import { MatLegacyOption as MatOption } from '@angular/material/legacy-core';
-import { MatLegacySelect as MatSelect } from '@angular/material/legacy-select';
 import { MultiSelect, MultiSelectOption } from 'src/app/interfaces/small-interfaces/small-interfaces';
+import { AudioService } from 'src/app/services/audio.service';
 
 
 @Component({
@@ -28,12 +27,22 @@ export class MultiSelectInputComponent implements OnInit{
     Title: "Sem opções"
   }
 
+  constructor(
+    private audioService: AudioService
+  ){
+
+  }
+
   ngOnInit(): void{
     this.fullList = this.multiSelect.List;
     this.selectList = this.fullList;
     if(this.selectedValues.length > 0){
       this.multiSelectForm.setValue(this.selectedValues);
     }
+  }
+
+  SelectItem(): void {
+    this.audioService.SelectItem();
   }
 
   GetOptionName(id: number | undefined | string): string{

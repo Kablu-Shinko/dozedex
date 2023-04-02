@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Breed } from 'src/app/interfaces/breed.interface';
+import { AudioService } from 'src/app/services/audio.service';
 import { BreedService } from 'src/app/services/breed.service';
 import { DozedexService } from 'src/app/services/dozedex.service';
 
@@ -16,7 +17,8 @@ export class BreedListComponent implements OnInit {
     private route: ActivatedRoute,
     private breedService: BreedService,
     private router: Router,
-    private dozedexService: DozedexService
+    private dozedexService: DozedexService,
+    private audioService: AudioService
   ) { }
 
   Area: string = "Raças";
@@ -45,18 +47,29 @@ export class BreedListComponent implements OnInit {
   }
   
   GoToEdit(key: number | undefined): void{
+    this.SelectItem();
     this.breedService.SetBreedKey(key ?? 0);
     this.router.navigate(['breed/edit']);
   }
 
   AddNew(){
+    this.SelectItem();
     this.breedService.ResetKey();
     this.router.navigate(['breed/create']);
   }
 
   async Inactive(key: number | undefined): Promise<void>{
+    this.SelectItem();
     await this.breedService.Inactive(key);
     alert("Excluido");
     await this.dozedexService.RefreshPage(this.router.url);
+  }
+
+  SelectItem(): void {
+    this.audioService.SelectItem();
+  }
+
+  ChangeItem(): void {
+    this.audioService.ChangeItem();
   }
 }

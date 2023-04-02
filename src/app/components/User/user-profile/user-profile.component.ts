@@ -6,8 +6,10 @@ import { DozedexService } from 'src/app/services/dozedex.service';
 import { ImageService } from 'src/app/services/image.service';
 import { UserService } from 'src/app/services/user.service';
 import {MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA} from '@angular/material/legacy-dialog';
+// import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../assets/dialog/dialog.component';
 import { DialogData } from 'src/app/interfaces/small-interfaces/small-interfaces';
+import { AudioService } from 'src/app/services/audio.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -22,7 +24,8 @@ export class UserProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dozedexService: DozedexService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private audioService: AudioService
   ) { }
   
   Area: string = "Perfil de usuário"
@@ -95,6 +98,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   openDialog(): void {
+    this.SelectItem();
     const data: DialogData = {
       Title: "Trocar url da imagem",
       Description: "insira abaixo a url da nova imagem",
@@ -112,6 +116,7 @@ export class UserProfileComponent implements OnInit {
         }
       ],
       Function: async (inputs: string[]) => { 
+        this.SelectItem();
         await this.SaveUrl(inputs[0], inputs[1]); 
         this.dialog.closeAll(); 
       }
@@ -121,5 +126,13 @@ export class UserProfileComponent implements OnInit {
       width: '400px',
       data: data
     });
+  }
+
+  SelectItem(): void {
+    this.audioService.SelectItem();
+  }
+
+  ChangeItem(): void {
+    this.audioService.ChangeItem();
   }
 }

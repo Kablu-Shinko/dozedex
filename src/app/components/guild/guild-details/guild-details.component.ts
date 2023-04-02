@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Guild } from 'src/app/interfaces/guild.interface';
+import { AudioService } from 'src/app/services/audio.service';
 import { CharacterService } from 'src/app/services/character.service';
 import { GuildService } from 'src/app/services/guild.service';
 
@@ -14,7 +15,8 @@ export class GuildDetailsComponent implements OnInit {
   constructor(
     private guildService: GuildService,
     private router: Router,
-    private characterService: CharacterService
+    private characterService: CharacterService,
+    private audioService: AudioService
   ) { }
 
   loading: boolean = false;
@@ -56,11 +58,13 @@ export class GuildDetailsComponent implements OnInit {
   }
 
   GoToCharacterDetails(key: number | undefined): void{
+    this.SelectItem();
     this.characterService.SetCharacterKey(key ?? 0);
     this.router.navigate(['character/details']);
   }
 
   GoToEdit(key: number | undefined): void{
+    this.SelectItem();
     this.characterService.SetCharacterKey(key ?? 0);
     this.router.navigate(['guild/edit']);
   }
@@ -83,5 +87,13 @@ export class GuildDetailsComponent implements OnInit {
     else{
       return "Desconhecida";
     }
+  }
+
+  ChangeItem(): void {
+    this.audioService.ChangeItem();
+  }
+
+  SelectItem(): void {
+    this.audioService.SelectItem();
   }
 }

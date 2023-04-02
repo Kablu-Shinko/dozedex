@@ -1,22 +1,22 @@
 <mat-drawer-container>
-    <mat-drawer #drawer class="dozedex-sidenav" mode="side">
+    <mat-drawer #drawer class="dozedex-sidenav" mode="side" (click)="SelectItem()">
         <br>
         <h2 style="text-align: center; margin-top: -5px;">Menu</h2>
         <mat-divider></mat-divider>
         <br>
         <div *ngFor="let option of menuOptions">
-            <button mat-menu-item (click)="option.Function()" style="color: white;">{{option.Title}}</button>
+            <button mat-menu-item (click)="option.Function()" (click)="SelectItem()" style="color: white;">{{option.Title}}</button>
         </div>
     </mat-drawer>
     
     <mat-toolbar color="primary" style="overflow-x: hidden;">
-        <button mat-button (click)="drawer.toggle()" class="navbar-icon simple-icon">
+        <button mat-button (click)="drawer.toggle()" (click)="SelectItem()" class="navbar-icon simple-icon">
             <mat-icon>menu</mat-icon>
         </button>
 
         <button mat-button disabled class="navbar-icon simple-icon" style="color: white !important; overflow: hidden;">{{ActualArea}}</button>
         
-        <button mat-button *ngIf="HaveAreaAction" class="navbar-icon simple-icon" style="color: white !important; overflow: hidden;" (click)="AreaAction()">{{AreaActionTitle}}</button>
+        <button mat-button *ngIf="HaveAreaAction" class="navbar-icon simple-icon" style="color: white !important; overflow: hidden;" (click)="AreaAction()" (click)="SelectItem()">{{AreaActionTitle}}</button>
         
         <span class="navbar-spacer"></span>
     
@@ -37,11 +37,11 @@
         </button> -->
         
         <button mat-button [matMenuTriggerFor]="profile" class="navbar-icon">
-            <img src="{{user.ImagePath}}" alt="{{altText}}" height="25vh" width="25vh" class="navbar-profile-icon">
+            <img src="{{user.ImagePath}}" alt="{{altText}}" height="25vh" width="25vh" class="navbar-profile-icon" (click)="SelectItem()">
         </button>
         <mat-menu #profile="matMenu">
             <div *ngFor="let option of profileOptions">
-                <button mat-menu-item (click)="option.Function()">{{option.Title}}</button>
+                <button mat-menu-item (click)="option.Function()" (click)="SelectItem()">{{option.Title}}</button>
             </div>
         </mat-menu>
     

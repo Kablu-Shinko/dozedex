@@ -4,6 +4,7 @@ import { AppVersion, MenuOption } from '../../../interfaces/small-interfaces/sma
 import { DozedexService } from '../../../services/dozedex.service';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../interfaces/user.interface'
+import { AudioService } from 'src/app/services/audio.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private userService: UserService,
     private dozedexService: DozedexService,
-    private router: Router
+    private router: Router,
+    private audioService: AudioService
   ) { }
 
   @Input() ActualArea: string = 'ESQUECEU DE PASSAR O INPUT DE AREA SEU CORNO';
@@ -59,7 +61,7 @@ export class NavbarComponent implements OnInit {
       Function: () => this.router.navigate(['item/list'])
     },
     {
-      Title: "Guildas",
+      Title: "Guildas/Grupos",
       Function: () => this.router.navigate(['guild/list'])
     },
     {
@@ -72,22 +74,39 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
-  profileOptions: MenuOption[] = [
-    {
-      Title: "Meu Perfil",
-      Function: () => this.router.navigate(['/user/profile'])
-    },
-    {
-      Title: "Sair",
-      Function: () => this.logOut()
-    }
-  ];
+  profileOptions: MenuOption[] = this.GetProfileOptions()
     
   ngOnInit(): void {
     this.dozedexService.VerifyLogin();
     this.dozedexService.addCurrentPath(this.router.url);
     this.GetAppVersion();
   };
+
+  GetProfileOptions(): MenuOption[] {
+    return [
+      {
+        Title: "Meu Perfil",
+        Function: () => this.router.navigate(['/user/profile'])
+      },
+      {
+        Title: this.audioService.soundEnabled ? "Desabilitar sons" : "Habilitar sons",
+        Function: () => this.EnableSound()
+      },
+      {
+        Title: "Sair",
+        Function: () => this.logOut()
+      }
+    ];
+  }
+
+  EnableSound(): void {
+    this.audioService.EnableSound();
+    this.profileOptions = this.GetProfileOptions();
+  }
+
+  SelectItem(): void {
+    this.audioService.SelectItem();
+  }
 
   logOut(): void{
     this.dozedexService.logOut();

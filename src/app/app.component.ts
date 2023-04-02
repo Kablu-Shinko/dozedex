@@ -5,6 +5,7 @@ import { User } from './interfaces/user.interface';
 import { DozedexService } from './services/dozedex.service';
 
 import { UserService } from './services/user.service';
+import { AudioService } from './services/audio.service';
 
 @Component({
 	selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private userService: UserService,
-		private dozedexService: DozedexService
+		private dozedexService: DozedexService,
+		private audioService: AudioService
 	){}
 
 	user: User = this.userService.GetUser();
@@ -30,7 +32,13 @@ export class AppComponent implements OnInit {
 			this.statusAPI = await this.dozedexService.verifyStatusAPI();
 		}
 
-		this.router.navigate([this.getPath()]);
+		let path = this.getPath();
+
+		if(path !== '/login') {
+			this.audioService.LoginSuccess();
+		}
+
+		this.router.navigate([path]);
 	}
 
 	toogleSideNav(): boolean{
@@ -58,7 +66,7 @@ export class AppComponent implements OnInit {
 		}
 
 		this.userService.SetUser(user, false);
-
+		this
 		return lastPath;
 	}
 }
