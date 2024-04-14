@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1680427164865,
+  "timestamp": 1713060415902,
   "index": "./index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "./favicon.ico",
         "./index.html",
-        "./main.8832d4b59914e731.js",
+        "./main.7fedb30c880f641b.js",
         "./manifest.webmanifest",
         "./polyfills.aa572aabee44c857.js",
         "./runtime.7f2a1851522ffb61.js",
@@ -30,6 +30,9 @@
       },
       "urls": [
         "./assets/animations/spinner.gif",
+        "./assets/defaults/images/breed/default.png",
+        "./assets/defaults/images/not found/default.gif",
+        "./assets/defaults/images/skill/default.gif",
         "./assets/icons/icon-128x128.png",
         "./assets/icons/icon-144x144.png",
         "./assets/icons/icon-152x152.png",
@@ -50,6 +53,9 @@
   "dataGroups": [],
   "hashTable": {
     "./assets/animations/spinner.gif": "0c7c80ca534b7d68158c4f31c2f0d0f6208b13ce",
+    "./assets/defaults/images/breed/default.png": "6480bec3b98d4a9ae55d9d090d67ea97b07f4672",
+    "./assets/defaults/images/not found/default.gif": "8b79e82cf706670f12f5bf4022e5887197b7e933",
+    "./assets/defaults/images/skill/default.gif": "ad6b058ffec6e508f5a6ee7b1a7ddbb18a708489",
     "./assets/icons/icon-128x128.png": "b1f4c75ab6a63eac43a58ca5d8a2a221b07a9e7d",
     "./assets/icons/icon-144x144.png": "490694e3cd734eba8d7a35ceb0bbffa04b8f6b57",
     "./assets/icons/icon-152x152.png": "cdd6a4954d66365bbf4a8bf7c5b27170dfc0d756",
@@ -64,9 +70,9 @@
     "./assets/songs/turned-on/turned-on.mp3": "50ab1e6ad6691747bcc985949065a2485c477395",
     "./assets/videos/Sunset.mp4": "6b60f2db4b9294dd3b72f3c4938a8f58fe75f069",
     "./favicon.ico": "02cfb373bdc6f7761f0e0370591f8df60b15fc70",
-    "./index.html": "152b45f52119d81964dec37a44e1fa52b0aeb671",
-    "./main.8832d4b59914e731.js": "740af1c66bfea76f3312db617853b17b71dd3f05",
-    "./manifest.webmanifest": "6247b94c7cd3d53df2f46bda10e18e43de8af8aa",
+    "./index.html": "f65b249b4015ac9f8c9f419e9e961221b2a3ac4a",
+    "./main.7fedb30c880f641b.js": "ebbc83704f0dcded10754282437de506a249da78",
+    "./manifest.webmanifest": "175a0c0d2c9b37943b2446627d458659e155f278",
     "./polyfills.aa572aabee44c857.js": "c16dcb22db91d3cd9f2ef788f2db2d104fcd7714",
     "./runtime.7f2a1851522ffb61.js": "5f007732a6f6ff42a6c015be7e3c434f553da5b0",
     "./styles.cbc08a7f783ff1c7.css": "a4594400a848d020e8bebab8d7c3142463090058"
