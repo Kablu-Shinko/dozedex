@@ -16,6 +16,13 @@ import { Skill } from 'src/app/interfaces/skill.interface';
 })
 export class SkillCreateComponent implements OnInit {
 
+  Area: string;
+  Key: number;
+  loading: boolean;
+  skillImagePath: string;
+  defaultSkillImageUri: string;
+  btnLoading: boolean;
+
   constructor(
     private imageService: ImageService,
     private formBuilder: FormBuilder,
@@ -23,14 +30,14 @@ export class SkillCreateComponent implements OnInit {
     private skillService: SkillService,
     private router: Router,
     public dialog: MatDialog
-  ) { }
-
-  Area: string = "";
-  Key: number = 0;
-  loading: boolean = false;
-  skillImagePath: string = '';
-  defaultSkillImageUrl: string = 'https://drive.google.com/file/d/10ya4XnetYlQNaEZYJTr9Pwe4xFe2SIEq/view?usp=sharing';
-  btnLoading: boolean = false;
+  ) {
+    this.Key = 0;
+    this.Area = "";
+    this.loading = false;
+    this.btnLoading = false;
+    this.skillImagePath = "";
+    this.defaultSkillImageUri = this.imageService.DefaultSkillImageURI;
+  }
 
   skill: Skill = {
     ShortDescription: '',
@@ -53,44 +60,44 @@ export class SkillCreateComponent implements OnInit {
     this.Area = "";
     this.Key = this.skillService.GetSkillKey();
 
-    if(this.Key > 0){
+    if (this.Key > 0) {
       this.Area = "Habilidades > Edição";
       this.skill = await this.skillService.GetOne(this.Key);
     }
-    else{
+    else {
       this.Area = "Habilidades > Criação";
     }
-    this.skill.ImagePath = this.imageService.GetFullImageURL(this.skill.ImageUrl ?? this.defaultSkillImageUrl);
+    this.skill.ImagePath = this.imageService.GetFullImageURL(this.skill.ImageUrl ?? this.defaultSkillImageUri);
     this.skillImagePath = this.skill.ImagePath;
     console.table(this.skill);
     this.InitForm();
     this.loading = false;
   }
 
-  InitForm(): void{
+  InitForm(): void {
     this.skillForm.controls.Name.setValue(this.skill.Name);
     this.skillForm.controls.ShortDescription.setValue(this.skill.ShortDescription);
     this.skillForm.controls.LongDescription.setValue(this.skill.LongDescription);
   }
 
-  async onSubmit(): Promise<void>{
-    if(this.skillForm.valid){
+  async onSubmit(): Promise<void> {
+    if (this.skillForm.valid) {
       this.btnLoading = true;
       var editedskill: Skill = {
         Name: this.skillForm.controls.Name.value ?? this.skill.Name,
         ShortDescription: this.skillForm.controls.ShortDescription.value ?? this.skill.ShortDescription,
         LongDescription: this.skillForm.controls.LongDescription.value ?? this.skill.LongDescription,
-        ImageUrl: this.skill.ImageUrl ?? this.defaultSkillImageUrl,
+        ImageUrl: this.skill.ImageUrl ?? this.defaultSkillImageUri,
         Key: this.skill.Key ?? -1,
         Status: this.skill.Status ?? false
       }
 
       var result: string = '';
 
-      if(editedskill.Key === -1){
+      if (editedskill.Key === -1) {
         result = await this.skillService.AddSkill(editedskill);
       }
-      else{
+      else {
         result = await this.skillService.UpdateSkill(editedskill);
       }
 
@@ -98,14 +105,14 @@ export class SkillCreateComponent implements OnInit {
 
       alert(result);
     }
-    else{
+    else {
       alert("Verifique os campos e tente novamente")
     }
     this.btnLoading = false;
     this.router.navigate(['skill/list']);
   }
 
-  async SaveUrl(newUrl: string): Promise<string>{
+  async SaveUrl(newUrl: string): Promise<string> {
     var editedSkill: Skill = {
       Name: this.skill.Name,
       ImageUrl: newUrl,
@@ -116,7 +123,7 @@ export class SkillCreateComponent implements OnInit {
       ImagePath: this.skill.ImagePath
     }
 
-    if(editedSkill.Key === undefined || editedSkill.Key === -1){
+    if (editedSkill.Key === undefined || editedSkill.Key === -1) {
       this.skill.ImageUrl = newUrl;
       return "agora complete o cadastro";
     }
@@ -139,13 +146,13 @@ export class SkillCreateComponent implements OnInit {
           Type: "text"
         }
       ],
-      Function: async (inputs: string[]) => { 
-        let response = await this.SaveUrl(inputs[0]); 
+      Function: async (inputs: string[]) => {
+        let response = await this.SaveUrl(inputs[0]);
         this.dialog.closeAll();
-        return response; 
+        return response;
       }
     }
-    
+
     this.dialog.open(DialogComponent, {
       width: '400px',
       data: data

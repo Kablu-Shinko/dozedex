@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { AppVersion } from '../interfaces/small-interfaces/small-interfaces';
 import DozedexAppBinary from '../../../package.json';
 
-
 @Injectable({
     providedIn: 'root'
 })
@@ -131,10 +130,6 @@ export class DozedexService implements OnInit{
         this.userService.ResetUser(false); //removes sessioned user
         this.userService.ResetUser(true); //removes cached user
         this.router.navigate(['/login']);
-    }
-
-    getBaseGoogleDriveURL(): string {
-        return environment.GOOGLEDRIVE_URL;
     }
 
     notImplemented(): void{

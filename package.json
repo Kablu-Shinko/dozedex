@@ -1,6 +1,6 @@
 {
   "name": "dozedex",
-  "version": "1.0.3B",
+  "version": "HOTFIX 1.0.3C",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -23,14 +23,14 @@
     "@angular/router": "^15.0.0",
     "@angular/service-worker": "^15.0.0",
     "ngx-toastr": "^16.1.0",
-    "nodemon": "^2.0.20",
+    "nodemon": "^3.1.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.0.0",
-    "@angular/cli": "~15.0.0",
+    "@angular/cli": "^15.2.11",
     "@angular/compiler-cli": "^15.0.0",
     "@types/jasmine": "~4.0.0",
     "angular-cli-ghpages": "^1.0.3",

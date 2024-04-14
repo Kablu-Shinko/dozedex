@@ -21,13 +21,13 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   @Input() ActualArea: string = 'ESQUECEU DE PASSAR O INPUT DE AREA SEU CORNO';
-  @Input() AreaAction: Function = () => {};
+  @Input() AreaAction: Function = () => { };
   @Input() HaveAreaAction: boolean = false;
   @Input() AreaActionTitle: string = '';
-  
+
   user: User = this.userService.GetUser();
   altText: string = "imagem de perfil";
-  showFiller: Boolean =  false;
+  showFiller: Boolean = false;
   loading: Boolean = false;
   AppVersion: AppVersion = {
     ActualVersion: this.dozedexService.GetLocalVersion(),
@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
   menuOptions: MenuOption[] = [
     {
       Title: "Início",
-      Function: () => this.router.navigate(['home'])  
+      Function: () => this.router.navigate(['home'])
     },
     {
       Title: "Personagens",
@@ -65,17 +65,13 @@ export class NavbarComponent implements OnInit {
       Function: () => this.router.navigate(['guild/list'])
     },
     {
-      Title: "Curiosidades",
-      Function: () => this.dozedexService.notImplemented()
-    },
-    {
       Title: "Drive (4Shared)",
       Function: () => this.router.navigate(['dozedex/drive'])
     }
   ];
 
   profileOptions: MenuOption[] = this.GetProfileOptions()
-    
+
   ngOnInit(): void {
     this.dozedexService.VerifyLogin();
     this.dozedexService.addCurrentPath(this.router.url);
@@ -108,11 +104,11 @@ export class NavbarComponent implements OnInit {
     this.audioService.SelectItem();
   }
 
-  logOut(): void{
+  logOut(): void {
     this.dozedexService.logOut();
   };
 
-  async RefreshPage(): Promise<void>{
+  async RefreshPage(): Promise<void> {
     this.loading = true;
     await this.dozedexService.RefreshPage(this.router.url);
     this.loading = false;
@@ -123,7 +119,7 @@ export class NavbarComponent implements OnInit {
     this.AppVersion = await this.dozedexService.VerifyAppVersion();
   }
 
-  goToCharacters(): void{
+  goToCharacters(): void {
     this.router.navigate(['/characters/list']);
   };
 }
